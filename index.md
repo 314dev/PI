@@ -1,37 +1,39 @@
-## Welcome to GitHub Pages
+# PI
+PI = [Pytorch(Lightning)](https://github.com/PyTorchLightning/pytorch-lightning) + [IREE](https://github.com/google/iree/)(via [torch-mlir](https://github.com/llvm/torch-mlir))
 
-You can use the [editor on GitHub](https://github.com/314dev/PI/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+An Enhanced fork of PyTorch-Lightning with a torch-mlir + IREE backend
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![pitorch](https://user-images.githubusercontent.com/74956/151889869-32b39bd9-d1eb-4c32-a5e5-33a9891d7112.jpg)
 
-### Markdown
+## GOALS
+### PyTorch-Lightning's Advantages over unstructured PyTorch
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Quoted from [PyTorch-Lightning](https://github.com/PyTorchLightning/pytorch-lightning#advantages-over-unstructured-pytorch)
 
-```markdown
-Syntax highlighted code block
+Models become hardware agnostic
 
-# Header 1
-## Header 2
-### Header 3
+Code is clear to read because engineering code is abstracted away
 
-- Bulleted
-- List
+Easier to reproduce
 
-1. Numbered
-2. List
+Make fewer mistakes because lightning handles the tricky engineering
 
-**Bold** and _Italic_ and `Code` text
+Keeps all the flexibility (LightningModules are still PyTorch modules), but removes a ton of boilerplate
 
-[Link](url) and ![Image](src)
-```
+Lightning has dozens of integrations with popular machine learning tools.
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+Tested rigorously with every new PR. We test every combination of PyTorch and Python supported versions, every OS, multi GPUs and even TPUs.
 
-### Jekyll Themes
+Minimal running speed overhead (about 300 ms per epoch compared with pure PyTorch).
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/314dev/PI/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Enhancements to Pytorch-Lightning
+Fast moving focus on torch-mlir + IREE integration (which means other Accelerator Backends may break in the process). But eventual goal is to upstream all the work here. 
 
-### Support or Contact
+Integrated install of PyTorch, PyTorch-Lightning, Torch-mlir, IREE (CPU/GPU) with one pip command `pip install pi`
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Python based Op-Authoring
+
+Pytorch Eager mode support with torch-mlir+IREE as the backend
+
+Support for Flashes, Bolts, [PyTorch Image Models](https://github.com/rwightman/pytorch-image-models) and HF.co models 
+
