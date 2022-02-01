@@ -8,28 +8,17 @@ An Enhanced fork of PyTorch-Lightning with a torch-mlir + IREE backend
 ## GOALS
 ### PyTorch-Lightning's Advantages over unstructured PyTorch
 
-Quoted from [PyTorch-Lightning](https://github.com/PyTorchLightning/pytorch-lightning#advantages-over-unstructured-pytorch)
+See more here: [PyTorch-Lightning](https://github.com/PyTorchLightning/pytorch-lightning#advantages-over-unstructured-pytorch)
 
 Models become hardware agnostic
-
-Code is clear to read because engineering code is abstracted away
-
-Easier to reproduce
-
-Make fewer mistakes because lightning handles the tricky engineering
-
+Data scientists focus on the Models, while ML systems engineers focus on the model deployment from laptops to datacenters.
 Keeps all the flexibility (LightningModules are still PyTorch modules), but removes a ton of boilerplate
-
-Lightning has dozens of integrations with popular machine learning tools.
-
-Tested rigorously with every new PR. We test every combination of PyTorch and Python supported versions, every OS, multi GPUs and even TPUs.
-
-Minimal running speed overhead (about 300 ms per epoch compared with pure PyTorch).
+Minimal running speed overhead
 
 ### Enhancements to Pytorch-Lightning
 Fast moving focus on torch-mlir + IREE integration (which means other Accelerator Backends may break in the process). But eventual goal is to upstream all the work here. 
 
-Integrated install of PyTorch, PyTorch-Lightning, Torch-mlir, IREE (CPU/GPU) with one pip command `pip install pi`
+Integrated install of PyTorch, PyTorch-Lightning, Torch-mlir, IREE (CPU/GPU) and CompilerGYM with one pip command `pip install pi`
 
 Python based Op-Authoring
 
