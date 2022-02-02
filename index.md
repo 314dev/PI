@@ -11,7 +11,9 @@ An Enhanced fork of PyTorch-Lightning with a torch-mlir + IREE backend
 
 Easy and integrated install of PyTorch, PyTorch-Lightning, Torch-mlir, IREE (CPU/GPU) and CompilerGYM with a single pip command `pip install pi`
 
-Fast moving focus on torch-mlir + IREE integration (eventual goal is to upstream all the work here)
+Fully integrated  ComplieryGYM based auto-tuner for all models
+
+Fast moving focus on torch-mlir + IREE integration (eventual goal is to upstream all the work here to respective repositories)
 
 Python based Op-Authoring with MLIR-Linalg DSL exposed into PyTorch/Python
 
