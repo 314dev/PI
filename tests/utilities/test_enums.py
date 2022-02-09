@@ -13,7 +13,7 @@
 # limitations under the License.
 import pytest
 
-from pytorch_lightning.utilities.enums import _AcceleratorType, GradClipAlgorithmType, ModelSummaryMode, PrecisionType
+from pi_ml.utilities.enums import _AcceleratorType, GradClipAlgorithmType, ModelSummaryMode, PrecisionType
 
 
 def test_consistency():

@@ -26,9 +26,9 @@ import torch.nn.functional as F
 
 import tests.helpers.pipelines as tpipes
 import tests.helpers.utils as tutils
-from pytorch_lightning import Callback, Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.trainer.states import RunningStage, TrainerFn
+from pi_ml import Callback, Trainer
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.trainer.states import RunningStage, TrainerFn
 from tests.helpers import BoringModel
 from tests.helpers.datamodules import ClassifDataModule
 from tests.helpers.runif import RunIf

@@ -19,10 +19,10 @@ from unittest import mock
 
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.plugins.environments import SLURMEnvironment
-from pytorch_lightning.trainer.connectors.signal_connector import SignalConnector
-from pytorch_lightning.utilities.exceptions import ExitGracefullyException
+from pi_ml import Trainer
+from pi_ml.plugins.environments import SLURMEnvironment
+from pi_ml.trainer.connectors.signal_connector import SignalConnector
+from pi_ml.utilities.exceptions import ExitGracefullyException
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 
@@ -132,5 +132,5 @@ class SignalHandlers:
 )
 def test_has_already_handler(handler, expected_return):
     """Test that the SignalConnector detects whether a signal handler is already attached."""
-    with mock.patch("pytorch_lightning.trainer.connectors.signal_connector.signal.getsignal", return_value=handler):
+    with mock.patch("pi_ml.trainer.connectors.signal_connector.signal.getsignal", return_value=handler):
         assert SignalConnector._has_already_handler(signal.SIGTERM) is expected_return

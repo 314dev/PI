@@ -18,9 +18,9 @@ import torch
 from torch import nn
 from torch.optim import Adam, SGD
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.loggers import TensorBoardLogger
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

@@ -16,9 +16,9 @@ from unittest.mock import patch
 
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import GradientAccumulationScheduler
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.callbacks import GradientAccumulationScheduler
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel
 
 

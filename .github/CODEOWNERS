@@ -19,35 +19,35 @@
 /docs/source/conf.py        @borda @awaelchli @carmocca
 
 # Packages
-/pytorch_lightning/accelerators         @williamfalcon @tchaton @SeanNaren @awaelchli @justusschock @kaushikb11
-/pytorch_lightning/callbacks            @williamfalcon @tchaton @carmocca @borda @kaushikb11
-/pytorch_lightning/core                 @tchaton @SeanNaren @borda @carmocca @justusschock @kaushikb11
-/pytorch_lightning/distributed          @williamfalcon @tchaton @awaelchli @kaushikb11
-/pytorch_lightning/lite                 @tchaton @awaelchli @carmocca
-/pytorch_lightning/loggers              @tchaton @awaelchli @borda
-/pytorch_lightning/loggers/wandb.py     @borisdayma
-/pytorch_lightning/loggers/neptune.py   @shnela @HubertJaworski @pkasprzyk @pitercl @Raalsky @aniezurawski @kamil-kaczmarek
-/pytorch_lightning/loops                @tchaton @awaelchli @justusschock @carmocca
-/pytorch_lightning/overrides            @tchaton @SeanNaren @borda
-/pytorch_lightning/plugins              @tchaton @SeanNaren @awaelchli @justusschock
-/pytorch_lightning/profiler             @williamfalcon @tchaton @borda @carmocca
-/pytorch_lightning/profiler/pytorch.py  @nbcsm @guotuofeng
-/pytorch_lightning/strategies           @tchaton @SeanNaren @awaelchli @justusschock @kaushikb11
-/pytorch_lightning/trainer              @williamfalcon @borda @tchaton @SeanNaren @carmocca @awaelchli @justusschock @kaushikb11
-/pytorch_lightning/trainer/connectors   @tchaton @SeanNaren @carmocca @borda
-/pytorch_lightning/tuner                @SkafteNicki @borda @awaelchli
-/pytorch_lightning/utilities            @borda @tchaton @SeanNaren @carmocca
+/pi_ml/accelerators         @williamfalcon @tchaton @SeanNaren @awaelchli @justusschock @kaushikb11
+/pi_ml/callbacks            @williamfalcon @tchaton @carmocca @borda @kaushikb11
+/pi_ml/core                 @tchaton @SeanNaren @borda @carmocca @justusschock @kaushikb11
+/pi_ml/distributed          @williamfalcon @tchaton @awaelchli @kaushikb11
+/pi_ml/lite                 @tchaton @awaelchli @carmocca
+/pi_ml/loggers              @tchaton @awaelchli @borda
+/pi_ml/loggers/wandb.py     @borisdayma
+/pi_ml/loggers/neptune.py   @shnela @HubertJaworski @pkasprzyk @pitercl @Raalsky @aniezurawski @kamil-kaczmarek
+/pi_ml/loops                @tchaton @awaelchli @justusschock @carmocca
+/pi_ml/overrides            @tchaton @SeanNaren @borda
+/pi_ml/plugins              @tchaton @SeanNaren @awaelchli @justusschock
+/pi_ml/profiler             @williamfalcon @tchaton @borda @carmocca
+/pi_ml/profiler/pytorch.py  @nbcsm @guotuofeng
+/pi_ml/strategies           @tchaton @SeanNaren @awaelchli @justusschock @kaushikb11
+/pi_ml/trainer              @williamfalcon @borda @tchaton @SeanNaren @carmocca @awaelchli @justusschock @kaushikb11
+/pi_ml/trainer/connectors   @tchaton @SeanNaren @carmocca @borda
+/pi_ml/tuner                @SkafteNicki @borda @awaelchli
+/pi_ml/utilities            @borda @tchaton @SeanNaren @carmocca
 
 # Specifics
-/pytorch_lightning/trainer/connectors/logger_connector @tchaton @carmocca
-/pytorch_lightning/trainer/progress.py  @tchaton @awaelchli @carmocca
+/pi_ml/trainer/connectors/logger_connector @tchaton @carmocca
+/pi_ml/trainer/progress.py  @tchaton @awaelchli @carmocca
 
 # API
-/pytorch_lightning/callbacks/base.py    @williamfalcon @awaelchli @ananthsub @carmocca
-/pytorch_lightning/core/datamodule.py   @williamFalcon @awaelchli @ananthsub @carmocca
-/pytorch_lightning/trainer/trainer.py   @williamfalcon @tchaton @awaelchli
-/pytorch_lightning/core/hooks.py        @williamfalcon @tchaton @awaelchli @ananthsub @carmocca
-/pytorch_lightning/core/lightning.py    @williamfalcon @tchaton @awaelchli
+/pi_ml/callbacks/base.py    @williamfalcon @awaelchli @ananthsub @carmocca
+/pi_ml/core/datamodule.py   @williamFalcon @awaelchli @ananthsub @carmocca
+/pi_ml/trainer/trainer.py   @williamfalcon @tchaton @awaelchli
+/pi_ml/core/hooks.py        @williamfalcon @tchaton @awaelchli @ananthsub @carmocca
+/pi_ml/core/lightning.py    @williamfalcon @tchaton @awaelchli
 
 # Testing
 /tests/helpers/boring_model.py          @williamfalcon @tchaton @borda
@@ -56,4 +56,4 @@
 /SECURITY.md                     @williamfalcon
 /README.md                       @williamfalcon @edenlightning @borda
 /setup.py                        @williamfalcon @borda
-/pytorch_lightning/__about__.py  @williamfalcon @borda
+/pi_ml/__about__.py  @williamfalcon @borda

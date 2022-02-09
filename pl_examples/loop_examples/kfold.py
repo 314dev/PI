@@ -29,11 +29,11 @@ from torchmetrics.classification.accuracy import Accuracy
 from pl_examples import _DATASETS_PATH
 from pl_examples.basic_examples.mnist_datamodule import MNIST
 from pl_examples.basic_examples.mnist_examples.image_classifier_4_lightning_module import ImageClassifier
-from pytorch_lightning import LightningDataModule, seed_everything, Trainer
-from pytorch_lightning.core.lightning import LightningModule
-from pytorch_lightning.loops.base import Loop
-from pytorch_lightning.loops.fit_loop import FitLoop
-from pytorch_lightning.trainer.states import TrainerFn
+from pi_ml import LightningDataModule, seed_everything, Trainer
+from pi_ml.core.lightning import LightningModule
+from pi_ml.loops.base import Loop
+from pi_ml.loops.fit_loop import FitLoop
+from pi_ml.trainer.states import TrainerFn
 
 #############################################################################################
 #                           KFold Loop / Cross Validation Example                           #

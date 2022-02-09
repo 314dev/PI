@@ -15,7 +15,7 @@
 import pytest
 import torch
 
-import pytorch_lightning as pl
+import pi_ml as pl
 from tests.helpers.boring_model import BoringModel
 
 

@@ -3,7 +3,7 @@ Style Guide
 ###########
 
 A main goal of Lightning is to improve readability and reproducibility. Imagine looking into any GitHub repo or a research project,
-finding a :class:`~pytorch_lightning.core.lightning.LightningModule`, and knowing exactly where to look to find the things you care about.
+finding a :class:`~pi_ml.core.lightning.LightningModule`, and knowing exactly where to look to find the things you care about.
 
 The goal of this style guide is to encourage Lightning code to be structured similarly.
 
@@ -13,7 +13,7 @@ The goal of this style guide is to encourage Lightning code to be structured sim
 LightningModule
 ***************
 
-These are best practices about structuring your :class:`~pytorch_lightning.core.lightning.LightningModule` class:
+These are best practices about structuring your :class:`~pi_ml.core.lightning.LightningModule` class:
 
 Systems vs Models
 =================
@@ -209,8 +209,8 @@ make sure to tune the number of workers for maximum efficiency.
 DataModules
 ===========
 
-The :class:`~pytorch_lightning.core.datamodule.LightningDataModule` is designed as a way of decoupling data-related
-hooks from the :class:`~pytorch_lightning.core.lightning.LightningModule` so you can develop dataset agnostic models. It makes it easy to hot swap different
+The :class:`~pi_ml.core.datamodule.LightningDataModule` is designed as a way of decoupling data-related
+hooks from the :class:`~pi_ml.core.lightning.LightningModule` so you can develop dataset agnostic models. It makes it easy to hot swap different
 datasets with your model, so you can test it and benchmark it across domains. It also makes sharing and reusing the exact data splits and transforms across projects possible.
 
 Check out :ref:`data` document to understand data management within Lightning and its best practices.

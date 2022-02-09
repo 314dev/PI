@@ -16,9 +16,9 @@ from collections.abc import Iterable
 import pytest
 from torch.utils.data import BatchSampler, SequentialSampler
 
-from pytorch_lightning import seed_everything
-from pytorch_lightning.overrides.distributed import IndexBatchSamplerWrapper, UnrepeatedDistributedSampler
-from pytorch_lightning.utilities.data import has_len
+from pi_ml import seed_everything
+from pi_ml.overrides.distributed import IndexBatchSamplerWrapper, UnrepeatedDistributedSampler
+from pi_ml.utilities.data import has_len
 
 
 @pytest.mark.parametrize("shuffle", [False, True])

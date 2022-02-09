@@ -1,8 +1,8 @@
 .. testsetup:: *
 
-    from pytorch_lightning.core.lightning import LightningModule
-    from pytorch_lightning.core.datamodule import LightningDataModule
-    from pytorch_lightning.trainer.trainer import Trainer
+    from pi_ml.core.lightning import LightningModule
+    from pi_ml.core.datamodule import LightningDataModule
+    from pi_ml.trainer.trainer import Trainer
 
 .. _introduction_guide:
 
@@ -72,7 +72,7 @@ Let's first start with the model. In this case, we'll design a 3-layer neural ne
     import torch
     from torch.nn import functional as F
     from torch import nn
-    from pytorch_lightning.core.lightning import LightningModule
+    from pi_ml.core.lightning import LightningModule
 
 
     class LitMNIST(LightningModule):
@@ -147,7 +147,7 @@ In PyTorch, we do it as follows:
     optimizer = Adam(LitMNIST().parameters(), lr=1e-3)
 
 
-In Lightning, the same code is re-organized within the :meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers` method.
+In Lightning, the same code is re-organized within the :meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers` method.
 
 .. testcode::
 
@@ -179,7 +179,7 @@ If you have LR Schedulers you can return them too:
             return [opt], [scheduler]
 
 
-For more available configurations, please checkout the :meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers` method.
+For more available configurations, please checkout the :meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers` method.
 
 
 Data
@@ -194,7 +194,7 @@ Lightning operates on pure dataloaders. Here's the PyTorch code for loading MNIS
     from torchvision.datasets import MNIST
     import os
     from torchvision import datasets, transforms
-    from pytorch_lightning import Trainer
+    from pi_ml import Trainer
 
     # transforms
     # prepare transforms standard to MNIST
@@ -396,7 +396,7 @@ In the case of MNIST, we do the following
             optimizer.step()
 
 In Lightning, everything that is in the training step gets organized under the
-:func:`~pytorch_lightning.core.LightningModule.training_step` function in the LightningModule.
+:func:`~pi_ml.core.LightningModule.training_step` function in the LightningModule.
 
 .. testcode::
 
@@ -462,7 +462,7 @@ Again, this is the same PyTorch code, except that it's organized by the Lightnin
 Logging
 ^^^^^^^
 To log to Tensorboard, your favorite logger, and/or the progress bar, use the
-:func:`~~pytorch_lightning.core.lightning.LightningModule.log` method which can be called from
+:func:`~~pi_ml.core.lightning.LightningModule.log` method which can be called from
 any method in the LightningModule.
 
 .. code-block:: python
@@ -470,7 +470,7 @@ any method in the LightningModule.
     def training_step(self, batch, batch_idx):
         self.log("my_metric", x)
 
-The :func:`~~pytorch_lightning.core.lightning.LightningModule.log` method has a few options:
+The :func:`~~pi_ml.core.lightning.LightningModule.log` method has a few options:
 
 - on_step (logs the metric at that step in training)
 - on_epoch (automatically accumulates and logs at the end of the epoch)
@@ -517,7 +517,7 @@ Train on CPU
 ^^^^^^^^^^^^
 .. code-block:: python
 
-    from pytorch_lightning import Trainer
+    from pi_ml import Trainer
 
     model = LitMNIST()
     trainer = Trainer()
@@ -686,7 +686,7 @@ Now we can train with a validation loop as well.
 
 .. code-block:: python
 
-    from pytorch_lightning import Trainer
+    from pi_ml import Trainer
 
     model = LitMNIST()
     trainer = Trainer(tpu_cores=8)
@@ -766,7 +766,7 @@ Once you train your model simply call ``.test()``.
 
 .. code-block:: python
 
-    from pytorch_lightning import Trainer
+    from pi_ml import Trainer
 
     model = LitMNIST()
     trainer = Trainer(tpu_cores=8)
@@ -872,7 +872,7 @@ In this case, we've set this LightningModel to predict logits. But we could also
     feature_maps = model(x)
 
 Or maybe we have a model that we use to do generation.
-A :class:`~pytorch_lightning.core.lightning.LightningModule` is also just a :class:`torch.nn.Module`.
+A :class:`~pi_ml.core.lightning.LightningModule` is also just a :class:`torch.nn.Module`.
 
 .. testcode::
 
@@ -896,10 +896,10 @@ A :class:`~pytorch_lightning.core.lightning.LightningModule` is also just a :cla
     generated_imgs = model(z)
 
 
-To perform inference at scale, it is possible to use :meth:`~pytorch_lightning.trainer.trainer.Trainer.predict`
-with :meth:`~pytorch_lightning.core.lightning.LightningModule.predict_step`
-By default, :meth:`~pytorch_lightning.core.lightning.LightningModule.predict_step`
-calls :meth:`~pytorch_lightning.core.lightning.LightningModule.forward`,
+To perform inference at scale, it is possible to use :meth:`~pi_ml.trainer.trainer.Trainer.predict`
+with :meth:`~pi_ml.core.lightning.LightningModule.predict_step`
+By default, :meth:`~pi_ml.core.lightning.LightningModule.predict_step`
+calls :meth:`~pi_ml.core.lightning.LightningModule.forward`,
 but it can be overridden to add any processing logic.
 
 .. code-block:: python
@@ -917,14 +917,14 @@ but it can be overridden to add any processing logic.
     trainer.predict(model, datamodule)
 
 
-How you split up what goes in :meth:`~pytorch_lightning.core.lightning.LightningModule.forward`
-vs :meth:`~pytorch_lightning.core.lightning.LightningModule.training_step`
-vs :meth:`~pytorch_lightning.core.lightning.LightningModule.predict_step` depends on how you want to use this model for prediction.
-However, we recommend :meth:`~pytorch_lightning.core.lightning.LightningModule.forward` to contain only tensor operations with your model.
-:meth:`~pytorch_lightning.core.lightning.LightningModule.training_step` to encapsulate
-:meth:`~pytorch_lightning.core.lightning.LightningModule.forward` logic with logging, metrics, and loss computation.
-:meth:`~pytorch_lightning.core.lightning.LightningModule.predict_step` to encapsulate
-:meth:`~pytorch_lightning.core.lightning.LightningModule.forward` with any necessary preprocess or postprocess functions.
+How you split up what goes in :meth:`~pi_ml.core.lightning.LightningModule.forward`
+vs :meth:`~pi_ml.core.lightning.LightningModule.training_step`
+vs :meth:`~pi_ml.core.lightning.LightningModule.predict_step` depends on how you want to use this model for prediction.
+However, we recommend :meth:`~pi_ml.core.lightning.LightningModule.forward` to contain only tensor operations with your model.
+:meth:`~pi_ml.core.lightning.LightningModule.training_step` to encapsulate
+:meth:`~pi_ml.core.lightning.LightningModule.forward` logic with logging, metrics, and loss computation.
+:meth:`~pi_ml.core.lightning.LightningModule.predict_step` to encapsulate
+:meth:`~pi_ml.core.lightning.LightningModule.forward` with any necessary preprocess or postprocess functions.
 
 ----------------
 
@@ -970,7 +970,7 @@ for hooks that you might care about
 
 .. testcode::
 
-    from pytorch_lightning.callbacks import Callback
+    from pi_ml.callbacks import Callback
 
 
     class MyPrintingCallback(Callback):

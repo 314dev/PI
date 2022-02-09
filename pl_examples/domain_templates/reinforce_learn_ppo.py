@@ -37,7 +37,7 @@ from torch.distributions import Categorical, Normal
 from torch.optim.optimizer import Optimizer
 from torch.utils.data import DataLoader, IterableDataset
 
-import pytorch_lightning as pl
+import pi_ml as pl
 from pl_examples import cli_lightning_logo
 
 

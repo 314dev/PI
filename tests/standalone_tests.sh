@@ -17,7 +17,7 @@ set -e
 # this environment variable allows special tests to run
 export PL_RUN_STANDALONE_TESTS=1
 # python arguments
-defaults='-m coverage run --source pytorch_lightning --append -m pytest --capture=no'
+defaults='-m coverage run --source pi_ml --append -m pytest --capture=no'
 
 # find tests marked as `@RunIf(standalone=True)`. done manually instead of with pytest because it is faster
 grep_output=$(grep --recursive --word-regexp 'tests' --regexp 'standalone=True' --include '*.py' --exclude 'tests/conftest.py')
@@ -66,7 +66,7 @@ fi
 
 # TODO: enable when CI uses torch>=1.9
 # test deadlock is properly handled with TorchElastic.
-# LOGS=$(PL_RUN_STANDALONE_TESTS=1 PL_RECONCILE_PROCESS=1 python -m torch.distributed.run --nproc_per_node=2 --max_restarts 0 -m coverage run --source pytorch_lightning -a tests/plugins/environments/torch_elastic_deadlock.py | grep "SUCCEEDED")
+# LOGS=$(PL_RUN_STANDALONE_TESTS=1 PL_RECONCILE_PROCESS=1 python -m torch.distributed.run --nproc_per_node=2 --max_restarts 0 -m coverage run --source pi_ml -a tests/plugins/environments/torch_elastic_deadlock.py | grep "SUCCEEDED")
 # if  [ -z "$LOGS" ]; then
 #    exit 1
 # fi

@@ -15,12 +15,12 @@ from typing import Dict, Optional
 
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import DeviceStatsMonitor
-from pytorch_lightning.callbacks.device_stats_monitor import _prefix_metric_keys
-from pytorch_lightning.loggers import CSVLogger
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.rank_zero import rank_zero_only
+from pi_ml import Trainer
+from pi_ml.callbacks import DeviceStatsMonitor
+from pi_ml.callbacks.device_stats_monitor import _prefix_metric_keys
+from pi_ml.loggers import CSVLogger
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.rank_zero import rank_zero_only
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

@@ -15,7 +15,7 @@ import pytest
 import torch
 from torch.nn import DataParallel
 
-from pytorch_lightning.overrides.base import (
+from pi_ml.overrides.base import (
     _LightningModuleWrapperBase,
     _LightningPrecisionModuleWrapperBase,
     unwrap_lightning_module,

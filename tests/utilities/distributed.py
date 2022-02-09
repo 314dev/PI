@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 from subprocess import TimeoutExpired
 
-import pytorch_lightning
+import pi_ml
 
 
 def call_training_script(module_file, cli_args, method, tmpdir, timeout=60, as_module=False):
@@ -28,9 +28,9 @@ def call_training_script(module_file, cli_args, method, tmpdir, timeout=60, as_m
     file_args = ["-m", module_file.__spec__.name] if as_module else [str(file)]
     command = [sys.executable] + file_args + cli_args
 
-    # need to set the PYTHONPATH in case pytorch_lightning was not installed into the environment
+    # need to set the PYTHONPATH in case pi_ml was not installed into the environment
     env = os.environ.copy()
-    env["PYTHONPATH"] = env.get("PYTHONPATH", "") + f"{pytorch_lightning.__file__}:"
+    env["PYTHONPATH"] = env.get("PYTHONPATH", "") + f"{pi_ml.__file__}:"
 
     # for running in ddp mode, we need to lauch it's own process or pytest will get stuck
     p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env)

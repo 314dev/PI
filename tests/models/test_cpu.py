@@ -17,8 +17,8 @@ import torch
 
 import tests.helpers.pipelines as tpipes
 import tests.helpers.utils as tutils
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import Callback, EarlyStopping, ModelCheckpoint
+from pi_ml import Trainer
+from pi_ml.callbacks import Callback, EarlyStopping, ModelCheckpoint
 from tests.helpers import BoringModel
 from tests.helpers.datamodules import ClassifDataModule
 from tests.helpers.runif import RunIf

@@ -14,8 +14,8 @@
 import pytest
 import torch
 
-from pytorch_lightning import LightningDataModule, LightningModule, Trainer
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import LightningDataModule, LightningModule, Trainer
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel, RandomDataset
 
 

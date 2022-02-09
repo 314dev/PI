@@ -21,8 +21,8 @@ import torch
 import torch.distributed as torch_distrib
 import torch.nn.functional as F
 
-from pytorch_lightning import seed_everything, Trainer
-from pytorch_lightning.strategies import Strategy
+from pi_ml import seed_everything, Trainer
+from pi_ml.strategies import Strategy
 from tests.helpers.boring_model import BoringModel
 from tests.helpers.runif import RunIf
 

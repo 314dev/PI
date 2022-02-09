@@ -1,8 +1,8 @@
 .. testsetup:: *
 
     import torch
-    from pytorch_lightning.trainer.trainer import Trainer
-    from pytorch_lightning.core.lightning import LightningModule
+    from pi_ml.trainer.trainer import Trainer
+    from pi_ml.core.lightning import LightningModule
 
 .. _gpu:
 
@@ -83,7 +83,7 @@ This will make your code scale to any arbitrary number of GPUs or TPUs with Ligh
         z = torch.Tensor(2, 3)
         z = z.type_as(x)
 
-The :class:`~pytorch_lightning.core.lightning.LightningModule` knows what device it is on. You can access the reference via ``self.device``.
+The :class:`~pi_ml.core.lightning.LightningModule` knows what device it is on. You can access the reference via ``self.device``.
 Sometimes it is necessary to store tensors as module attributes. However, if they are not parameters they will
 remain on the CPU even if the module gets moved to a new device. To prevent that and remain device agnostic,
 register the tensor as a buffer in your modules's ``__init__`` method with :meth:`~torch.nn.Module.register_buffer`.
@@ -305,7 +305,7 @@ after which the root node will aggregate the results.
     :ref:`manual_optimization` with DP. Use DDP which is more stable and at least 3x faster.
 
 .. warning:: DP only supports scattering and gathering primitive collections of tensors like lists, dicts, etc.
-    Therefore the :meth:`~pytorch_lightning.core.hooks.ModelHooks.transfer_batch_to_device` hook does not apply in
+    Therefore the :meth:`~pi_ml.core.hooks.ModelHooks.transfer_batch_to_device` hook does not apply in
     this mode and if you have overridden it, it will not be called.
 
 .. testcode::
@@ -555,7 +555,7 @@ To use *QAdam*, we need to initialize
 
 .. code-block:: python
 
-    from pytorch_lightning.strategies import BaguaStrategy
+    from pi_ml.strategies import BaguaStrategy
     from bagua.torch_api.algorithms.q_adam import QAdamOptimizer
 
 
@@ -732,9 +732,9 @@ Below are the possible configurations we support.
 
 Implement Your Own Distributed (DDP) training
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you need your own way to init PyTorch DDP you can override :meth:`pytorch_lightning.strategies.ddp.DDPStrategy.init_dist_connection`.
+If you need your own way to init PyTorch DDP you can override :meth:`pi_ml.strategies.ddp.DDPStrategy.init_dist_connection`.
 
-If you also need to use your own DDP implementation, override :meth:`pytorch_lightning.strategies.ddp.DDPStrategy.configure_ddp`.
+If you also need to use your own DDP implementation, override :meth:`pi_ml.strategies.ddp.DDPStrategy.configure_ddp`.
 
 
 Batch size

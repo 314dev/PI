@@ -4,7 +4,7 @@ from unittest import mock
 import pytest
 import torch
 
-import pytorch_lightning.utilities.seed as seed_utils
+import pi_ml.utilities.seed as seed_utils
 
 
 @mock.patch.dict(os.environ, {}, clear=True)

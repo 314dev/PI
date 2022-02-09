@@ -20,9 +20,9 @@ import pytest
 import torch
 from torch.nn.parallel.distributed import DistributedDataParallel
 
-import pytorch_lightning as pl
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import Callback
+import pi_ml as pl
+from pi_ml import Trainer
+from pi_ml.callbacks import Callback
 from tests.accelerators import ddp_model
 from tests.helpers.boring_model import BoringModel
 from tests.helpers.runif import RunIf

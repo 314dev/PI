@@ -31,13 +31,13 @@ from torch.optim import SGD
 from torch.utils.data import DataLoader, IterableDataset
 
 import tests.helpers.utils as tutils
-from pytorch_lightning import Callback, LightningDataModule, LightningModule, Trainer
-from pytorch_lightning.callbacks import EarlyStopping, GradientAccumulationScheduler, ModelCheckpoint, Timer
-from pytorch_lightning.callbacks.prediction_writer import BasePredictionWriter
-from pytorch_lightning.core.saving import load_hparams_from_tags_csv, load_hparams_from_yaml, save_hparams_to_tags_csv
-from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.overrides.distributed import IndexBatchSamplerWrapper, UnrepeatedDistributedSampler
-from pytorch_lightning.strategies import (
+from pi_ml import Callback, LightningDataModule, LightningModule, Trainer
+from pi_ml.callbacks import EarlyStopping, GradientAccumulationScheduler, ModelCheckpoint, Timer
+from pi_ml.callbacks.prediction_writer import BasePredictionWriter
+from pi_ml.core.saving import load_hparams_from_tags_csv, load_hparams_from_yaml, save_hparams_to_tags_csv
+from pi_ml.loggers import TensorBoardLogger
+from pi_ml.overrides.distributed import IndexBatchSamplerWrapper, UnrepeatedDistributedSampler
+from pi_ml.strategies import (
     DataParallelStrategy,
     DDP2Strategy,
     DDPFullyShardedStrategy,
@@ -46,12 +46,12 @@ from pytorch_lightning.strategies import (
     DDPSpawnStrategy,
     DDPStrategy,
 )
-from pytorch_lightning.trainer.states import TrainerFn
-from pytorch_lightning.utilities import _AcceleratorType, _StrategyType
-from pytorch_lightning.utilities.cloud_io import load as pl_load
-from pytorch_lightning.utilities.exceptions import DeadlockDetectedException, MisconfigurationException
-from pytorch_lightning.utilities.imports import _IS_WINDOWS, _OMEGACONF_AVAILABLE, _TORCH_GREATER_EQUAL_1_8
-from pytorch_lightning.utilities.seed import seed_everything
+from pi_ml.trainer.states import TrainerFn
+from pi_ml.utilities import _AcceleratorType, _StrategyType
+from pi_ml.utilities.cloud_io import load as pl_load
+from pi_ml.utilities.exceptions import DeadlockDetectedException, MisconfigurationException
+from pi_ml.utilities.imports import _IS_WINDOWS, _OMEGACONF_AVAILABLE, _TORCH_GREATER_EQUAL_1_8
+from pi_ml.utilities.seed import seed_everything
 from tests.helpers import BoringModel, RandomDataset
 from tests.helpers.boring_model import RandomIterableDataset, RandomIterableDatasetWithLen
 from tests.helpers.datamodules import ClassifDataModule
@@ -607,7 +607,7 @@ def test_trainer_min_steps_and_min_epochs_not_reached(tmpdir, caplog):
         limit_train_batches=2,
         callbacks=[early_stop],
     )
-    with caplog.at_level(logging.INFO, logger="pytorch_lightning.trainer.trainer"):
+    with caplog.at_level(logging.INFO, logger="pi_ml.trainer.trainer"):
         trainer.fit(model)
 
     message = f"minimum epochs ({min_epochs}) or minimum steps (None) has not been met. Training will continue"
@@ -1348,7 +1348,7 @@ def test_trainer_setup_call(tmpdir, stage):
 
 
 @pytest.mark.parametrize("train_batches, max_steps, log_interval", [(10, 10, 1), (3, 10, 1), (3, 10, 5)])
-@patch("pytorch_lightning.loggers.tensorboard.TensorBoardLogger.log_metrics")
+@patch("pi_ml.loggers.tensorboard.TensorBoardLogger.log_metrics")
 def test_log_every_n_steps(log_metrics_mock, tmpdir, train_batches, max_steps, log_interval):
     class TestModel(BoringModel):
         def training_step(self, *args, **kwargs):
@@ -2001,25 +2001,25 @@ def test_error_handling_all_stages(tmpdir, strategy, num_processes):
     trainer = Trainer(default_root_dir=tmpdir, strategy=strategy, num_processes=num_processes, fast_dev_run=True)
 
     with pytest.raises(Exception, match=r"Error during train"), patch(
-        "pytorch_lightning.Trainer._on_exception"
+        "pi_ml.Trainer._on_exception"
     ) as exception_hook:
         trainer.fit(model)
     exception_hook.assert_called()
 
     with pytest.raises(Exception, match=r"Error during validation"), patch(
-        "pytorch_lightning.Trainer._on_exception"
+        "pi_ml.Trainer._on_exception"
     ) as exception_hook:
         trainer.validate(model)
     exception_hook.assert_called()
 
     with pytest.raises(Exception, match=r"Error during test"), patch(
-        "pytorch_lightning.Trainer._on_exception"
+        "pi_ml.Trainer._on_exception"
     ) as exception_hook:
         trainer.test(model)
     exception_hook.assert_called()
 
     with pytest.raises(Exception, match=r"Error during predict"), patch(
-        "pytorch_lightning.Trainer._on_exception"
+        "pi_ml.Trainer._on_exception"
     ) as exception_hook:
         trainer.predict(model, model.val_dataloader(), return_predictions=False)
     exception_hook.assert_called()

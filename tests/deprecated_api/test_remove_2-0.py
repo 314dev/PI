@@ -14,7 +14,7 @@
 """Test deprecated functionality which will be removed in v2.0."""
 import pytest
 
-from pytorch_lightning import Trainer
+from pi_ml import Trainer
 from tests.callbacks.test_callbacks import OldStatefulCallback
 from tests.helpers import BoringModel
 

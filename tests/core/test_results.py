@@ -16,8 +16,8 @@ import torch.distributed as dist
 import torch.multiprocessing as mp
 
 import tests.helpers.utils as tutils
-from pytorch_lightning.trainer.connectors.logger_connector.result import _Sync
-from pytorch_lightning.utilities.distributed import sync_ddp_if_available
+from pi_ml.trainer.connectors.logger_connector.result import _Sync
+from pi_ml.utilities.distributed import sync_ddp_if_available
 from tests.helpers.runif import RunIf
 
 

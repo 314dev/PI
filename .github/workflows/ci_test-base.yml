@@ -61,7 +61,7 @@ jobs:
 
     - name: Test Package [only]
       run: |
-        coverage run --source pytorch_lightning -m pytest pytorch_lightning -v
+        coverage run --source pi_ml -m pytest pi_ml -v
 
     - name: Statistics
       if: success()

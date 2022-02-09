@@ -16,11 +16,11 @@ from unittest.mock import ANY, call, Mock
 import pytest
 from torch.utils.data import DataLoader
 
-import pytorch_lightning as pl
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import BasePredictionWriter
-from pytorch_lightning.trainer.supporters import CombinedLoader
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+import pi_ml as pl
+from pi_ml import Trainer
+from pi_ml.callbacks import BasePredictionWriter
+from pi_ml.trainer.supporters import CombinedLoader
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 

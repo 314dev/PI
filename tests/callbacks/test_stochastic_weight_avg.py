@@ -20,10 +20,10 @@ from torch import nn
 from torch.optim.swa_utils import SWALR
 from torch.utils.data import DataLoader
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import StochasticWeightAveraging
-from pytorch_lightning.strategies import DDPSpawnStrategy, Strategy
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.callbacks import StochasticWeightAveraging
+from pi_ml.strategies import DDPSpawnStrategy, Strategy
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers.boring_model import BoringModel, RandomDataset, RandomIterableDataset
 from tests.helpers.runif import RunIf
 

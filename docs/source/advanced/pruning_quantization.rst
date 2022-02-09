@@ -1,8 +1,8 @@
 .. testsetup:: *
 
     import os
-    from pytorch_lightning.trainer.trainer import Trainer
-    from pytorch_lightning.core.lightning import LightningModule
+    from pi_ml.trainer.trainer import Trainer
+    from pi_ml.core.lightning import LightningModule
 
 .. _pruning_quantization:
 
@@ -24,13 +24,13 @@ Pruning is a technique which focuses on eliminating some of the model weights to
 
 Pruning has been shown to achieve significant efficiency improvements while minimizing the drop in model performance (prediction quality). Model pruning is recommended for cloud endpoints, deploying models on edge devices, or mobile inference (among others).
 
-To enable pruning during training in Lightning, simply pass in the :class:`~pytorch_lightning.callbacks.ModelPruning` callback to the Lightning Trainer. PyTorch's native pruning implementation is used under the hood.
+To enable pruning during training in Lightning, simply pass in the :class:`~pi_ml.callbacks.ModelPruning` callback to the Lightning Trainer. PyTorch's native pruning implementation is used under the hood.
 
 This callback supports multiple pruning functions: pass any `torch.nn.utils.prune <https://pytorch.org/docs/stable/nn.html#utilities>`_ function as a string to select which weights to prune (`random_unstructured <https://pytorch.org/docs/stable/generated/torch.nn.utils.prune.random_unstructured.html#torch.nn.utils.prune.random_unstructured>`_, `RandomStructured <https://pytorch.org/docs/stable/generated/torch.nn.utils.prune.RandomStructured.html#torch.nn.utils.prune.RandomStructured>`_, etc) or implement your own by subclassing `BasePruningMethod <https://pytorch.org/tutorials/intermediate/pruning_tutorial.html#extending-torch-nn-utils-prune-with-custom-pruning-functions>`_.
 
 .. code-block:: python
 
-    from pytorch_lightning.callbacks import ModelPruning
+    from pi_ml.callbacks import ModelPruning
 
     # set the amount to be the fraction of parameters to prune
     trainer = Trainer(callbacks=[ModelPruning("l1_unstructured", amount=0.5)])
@@ -68,11 +68,11 @@ Quantization Aware Training (QAT) mimics the effects of quantization during trai
 
 Quantization is useful when it is required to serve large models on machines with limited memory, or when there's a need to switch between models and reducing the I/O time is important. For example, switching between monolingual speech recognition models across multiple languages.
 
-Lightning includes :class:`~pytorch_lightning.callbacks.QuantizationAwareTraining` callback (using PyTorch's native quantization, read more `here <https://pytorch.org/docs/stable/quantization.html#quantization-aware-training>`__), which allows creating fully quantized models (compatible with torchscript).
+Lightning includes :class:`~pi_ml.callbacks.QuantizationAwareTraining` callback (using PyTorch's native quantization, read more `here <https://pytorch.org/docs/stable/quantization.html#quantization-aware-training>`__), which allows creating fully quantized models (compatible with torchscript).
 
 .. code-block:: python
 
-    from pytorch_lightning.callbacks import QuantizationAwareTraining
+    from pi_ml.callbacks import QuantizationAwareTraining
 
 
     class RegressionModel(LightningModule):

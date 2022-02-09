@@ -13,8 +13,8 @@
 # limitations under the License.
 import pytest
 
-from pytorch_lightning import Callback, Trainer
-from pytorch_lightning.trainer.states import RunningStage, TrainerFn, TrainerState, TrainerStatus
+from pi_ml import Callback, Trainer
+from pi_ml.trainer.states import RunningStage, TrainerFn, TrainerState, TrainerStatus
 from tests.helpers import BoringModel
 
 

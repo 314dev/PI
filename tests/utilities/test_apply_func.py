@@ -21,8 +21,8 @@ import numpy as np
 import pytest
 import torch
 
-from pytorch_lightning.utilities.apply_func import apply_to_collection, apply_to_collections, move_data_to_device
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.apply_func import apply_to_collection, apply_to_collections, move_data_to_device
+from pi_ml.utilities.exceptions import MisconfigurationException
 
 
 def test_recursive_application_to_collection():

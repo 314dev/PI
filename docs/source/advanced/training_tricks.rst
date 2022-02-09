@@ -1,7 +1,7 @@
 .. testsetup:: *
 
-    from pytorch_lightning import Trainer
-    from pytorch_lightning.callbacks import StochasticWeightAveraging
+    from pi_ml import Trainer
+    from pi_ml.callbacks import StochasticWeightAveraging
 
 .. _training_tricks:
 
@@ -34,7 +34,7 @@ If the Trainer's ``gradient_clip_algorithm`` is set to ``'value'`` (``'norm'`` b
     If using mixed precision, the ``gradient_clip_val`` does not need to be changed as the gradients are unscaled
     before applying the clipping function.
 
-.. seealso:: :class:`~pytorch_lightning.trainer.trainer.Trainer`
+.. seealso:: :class:`~pi_ml.trainer.trainer.Trainer`
 
 .. testcode::
 
@@ -62,7 +62,7 @@ it harder to end up in a local minimum during optimization.
 For a more detailed explanation of SWA and how it works,
 read `this post <https://pytorch.org/blog/pytorch-1.6-now-includes-stochastic-weight-averaging>`__ by the PyTorch team.
 
-.. seealso:: The :class:`~pytorch_lightning.callbacks.StochasticWeightAveraging` callback
+.. seealso:: The :class:`~pi_ml.callbacks.StochasticWeightAveraging` callback
 
 .. testcode::
 
@@ -79,7 +79,7 @@ Auto-scaling of batch size can be enabled to find the largest batch size that fi
 memory. Large batch size often yields a better estimation of the gradients, but may also result in
 longer training time. Inspired by https://github.com/BlackHC/toma.
 
-.. seealso:: :class:`~pytorch_lightning.trainer.trainer.Trainer`
+.. seealso:: :class:`~pi_ml.trainer.trainer.Trainer`
 
 .. code-block:: python
 
@@ -120,7 +120,7 @@ search for batch sizes larger than the size of the training dataset.
     to ``.fit()``.
 
 The scaling algorithm has a number of parameters that the user can control by
-invoking the :meth:`~pytorch_lightning.tuner.tuning.Tuner.scale_batch_size` method:
+invoking the :meth:`~pi_ml.tuner.tuning.Tuner.scale_batch_size` method:
 
 .. code-block:: python
 
@@ -228,7 +228,7 @@ If your model is using an arbitrary value instead of ``self.lr`` or ``self.learn
 
 You can also inspect the results of the learning rate finder or just play around
 with the parameters of the algorithm. This can be done by invoking the
-:meth:`~pytorch_lightning.tuner.tuning.Tuner.lr_find` method. A typical example of this would look like:
+:meth:`~pi_ml.tuner.tuning.Tuner.lr_find` method. A typical example of this would look like:
 
 .. code-block:: python
 
@@ -279,7 +279,7 @@ Refer to :doc:`Advanced GPU Optimized Training <../advanced/advanced_gpu>` for m
 Sharing Datasets Across Process Boundaries
 ******************************************
 
-The :class:`~pytorch_lightning.core.datamodule.LightningDataModule` class provides an organized way to decouple data loading from training logic, with :meth:`~pytorch_lightning.core.hooks.DataHooks.prepare_data` being used for downloading and pre-processing the dataset on a single process, and :meth:`~pytorch_lightning.core.hooks.DataHooks.setup` loading the pre-processed data for each process individually:
+The :class:`~pi_ml.core.datamodule.LightningDataModule` class provides an organized way to decouple data loading from training logic, with :meth:`~pi_ml.core.hooks.DataHooks.prepare_data` being used for downloading and pre-processing the dataset on a single process, and :meth:`~pi_ml.core.hooks.DataHooks.setup` loading the pre-processed data for each process individually:
 
 .. code-block:: python
 
@@ -297,7 +297,7 @@ However, for in-memory datasets, that means that each process will hold a (redun
 For example, when training Graph Neural Networks, a common strategy is to load the entire graph into CPU memory for fast access to the entire graph structure and its features, and to then perform neighbor sampling to obtain mini-batches that fit onto the GPU.
 
 A simple way to prevent redundant dataset replicas is to rely on :obj:`torch.multiprocessing` to share the `data automatically between spawned processes via shared memory <https://pytorch.org/docs/stable/notes/multiprocessing.html>`_.
-For this, all data pre-loading should be done on the main process inside :meth:`DataModule.__init__`. As a result, all tensor-data will get automatically shared when using the :class:`~pytorch_lightning.plugins.strategies.ddp_spawn.DDPSpawnStrategy`
+For this, all data pre-loading should be done on the main process inside :meth:`DataModule.__init__`. As a result, all tensor-data will get automatically shared when using the :class:`~pi_ml.plugins.strategies.ddp_spawn.DDPSpawnStrategy`
 training type strategy:
 
 .. warning::
@@ -321,4 +321,4 @@ training type strategy:
     trainer = Trainer(gpus=2, strategy="ddp_spawn")
     trainer.fit(model, datamodule)
 
-See the `graph-level <https://github.com/pyg-team/pytorch_geometric/blob/master/examples/pytorch_lightning/gin.py>`_ and `node-level <https://github.com/pyg-team/pytorch_geometric/blob/master/examples/pytorch_lightning/graph_sage.py>`_ prediction examples in PyTorch Geometric for practical use-cases.
+See the `graph-level <https://github.com/pyg-team/pytorch_geometric/blob/master/examples/pi_ml/gin.py>`_ and `node-level <https://github.com/pyg-team/pytorch_geometric/blob/master/examples/pi_ml/graph_sage.py>`_ prediction examples in PyTorch Geometric for practical use-cases.

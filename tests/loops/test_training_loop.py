@@ -14,7 +14,7 @@
 import pytest
 import torch
 
-from pytorch_lightning import seed_everything, Trainer
+from pi_ml import seed_everything, Trainer
 from tests.helpers import BoringModel
 
 

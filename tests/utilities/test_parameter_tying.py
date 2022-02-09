@@ -15,7 +15,7 @@ import pytest
 import torch
 from torch import nn
 
-from pytorch_lightning.utilities import find_shared_parameters, set_shared_parameters
+from pi_ml.utilities import find_shared_parameters, set_shared_parameters
 from tests.helpers import BoringModel
 
 

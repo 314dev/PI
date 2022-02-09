@@ -15,9 +15,9 @@ import os
 from typing import Any, Dict, Optional, Union
 from unittest.mock import Mock
 
-import pytorch_lightning as pl
-from pytorch_lightning import Callback, Trainer
-from pytorch_lightning.loggers.base import LightningLoggerBase
+import pi_ml as pl
+from pi_ml import Callback, Trainer
+from pi_ml.loggers.base import LightningLoggerBase
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

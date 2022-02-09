@@ -23,8 +23,8 @@ from torchmetrics import Accuracy
 from pl_examples import cli_lightning_logo
 from pl_examples.basic_examples.mnist_datamodule import MNIST
 from pl_examples.basic_examples.mnist_examples.image_classifier_1_pytorch import Net
-from pytorch_lightning import LightningDataModule, LightningModule
-from pytorch_lightning.utilities.cli import LightningCLI
+from pi_ml import LightningDataModule, LightningModule
+from pi_ml.utilities.cli import LightningCLI
 
 
 class ImageClassifier(LightningModule):

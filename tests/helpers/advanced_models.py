@@ -18,8 +18,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
-from pytorch_lightning.core.lightning import LightningModule
-from pytorch_lightning.utilities.imports import _TORCHVISION_AVAILABLE
+from pi_ml.core.lightning import LightningModule
+from pi_ml.utilities.imports import _TORCHVISION_AVAILABLE
 from tests import _PATH_DATASETS
 from tests.helpers.datasets import AverageDataset, MNIST, TrialMNIST
 

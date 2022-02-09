@@ -20,7 +20,7 @@ import pytest
 import torch
 from torch.utils.data import DataLoader
 
-from pytorch_lightning import __version__, Callback, LightningDataModule, LightningModule, Trainer
+from pi_ml import __version__, Callback, LightningDataModule, LightningModule, Trainer
 from tests.helpers import BoringDataModule, BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 
@@ -113,7 +113,7 @@ def test_training_epoch_end_metrics_collection_on_override(tmpdir):
 
 @RunIf(min_gpus=1)
 @mock.patch(
-    "pytorch_lightning.strategies.Strategy.lightning_module",
+    "pi_ml.strategies.Strategy.lightning_module",
     new_callable=PropertyMock,
 )
 def test_apply_batch_transfer_handler(model_getter_mock):

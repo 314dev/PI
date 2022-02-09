@@ -16,7 +16,7 @@ from unittest import mock
 
 import pytest
 
-from pytorch_lightning.plugins.environments import LightningEnvironment
+from pi_ml.plugins.environments import LightningEnvironment
 
 
 @mock.patch.dict(os.environ, {})

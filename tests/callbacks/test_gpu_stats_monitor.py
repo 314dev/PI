@@ -18,11 +18,11 @@ import numpy as np
 import pytest
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import GPUStatsMonitor
-from pytorch_lightning.loggers import CSVLogger
-from pytorch_lightning.loggers.csv_logs import ExperimentWriter
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.callbacks import GPUStatsMonitor
+from pi_ml.loggers import CSVLogger
+from pi_ml.loggers.csv_logs import ExperimentWriter
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 
@@ -84,7 +84,7 @@ def test_gpu_stats_monitor_no_queries(tmpdir):
         devices=1,
         callbacks=[gpu_stats],
     )
-    with mock.patch("pytorch_lightning.loggers.tensorboard.TensorBoardLogger.log_metrics") as log_metrics_mock:
+    with mock.patch("pi_ml.loggers.tensorboard.TensorBoardLogger.log_metrics") as log_metrics_mock:
         trainer.fit(model)
 
     assert log_metrics_mock.mock_calls[1:] == [

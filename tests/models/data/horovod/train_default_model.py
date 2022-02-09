@@ -27,9 +27,9 @@ PYTHONPATH = os.getenv("PYTHONPATH", "")
 if ":" in PYTHONPATH:
     sys.path = PYTHONPATH.split(":") + sys.path
 
-from pytorch_lightning import Trainer  # noqa: E402
-from pytorch_lightning.callbacks import ModelCheckpoint  # noqa: E402
-from pytorch_lightning.utilities import _HOROVOD_AVAILABLE  # noqa: E402
+from pi_ml import Trainer  # noqa: E402
+from pi_ml.callbacks import ModelCheckpoint  # noqa: E402
+from pi_ml.utilities import _HOROVOD_AVAILABLE  # noqa: E402
 
 if _HOROVOD_AVAILABLE:
     import horovod.torch as hvd

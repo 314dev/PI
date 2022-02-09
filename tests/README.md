@@ -32,7 +32,7 @@ Make sure to run coverage on a GPU machine with at least 2 GPUs and NVIDIA apex 
 cd pytorch-lightning
 
 # generate coverage (coverage is also installed as part of dev dependencies under requirements/devel.txt)
-coverage run --source pytorch_lightning -m py.test pytorch_lightning tests examples -v
+coverage run --source pi_ml -m py.test pi_ml tests examples -v
 
 # print coverage stats
 coverage report -m
@@ -47,13 +47,13 @@ You can build it on your own, note it takes lots of time, be prepared.
 
 ```bash
 git clone <git-repository>
-docker image build -t pytorch_lightning:devel-torch1.9 -f dockers/cuda-extras/Dockerfile --build-arg TORCH_VERSION=1.9 .
+docker image build -t pi_ml:devel-torch1.9 -f dockers/cuda-extras/Dockerfile --build-arg TORCH_VERSION=1.9 .
 ```
 
 To build other versions, select different Dockerfile.
 
 ```bash
 docker image list
-docker run --rm -it pytorch_lightning:devel-torch1.9 bash
-docker image rm pytorch_lightning:devel-torch1.9
+docker run --rm -it pi_ml:devel-torch1.9 bash
+docker image rm pi_ml:devel-torch1.9
 ```

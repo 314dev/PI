@@ -4,9 +4,9 @@
 .. testsetup:: *
 
     import os
-    from pytorch_lightning.trainer.trainer import Trainer
-    from pytorch_lightning.core.lightning import LightningModule
-    from pytorch_lightning.utilities.seed import seed_everything
+    from pi_ml.trainer.trainer import Trainer
+    from pi_ml.core.lightning import LightningModule
+    from pi_ml.utilities.seed import seed_everything
 
 .. _trainer:
 
@@ -157,7 +157,7 @@ So you can run it like so:
 Validation
 ----------
 You can perform an evaluation epoch over the validation set, outside of the training loop,
-using :meth:`pytorch_lightning.trainer.trainer.Trainer.validate`. This might be
+using :meth:`pi_ml.trainer.trainer.Trainer.validate`. This might be
 useful if you want to collect new metrics from a model right at its initialization
 or after it has already been trained.
 
@@ -186,7 +186,7 @@ and set ``deterministic`` flag in ``Trainer``.
 
 Example::
 
-    from pytorch_lightning import Trainer, seed_everything
+    from pi_ml import Trainer, seed_everything
 
     seed_everything(42, workers=True)
     # sets seeds for numpy, torch, python.random and PYTHONHASHSEED.
@@ -194,7 +194,7 @@ Example::
     trainer = Trainer(deterministic=True)
 
 
-By setting ``workers=True`` in :func:`~pytorch_lightning.utilities.seed.seed_everything`, Lightning derives
+By setting ``workers=True`` in :func:`~pi_ml.utilities.seed.seed_everything`, Lightning derives
 unique seeds across all dataloader workers and processes for :mod:`torch`, :mod:`numpy` and stdlib
 :mod:`random` number generators. When turned on, it ensures that e.g. data augmentations are not repeated across workers.
 
@@ -464,8 +464,8 @@ callbacks
 
 |
 
-Add a list of :class:`~pytorch_lightning.callbacks.Callback`. Callbacks run sequentially in the order defined here
-with the exception of :class:`~pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint` callbacks which run
+Add a list of :class:`~pi_ml.callbacks.Callback`. Callbacks run sequentially in the order defined here
+with the exception of :class:`~pi_ml.callbacks.model_checkpoint.ModelCheckpoint` callbacks which run
 after all others to ensure all states are saved to the checkpoints.
 
 .. code-block:: python
@@ -476,7 +476,7 @@ after all others to ensure all states are saved to the checkpoints.
 
 Example::
 
-    from pytorch_lightning.callbacks import Callback
+    from pi_ml.callbacks import Callback
 
     class PrintCallback(Callback):
         def on_train_start(self, trainer, pl_module):
@@ -486,10 +486,10 @@ Example::
 
 
 Model-specific callbacks can also be added inside the ``LightningModule`` through
-:meth:`~pytorch_lightning.core.lightning.LightningModule.configure_callbacks`.
+:meth:`~pi_ml.core.lightning.LightningModule.configure_callbacks`.
 Callbacks returned in this hook will extend the list initially given to the ``Trainer`` argument, and replace
 the trainer callbacks should there be two or more of the same type.
-:class:`~pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint` callbacks always run last.
+:class:`~pi_ml.callbacks.model_checkpoint.ModelCheckpoint` callbacks always run last.
 
 
 check_val_every_n_epoch
@@ -532,7 +532,7 @@ default_root_dir
 |
 
 Default path for logs and weights when no logger or
-:class:`pytorch_lightning.callbacks.ModelCheckpoint` callback passed.  On
+:class:`pi_ml.callbacks.ModelCheckpoint` callback passed.  On
 certain clusters you might want to separate where logs and checkpoints are
 stored. If you don't then use this argument for convenience. Paths can be local
 paths or remote paths such as `s3://bucket/path` or 'hdfs://path/'. Credentials
@@ -601,13 +601,13 @@ To disable automatic checkpointing, set this to `False`.
     trainer = Trainer(enable_checkpointing=False)
 
 
-You can override the default behavior by initializing the :class:`~pytorch_lightning.callbacks.ModelCheckpoint`
-callback, and adding it to the :paramref:`~pytorch_lightning.trainer.trainer.Trainer.callbacks` list.
+You can override the default behavior by initializing the :class:`~pi_ml.callbacks.ModelCheckpoint`
+callback, and adding it to the :paramref:`~pi_ml.trainer.trainer.Trainer.callbacks` list.
 See :doc:`Saving and Loading Checkpoints <../common/checkpointing>` for how to customize checkpointing.
 
 .. testcode::
 
-    from pytorch_lightning.callbacks import ModelCheckpoint
+    from pi_ml.callbacks import ModelCheckpoint
 
     # Init ModelCheckpoint callback, monitoring 'val_loss'
     checkpoint_callback = ModelCheckpoint(monitor="val_loss")
@@ -876,7 +876,7 @@ logger
 
 .. testcode::
 
-    from pytorch_lightning.loggers import TensorBoardLogger
+    from pi_ml.loggers import TensorBoardLogger
 
     # default logger used by trainer
     logger = TensorBoardLogger(save_dir=os.getcwd(), version=1, name="lightning_logs")
@@ -972,7 +972,7 @@ max_time
 ^^^^^^^^
 
 Set the maximum amount of time for training. Training will get interrupted mid-epoch.
-For customizable options use the :class:`~pytorch_lightning.callbacks.timer.Timer` callback.
+For customizable options use the :class:`~pi_ml.callbacks.timer.Timer` callback.
 
 .. testcode::
 
@@ -1108,11 +1108,11 @@ plugins
 - :ref:`Apex <amp>`
 
 To define your own behavior, subclass the relevant class and pass it in. Here's an example linking up your own
-:class:`~pytorch_lightning.plugins.environments.ClusterEnvironment`.
+:class:`~pi_ml.plugins.environments.ClusterEnvironment`.
 
 .. code-block:: python
 
-    from pytorch_lightning.plugins.environments import ClusterEnvironment
+    from pi_ml.plugins.environments import ClusterEnvironment
 
 
     class MyCluster(ClusterEnvironment):
@@ -1215,7 +1215,7 @@ process_position
 ^^^^^^^^^^^^^^^^
 
 .. warning:: ``process_position`` has been deprecated in v1.5 and will be removed in v1.7.
-    Please pass :class:`~pytorch_lightning.callbacks.progress.TQDMProgressBar` with ``process_position``
+    Please pass :class:`~pi_ml.callbacks.progress.TQDMProgressBar` with ``process_position``
     directly to the Trainer's ``callbacks`` argument instead.
 
 .. raw:: html
@@ -1252,7 +1252,7 @@ See the :doc:`profiler documentation <../advanced/profiler>`. for more details.
 
 .. testcode::
 
-    from pytorch_lightning.profiler import SimpleProfiler, AdvancedProfiler
+    from pi_ml.profiler import SimpleProfiler, AdvancedProfiler
 
     # default used by the Trainer
     trainer = Trainer(profiler=None)
@@ -1267,7 +1267,7 @@ progress_bar_refresh_rate
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. warning:: ``progress_bar_refresh_rate`` has been deprecated in v1.5 and will be removed in v1.7.
-    Please pass :class:`~pytorch_lightning.callbacks.progress.TQDMProgressBar` with ``refresh_rate``
+    Please pass :class:`~pi_ml.callbacks.progress.TQDMProgressBar` with ``refresh_rate``
     directly to the Trainer's ``callbacks`` argument instead. To disable the progress bar,
     pass ``enable_progress_bar = False`` to the Trainer.
 
@@ -1416,7 +1416,7 @@ Supports passing different training strategies with aliases (ddp, ddp_spawn, etc
 
 .. code-block:: python
 
-    from pytorch_lightning.strategies import DDPStrategy
+    from pi_ml.strategies import DDPStrategy
 
 
     class CustomDDPStrategy(DDPStrategy):
@@ -1613,7 +1613,7 @@ Example::
 weights_summary
 ^^^^^^^^^^^^^^^
 
-.. warning:: `weights_summary` is deprecated in v1.5 and will be removed in v1.7. Please pass :class:`~pytorch_lightning.callbacks.model_summary.ModelSummary`
+.. warning:: `weights_summary` is deprecated in v1.5 and will be removed in v1.7. Please pass :class:`~pi_ml.callbacks.model_summary.ModelSummary`
     directly to the Trainer's ``callbacks`` argument instead. To disable the model summary,
     pass ``enable_model_summary = False`` to the Trainer.
 
@@ -1655,7 +1655,7 @@ Whether to enable or disable the model summarization. Defaults to True.
     trainer = Trainer(enable_model_summary=False)
 
     # enable custom summarization
-    from pytorch_lightning.callbacks import ModelSummary
+    from pi_ml.callbacks import ModelSummary
 
     trainer = Trainer(enable_model_summary=True, callbacks=[ModelSummary(max_depth=-1)])
 
@@ -1670,37 +1670,37 @@ Methods
 init
 ****
 
-.. automethod:: pytorch_lightning.trainer.Trainer.__init__
+.. automethod:: pi_ml.trainer.Trainer.__init__
    :noindex:
 
 fit
 ****
 
-.. automethod:: pytorch_lightning.trainer.Trainer.fit
+.. automethod:: pi_ml.trainer.Trainer.fit
    :noindex:
 
 validate
 ********
 
-.. automethod:: pytorch_lightning.trainer.Trainer.validate
+.. automethod:: pi_ml.trainer.Trainer.validate
    :noindex:
 
 test
 ****
 
-.. automethod:: pytorch_lightning.trainer.Trainer.test
+.. automethod:: pi_ml.trainer.Trainer.test
    :noindex:
 
 predict
 *******
 
-.. automethod:: pytorch_lightning.trainer.Trainer.predict
+.. automethod:: pi_ml.trainer.Trainer.predict
    :noindex:
 
 tune
 ****
 
-.. automethod:: pytorch_lightning.trainer.Trainer.tune
+.. automethod:: pi_ml.trainer.Trainer.tune
    :noindex:
 
 Properties

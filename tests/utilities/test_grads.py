@@ -17,7 +17,7 @@ import pytest
 import torch
 import torch.nn as nn
 
-from pytorch_lightning.utilities import grad_norm
+from pi_ml.utilities import grad_norm
 
 
 @pytest.mark.parametrize(

@@ -2,9 +2,9 @@ import pytest
 import torch
 from torch.utils.data.dataloader import DataLoader
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.trainer.states import RunningStage
-from pytorch_lightning.utilities.data import (
+from pi_ml import Trainer
+from pi_ml.trainer.states import RunningStage
+from pi_ml.utilities.data import (
     _get_dataloader_init_kwargs,
     _replace_dataloader_init_method,
     _update_dataloader,
@@ -15,7 +15,7 @@ from pytorch_lightning.utilities.data import (
     has_len_all_ranks,
     warning_cache,
 )
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers.boring_model import BoringModel, RandomDataset, RandomIterableDataset
 from tests.helpers.utils import no_warning_call
 

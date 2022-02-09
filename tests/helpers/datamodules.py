@@ -16,8 +16,8 @@ from typing import Optional
 import torch
 from torch.utils.data import DataLoader
 
-from pytorch_lightning.core.datamodule import LightningDataModule
-from pytorch_lightning.utilities import _module_available
+from pi_ml.core.datamodule import LightningDataModule
+from pi_ml.utilities import _module_available
 from tests.helpers.datasets import MNIST, SklearnDataset, TrialMNIST
 
 _SKLEARN_AVAILABLE = _module_available("sklearn")

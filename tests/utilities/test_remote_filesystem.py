@@ -16,9 +16,9 @@ import os
 import fsspec
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.loggers import TensorBoardLogger
+from pi_ml import Trainer
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.loggers import TensorBoardLogger
 from tests.helpers import BoringModel
 
 GCS_BUCKET_PATH = os.getenv("GCS_BUCKET_PATH", None)

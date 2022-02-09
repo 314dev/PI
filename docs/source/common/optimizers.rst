@@ -41,7 +41,7 @@ Here is a minimal example of manual optimization.
 
 .. testcode:: python
 
-    from pytorch_lightning import LightningModule
+    from pi_ml import LightningModule
 
 
     class MyModel(LightningModule):
@@ -69,8 +69,8 @@ Here is a minimal example of manual optimization.
 Access your Own Optimizer
 =========================
 
-The provided ``optimizer`` is a :class:`~pytorch_lightning.core.optimizer.LightningOptimizer` object wrapping your own optimizer
-configured in your :meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers`. You can access your own optimizer
+The provided ``optimizer`` is a :class:`~pi_ml.core.optimizer.LightningOptimizer` object wrapping your own optimizer
+configured in your :meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers`. You can access your own optimizer
 with ``optimizer.optimizer``. However, if you use your own optimizer to perform a step, Lightning won't be able to
 support accelerators, precision and profiling for you.
 
@@ -126,7 +126,7 @@ Here is an example training a simple GAN with multiple optimizers using manual o
 
     import torch
     from torch import Tensor
-    from pytorch_lightning import LightningModule
+    from pi_ml import LightningModule
 
 
     class SimpleGAN(LightningModule):
@@ -197,17 +197,17 @@ Learning Rate Scheduling
 
 Every optimizer you use can be paired with any
 `Learning Rate Scheduler <https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate>`_. Please see the
-documentation of :meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers` for all the available options
+documentation of :meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers` for all the available options
 
 You can call ``lr_scheduler.step()`` at arbitrary intervals.
-Use ``self.lr_schedulers()`` in  your :class:`~pytorch_lightning.core.lightning.LightningModule` to access any learning rate schedulers
-defined in your :meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers`.
+Use ``self.lr_schedulers()`` in  your :class:`~pi_ml.core.lightning.LightningModule` to access any learning rate schedulers
+defined in your :meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers`.
 
 .. warning::
    * Before v1.3, Lightning automatically called ``lr_scheduler.step()`` in both automatic and manual optimization. From
      1.3, ``lr_scheduler.step()`` is now for the user to call at arbitrary intervals.
    * Note that the ``lr_scheduler_config`` keys, such as ``"frequency"`` and ``"interval"``, will be ignored even if they are provided in
-     your :meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers` during manual optimization.
+     your :meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers` during manual optimization.
 
 Here is an example calling ``lr_scheduler.step()`` every step.
 
@@ -373,7 +373,7 @@ Use Multiple Optimizers (like GANs)
 ===================================
 
 To use multiple optimizers (optionally with learning rate schedulers), return two or more optimizers from
-:meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers`.
+:meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers`.
 
 .. testcode:: python
 
@@ -417,7 +417,7 @@ Step Optimizeres at Arbitrary Intervals
 =======================================
 
 To do more interesting things with your optimizers such as learning rate warm-up or odd scheduling,
-override the :meth:`~pytorch_lightning.core.lightning.LightningModule.optimizer_step` function.
+override the :meth:`~pi_ml.core.lightning.LightningModule.optimizer_step` function.
 
 .. warning::
     If you are overriding this method, make sure that you pass the ``optimizer_closure`` parameter to
@@ -485,8 +485,8 @@ Here we add a manual learning rate warm-up without an lr scheduler.
 Access your Own Optimizer
 =========================
 
-The provided ``optimizer`` is a :class:`~pytorch_lightning.core.optimizer.LightningOptimizer` object wrapping your own optimizer
-configured in your :meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers`.
+The provided ``optimizer`` is a :class:`~pi_ml.core.optimizer.LightningOptimizer` object wrapping your own optimizer
+configured in your :meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers`.
 You can access your own optimizer with ``optimizer.optimizer``. However, if you use your own optimizer
 to perform a step, Lightning won't be able to support accelerators, precision and profiling for you.
 
@@ -533,7 +533,7 @@ Bring your own Custom Learning Rate Schedulers
 
 Lightning allows using custom learning rate schedulers that aren't available in `PyTorch natively <https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate>`_.
 One good example is `Timm Schedulers <https://github.com/rwightman/pytorch-image-models/blob/master/timm/scheduler/scheduler.py>`_. When using custom learning rate schedulers
-relying on a different API from Native PyTorch ones, you should override the :meth:`~pytorch_lightning.core.lightning.LightningModule.lr_scheduler_step` with your desired logic.
+relying on a different API from Native PyTorch ones, you should override the :meth:`~pi_ml.core.lightning.LightningModule.lr_scheduler_step` with your desired logic.
 If you are using native PyTorch schedulers, there is no need to override this hook since Lightning will handle it automatically by default.
 
 .. code-block:: python
@@ -555,17 +555,17 @@ Configure Gradient Clipping
 ===========================
 
 To configure custom gradient clipping, consider overriding
-the :meth:`~pytorch_lightning.core.lightning.LightningModule.configure_gradient_clipping` method.
+the :meth:`~pi_ml.core.lightning.LightningModule.configure_gradient_clipping` method.
 Attributes ``gradient_clip_val`` and ``gradient_clip_algorithm`` from Trainer will be passed in the
 respective arguments here and Lightning will handle gradient clipping for you. In case you want to set
 different values for your arguments of your choice and let Lightning handle the gradient clipping, you can
-use the inbuilt :meth:`~pytorch_lightning.core.lightning.LightningModule.clip_gradients` method and pass
+use the inbuilt :meth:`~pi_ml.core.lightning.LightningModule.clip_gradients` method and pass
 the arguments along with your optimizer.
 
 .. warning::
-    Make sure to not override :meth:`~pytorch_lightning.core.lightning.LightningModule.clip_gradients`
+    Make sure to not override :meth:`~pi_ml.core.lightning.LightningModule.clip_gradients`
     method. If you want to customize gradient clipping, consider using
-    :meth:`~pytorch_lightning.core.lightning.LightningModule.configure_gradient_clipping` method.
+    :meth:`~pi_ml.core.lightning.LightningModule.configure_gradient_clipping` method.
 
 For example, here we will apply gradient clipping only to the gradients associated with optimizer A.
 

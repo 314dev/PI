@@ -15,9 +15,9 @@ import os
 
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.strategies import DeepSpeedStrategy
-from pytorch_lightning.utilities.deepspeed import convert_zero_checkpoint_to_fp32_state_dict
+from pi_ml import Trainer
+from pi_ml.strategies import DeepSpeedStrategy
+from pi_ml.utilities.deepspeed import convert_zero_checkpoint_to_fp32_state_dict
 from tests.helpers.boring_model import BoringModel
 from tests.helpers.runif import RunIf
 

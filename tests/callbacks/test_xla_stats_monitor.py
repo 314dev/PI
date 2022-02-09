@@ -16,11 +16,11 @@ import os
 import numpy as np
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import XLAStatsMonitor
-from pytorch_lightning.loggers import CSVLogger
-from pytorch_lightning.loggers.csv_logs import ExperimentWriter
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.callbacks import XLAStatsMonitor
+from pi_ml.loggers import CSVLogger
+from pi_ml.loggers.csv_logs import ExperimentWriter
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

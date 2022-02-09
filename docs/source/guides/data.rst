@@ -1,8 +1,8 @@
 .. testsetup:: *
 
-    from pytorch_lightning.core.lightning import LightningModule
+    from pi_ml.core.lightning import LightningModule
     from torch.utils.data import IterableDataset, DataLoader, Dataset
-    from pytorch_lightning.trainer.trainer import Trainer
+    from pi_ml.trainer.trainer import Trainer
 
 .. _data:
 
@@ -28,14 +28,14 @@ There are a few different data containers used in Lightning:
      - The PyTorch :class:`~torch.utils.data.IterableDataset` represents a stream of data.
    * - :class:`~torch.utils.data.DataLoader`
      - The PyTorch :class:`~torch.utils.data.DataLoader` represents a Python iterable over a Dataset.
-   * - :class:`~pytorch_lightning.core.datamodule.LightningDataModule`
-     -  A :class:`~pytorch_lightning.core.datamodule.LightningDataModule` is simply a collection of: training DataLoader(s), validation DataLoader(s), test DataLoader(s) and predict DataLoader(s), along with the matching transforms and data processing/downloads steps required.
+   * - :class:`~pi_ml.core.datamodule.LightningDataModule`
+     -  A :class:`~pi_ml.core.datamodule.LightningDataModule` is simply a collection of: training DataLoader(s), validation DataLoader(s), test DataLoader(s) and predict DataLoader(s), along with the matching transforms and data processing/downloads steps required.
 
 
 Why use LightningDataModule?
 ============================
 
-The :class:`~pytorch_lightning.core.datamodule.LightningDataModule` was designed as a way of decoupling data-related hooks from the :class:`~pytorch_lightning.core.lightning.LightningModule` so you can develop dataset agnostic models. The :class:`~pytorch_lightning.core.datamodule.LightningDataModule` makes it easy to hot swap different datasets with your model, so you can test it and benchmark it across domains. It also makes sharing and reusing the exact data splits and transforms across projects possible.
+The :class:`~pi_ml.core.datamodule.LightningDataModule` was designed as a way of decoupling data-related hooks from the :class:`~pi_ml.core.lightning.LightningModule` so you can develop dataset agnostic models. The :class:`~pi_ml.core.datamodule.LightningDataModule` makes it easy to hot swap different datasets with your model, so you can test it and benchmark it across domains. It also makes sharing and reusing the exact data splits and transforms across projects possible.
 
 Read :ref:`this <datamodules>` for more details on LightningDataModule.
 
@@ -52,17 +52,17 @@ There are a few ways to pass multiple Datasets to Lightning:
 1. Create a DataLoader that iterates over multiple Datasets under the hood.
 2. In the training loop you can pass multiple DataLoaders as a dict or list/tuple and Lightning
    will automatically combine the batches from different DataLoaders. You can control the way how dataloaders of different length
-   are combined by the flag `multiple_trainloader_mode` of the :class:`~pytorch_lightning.trainer.Trainer`. Alternatively, you can provide
-   dataloaders via :class:`~pytorch_lightning.trainer.supporters.CombinedLoader`.
+   are combined by the flag `multiple_trainloader_mode` of the :class:`~pi_ml.trainer.Trainer`. Alternatively, you can provide
+   dataloaders via :class:`~pi_ml.trainer.supporters.CombinedLoader`.
 3. In the validation, test or prediction you have the option to either return multiple DataLoaders as list/tuple, which Lightning will call sequentially,
-   or combine the dataloaders using :class:`~pytorch_lightning.trainer.supporters.CombinedLoader`, which Lightning will
+   or combine the dataloaders using :class:`~pi_ml.trainer.supporters.CombinedLoader`, which Lightning will
    automatically combine the batches from different DataLoaders.
 
 
 Using LightningDataModule
 =========================
 
-You can set more than one :class:`~torch.utils.data.DataLoader` in your :class:`~pytorch_lightning.core.datamodule.LightningDataModule` using its dataloader hooks
+You can set more than one :class:`~torch.utils.data.DataLoader` in your :class:`~pi_ml.core.datamodule.LightningDataModule` using its dataloader hooks
 and Lightning will use the correct one under-the-hood.
 
 .. testcode::
@@ -120,9 +120,9 @@ also works for testing, validation and prediction datasets.
 Return Multiple DataLoaders
 ---------------------------
 
-You can set multiple DataLoaders in your :class:`~pytorch_lightning.core.lightning.LightningModule`, and Lightning will take care of batch combination.
+You can set multiple DataLoaders in your :class:`~pi_ml.core.lightning.LightningModule`, and Lightning will take care of batch combination.
 
-For more details please have a look at :paramref:`~pytorch_lightning.trainer.trainer.Trainer.multiple_trainloader_mode`
+For more details please have a look at :paramref:`~pi_ml.trainer.trainer.Trainer.multiple_trainloader_mode`
 
 .. testcode::
 
@@ -186,11 +186,11 @@ Furthermore, Lightning also supports nested lists and dicts (or a combination).
             batch_c = batch_c_d["c"]
             batch_d = batch_c_d["d"]
 
-Alternatively, you can also pass in a :class:`~pytorch_lightning.trainer.supporters.CombinedLoader` containing multiple DataLoaders.
+Alternatively, you can also pass in a :class:`~pi_ml.trainer.supporters.CombinedLoader` containing multiple DataLoaders.
 
 .. testcode::
 
-    from pytorch_lightning.trainer.supporters import CombinedLoader
+    from pi_ml.trainer.supporters import CombinedLoader
 
 
     def train_dataloader(self):
@@ -218,9 +218,9 @@ the dataloaders in sequential order, i.e., the first dataloader will be processe
 
 See the following for more details for the default sequential option:
 
-- :meth:`~pytorch_lightning.core.hooks.DataHooks.val_dataloader`
-- :meth:`~pytorch_lightning.core.hooks.DataHooks.test_dataloader`
-- :meth:`~pytorch_lightning.core.hooks.DataHooks.predict_dataloader`
+- :meth:`~pi_ml.core.hooks.DataHooks.val_dataloader`
+- :meth:`~pi_ml.core.hooks.DataHooks.test_dataloader`
+- :meth:`~pi_ml.core.hooks.DataHooks.predict_dataloader`
 
 .. testcode::
 
@@ -234,11 +234,11 @@ See the following for more details for the default sequential option:
         ...
 
 
-Evaluation dataloaders are iterated over sequentially. If you want to iterate over them in parallel, PyTorch Lightning provides a :class:`~pytorch_lightning.trainer.supporters.CombinedLoader` object which supports collections of dataloaders such as list, tuple, or dictionary. The dataloaders can be accessed using in the same way as the provided structure:
+Evaluation dataloaders are iterated over sequentially. If you want to iterate over them in parallel, PyTorch Lightning provides a :class:`~pi_ml.trainer.supporters.CombinedLoader` object which supports collections of dataloaders such as list, tuple, or dictionary. The dataloaders can be accessed using in the same way as the provided structure:
 
 .. testcode::
 
-    from pytorch_lightning.trainer.supporters import CombinedLoader
+    from pi_ml.trainer.supporters import CombinedLoader
 
 
     def val_dataloader(self):
@@ -258,8 +258,8 @@ Evaluate with Additional DataLoaders
 ====================================
 
 You can evaluate your models using additonal dataloaders even if the dataloader specific hooks haven't been defined within your
-:class:`~pytorch_lightning.core.lightning.LightningModule`. For example, this would be the case if your test data
-set is not available at the time your model was declared. Simply pass the test set to the :meth:`~pytorch_lightning.trainer.trainer.Trainer.test` method:
+:class:`~pi_ml.core.lightning.LightningModule`. For example, this would be the case if your test data
+set is not available at the time your model was declared. Simply pass the test set to the :meth:`~pi_ml.trainer.trainer.Trainer.test` method:
 
 .. code-block:: python
 
@@ -279,7 +279,7 @@ In the case that you require access to the DataLoader or Dataset objects, DataLo
 
 .. testcode::
 
-    from pytorch_lightning import LightningModule
+    from pi_ml import LightningModule
 
 
     class Model(LightningModule):
@@ -291,11 +291,11 @@ In the case that you require access to the DataLoader or Dataset objects, DataLo
             # extract metadata, etc. from the dataset:
             ...
 
-If you are using a :class:`~pytorch_lightning.trainer.supporters.CombinedLoader` object which allows you to fetch batches from a collection of dataloaders dataloader simultaneously which supports collections of dataloaders such as list, tuple, or dictionary. The dataloaders can be accessed using the same collection structure:
+If you are using a :class:`~pi_ml.trainer.supporters.CombinedLoader` object which allows you to fetch batches from a collection of dataloaders dataloader simultaneously which supports collections of dataloaders such as list, tuple, or dictionary. The dataloaders can be accessed using the same collection structure:
 
 .. code-block:: python
 
-    from pytorch_lightning.trainer.supporters import CombinedLoader
+    from pi_ml.trainer.supporters import CombinedLoader
 
     test_dl1 = ...
     test_dl2 = ...
@@ -359,7 +359,7 @@ Lightning can handle TBPTT automatically via this flag.
 
 .. testcode::
 
-    from pytorch_lightning import LightningModule
+    from pi_ml import LightningModule
 
 
     class MyModel(LightningModule):
@@ -377,7 +377,7 @@ Lightning can handle TBPTT automatically via this flag.
             return {"loss": ..., "hiddens": hiddens}
 
 .. note:: If you need to modify how the batch is split,
-    override :func:`~pytorch_lightning.core.lightning.LightningModule.tbptt_split_batch`.
+    override :func:`~pi_ml.core.lightning.LightningModule.tbptt_split_batch`.
 
 
 Iterable Datasets

@@ -9,7 +9,7 @@ effective batch size is increased but there is no memory overhead.
     step, the effective batch size on each device will remain ``N*K`` but right before the ``optimizer.step()``, the gradient sync will make the effective
     batch size as ``P*N*K``. For DP, since the batch is split across devices, the final effective batch size will be ``N*K``.
 
-.. seealso:: :class:`~pytorch_lightning.trainer.trainer.Trainer`
+.. seealso:: :class:`~pi_ml.trainer.trainer.Trainer`
 
 .. testcode::
 
@@ -29,11 +29,11 @@ should be updated.
         # will happen. Note that you need to use zero-indexed epoch keys here
         trainer = Trainer(accumulate_grad_batches={0: 8, 4: 4, 8: 1})
 
-Or, you can create custom :class:`~pytorch_lightning.callbacks.gradient_accumulation_scheduler.GradientAccumulationScheduler`
+Or, you can create custom :class:`~pi_ml.callbacks.gradient_accumulation_scheduler.GradientAccumulationScheduler`
 
 .. testcode::
 
-        from pytorch_lightning.callbacks import GradientAccumulationScheduler
+        from pi_ml.callbacks import GradientAccumulationScheduler
 
 
         # till 5th epoch, it will accumulate every 8 batches. From 5th epoch

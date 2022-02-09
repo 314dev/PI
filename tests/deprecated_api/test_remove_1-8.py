@@ -18,24 +18,24 @@ import pytest
 import torch
 from torch import optim
 
-from pytorch_lightning import Callback, Trainer
-from pytorch_lightning.plugins.training_type.ddp import DDPPlugin
-from pytorch_lightning.plugins.training_type.ddp2 import DDP2Plugin
-from pytorch_lightning.plugins.training_type.ddp_spawn import DDPSpawnPlugin
-from pytorch_lightning.plugins.training_type.deepspeed import DeepSpeedPlugin
-from pytorch_lightning.plugins.training_type.dp import DataParallelPlugin
-from pytorch_lightning.plugins.training_type.fully_sharded import DDPFullyShardedPlugin
-from pytorch_lightning.plugins.training_type.ipu import IPUPlugin
-from pytorch_lightning.plugins.training_type.sharded import DDPShardedPlugin
-from pytorch_lightning.plugins.training_type.sharded_spawn import DDPSpawnShardedPlugin
-from pytorch_lightning.plugins.training_type.single_device import SingleDevicePlugin
-from pytorch_lightning.plugins.training_type.single_tpu import SingleTPUPlugin
-from pytorch_lightning.plugins.training_type.tpu_spawn import TPUSpawnPlugin
-from pytorch_lightning.trainer.states import RunningStage
-from pytorch_lightning.utilities.apply_func import move_data_to_device
-from pytorch_lightning.utilities.enums import DeviceType, DistributedType
-from pytorch_lightning.utilities.imports import _TORCHTEXT_LEGACY
-from pytorch_lightning.utilities.rank_zero import rank_zero_warn
+from pi_ml import Callback, Trainer
+from pi_ml.plugins.training_type.ddp import DDPPlugin
+from pi_ml.plugins.training_type.ddp2 import DDP2Plugin
+from pi_ml.plugins.training_type.ddp_spawn import DDPSpawnPlugin
+from pi_ml.plugins.training_type.deepspeed import DeepSpeedPlugin
+from pi_ml.plugins.training_type.dp import DataParallelPlugin
+from pi_ml.plugins.training_type.fully_sharded import DDPFullyShardedPlugin
+from pi_ml.plugins.training_type.ipu import IPUPlugin
+from pi_ml.plugins.training_type.sharded import DDPShardedPlugin
+from pi_ml.plugins.training_type.sharded_spawn import DDPSpawnShardedPlugin
+from pi_ml.plugins.training_type.single_device import SingleDevicePlugin
+from pi_ml.plugins.training_type.single_tpu import SingleTPUPlugin
+from pi_ml.plugins.training_type.tpu_spawn import TPUSpawnPlugin
+from pi_ml.trainer.states import RunningStage
+from pi_ml.utilities.apply_func import move_data_to_device
+from pi_ml.utilities.enums import DeviceType, DistributedType
+from pi_ml.utilities.imports import _TORCHTEXT_LEGACY
+from pi_ml.utilities.rank_zero import rank_zero_warn
 from tests.helpers.boring_model import BoringDataModule, BoringModel
 from tests.helpers.runif import RunIf
 from tests.helpers.torchtext_utils import get_dummy_torchtext_data_iterator
@@ -305,7 +305,7 @@ def test_v1_8_0_deprecate_trainer_data_loading_mixin():
 
 
 def test_v_1_8_0_deprecated_device_stats_monitor_prefix_metric_keys():
-    from pytorch_lightning.callbacks.device_stats_monitor import prefix_metric_keys
+    from pi_ml.callbacks.device_stats_monitor import prefix_metric_keys
 
     with pytest.deprecated_call(match="in v1.6 and will be removed in v1.8"):
         prefix_metric_keys({"foo": 1.0}, "bar")
@@ -450,31 +450,31 @@ def test_v1_8_0_rank_zero_imports():
 
     import warnings
 
-    from pytorch_lightning.utilities.distributed import rank_zero_debug, rank_zero_info
-    from pytorch_lightning.utilities.warnings import LightningDeprecationWarning, rank_zero_deprecation, rank_zero_warn
+    from pi_ml.utilities.distributed import rank_zero_debug, rank_zero_info
+    from pi_ml.utilities.warnings import LightningDeprecationWarning, rank_zero_deprecation, rank_zero_warn
 
     with pytest.deprecated_call(
-        match="pytorch_lightning.utilities.distributed.rank_zero_debug has been deprecated in v1.6"
+        match="pi_ml.utilities.distributed.rank_zero_debug has been deprecated in v1.6"
         " and will be removed in v1.8."
     ):
         rank_zero_debug("foo")
     with pytest.deprecated_call(
-        match="pytorch_lightning.utilities.distributed.rank_zero_info has been deprecated in v1.6"
+        match="pi_ml.utilities.distributed.rank_zero_info has been deprecated in v1.6"
         " and will be removed in v1.8."
     ):
         rank_zero_info("foo")
     with pytest.deprecated_call(
-        match="pytorch_lightning.utilities.warnings.rank_zero_warn has been deprecated in v1.6"
+        match="pi_ml.utilities.warnings.rank_zero_warn has been deprecated in v1.6"
         " and will be removed in v1.8."
     ):
         rank_zero_warn("foo")
     with pytest.deprecated_call(
-        match="pytorch_lightning.utilities.warnings.rank_zero_deprecation has been deprecated in v1.6"
+        match="pi_ml.utilities.warnings.rank_zero_deprecation has been deprecated in v1.6"
         " and will be removed in v1.8."
     ):
         rank_zero_deprecation("foo")
     with pytest.deprecated_call(
-        match="pytorch_lightning.utilities.warnings.LightningDeprecationWarning has been deprecated in v1.6"
+        match="pi_ml.utilities.warnings.LightningDeprecationWarning has been deprecated in v1.6"
         " and will be removed in v1.8."
     ):
         warnings.warn("foo", LightningDeprecationWarning, stacklevel=5)

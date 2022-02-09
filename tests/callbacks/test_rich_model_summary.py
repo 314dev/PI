@@ -17,9 +17,9 @@ from unittest import mock
 import pytest
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import RichModelSummary, RichProgressBar
-from pytorch_lightning.utilities.model_summary import summarize
+from pi_ml import Trainer
+from pi_ml.callbacks import RichModelSummary, RichProgressBar
+from pi_ml.utilities.model_summary import summarize
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 
@@ -33,7 +33,7 @@ def test_rich_model_summary_callback():
 
 
 def test_rich_progress_bar_import_error(monkeypatch):
-    import pytorch_lightning.callbacks.rich_model_summary as imports
+    import pi_ml.callbacks.rich_model_summary as imports
 
     monkeypatch.setattr(imports, "_RICH_AVAILABLE", False)
     with pytest.raises(ModuleNotFoundError, match="`RichModelSummary` requires `rich` to be installed."):
@@ -41,8 +41,8 @@ def test_rich_progress_bar_import_error(monkeypatch):
 
 
 @RunIf(rich=True)
-@mock.patch("pytorch_lightning.callbacks.rich_model_summary.Console.print", autospec=True)
-@mock.patch("pytorch_lightning.callbacks.rich_model_summary.Table.add_row", autospec=True)
+@mock.patch("pi_ml.callbacks.rich_model_summary.Console.print", autospec=True)
+@mock.patch("pi_ml.callbacks.rich_model_summary.Table.add_row", autospec=True)
 def test_rich_summary_tuples(mock_table_add_row, mock_console):
     """Ensure that tuples are converted into string, and print is called correctly."""
     model_summary = RichModelSummary()

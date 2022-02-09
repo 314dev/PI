@@ -6,7 +6,7 @@ API References
 Accelerator API
 ---------------
 
-.. currentmodule:: pytorch_lightning.accelerators
+.. currentmodule:: pi_ml.accelerators
 
 .. autosummary::
     :toctree: api
@@ -22,7 +22,7 @@ Accelerator API
 Core API
 --------
 
-.. currentmodule:: pytorch_lightning.core
+.. currentmodule:: pi_ml.core
 
 .. autosummary::
     :toctree: api
@@ -36,7 +36,7 @@ Core API
 Strategy API
 ------------
 
-.. currentmodule:: pytorch_lightning.strategies
+.. currentmodule:: pi_ml.strategies
 
 .. autosummary::
     :toctree: api
@@ -63,7 +63,7 @@ Strategy API
 Callbacks API
 -------------
 
-.. currentmodule:: pytorch_lightning.callbacks
+.. currentmodule:: pi_ml.callbacks
 
 .. autosummary::
     :toctree: api
@@ -80,7 +80,7 @@ Callbacks API
 Loggers API
 -----------
 
-.. currentmodule:: pytorch_lightning.loggers
+.. currentmodule:: pi_ml.loggers
 
 .. autosummary::
     :toctree: api
@@ -101,7 +101,7 @@ Loop API
 Base Classes
 ^^^^^^^^^^^^
 
-.. currentmodule:: pytorch_lightning.loops
+.. currentmodule:: pi_ml.loops
 
 .. autosummary::
     :toctree: api
@@ -118,7 +118,7 @@ Default Loop Implementations
 Training
 """"""""
 
-.. currentmodule:: pytorch_lightning.loops
+.. currentmodule:: pi_ml.loops
 
 .. autosummary::
     :toctree: api
@@ -135,7 +135,7 @@ Training
 Validation and Testing
 """"""""""""""""""""""
 
-.. currentmodule:: pytorch_lightning.loops
+.. currentmodule:: pi_ml.loops
 
 .. autosummary::
     :toctree: api
@@ -149,7 +149,7 @@ Validation and Testing
 Prediction
 """"""""""
 
-.. currentmodule:: pytorch_lightning.loops
+.. currentmodule:: pi_ml.loops
 
 .. autosummary::
     :toctree: api
@@ -166,7 +166,7 @@ Plugins API
 Precision Plugins
 ^^^^^^^^^^^^^^^^^
 
-.. currentmodule:: pytorch_lightning.plugins.precision
+.. currentmodule:: pi_ml.plugins.precision
 
 .. autosummary::
     :toctree: api
@@ -188,7 +188,7 @@ Precision Plugins
 Cluster Environments
 ^^^^^^^^^^^^^^^^^^^^
 
-.. currentmodule:: pytorch_lightning.plugins.environments
+.. currentmodule:: pi_ml.plugins.environments
 
 .. autosummary::
     :toctree: api
@@ -205,7 +205,7 @@ Cluster Environments
 Checkpoint IO Plugins
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. currentmodule:: pytorch_lightning.plugins.io
+.. currentmodule:: pi_ml.plugins.io
 
 .. autosummary::
     :toctree: api
@@ -219,7 +219,7 @@ Checkpoint IO Plugins
 Profiler API
 ------------
 
-.. currentmodule:: pytorch_lightning.profiler
+.. currentmodule:: pi_ml.profiler
 
 .. autosummary::
     :toctree: api
@@ -238,7 +238,7 @@ Profiler API
 Trainer API
 -----------
 
-.. currentmodule:: pytorch_lightning.trainer.trainer
+.. currentmodule:: pi_ml.trainer.trainer
 
 .. autosummary::
     :toctree: api
@@ -250,7 +250,7 @@ Trainer API
 LightningLite API
 -----------------
 
-.. currentmodule:: pytorch_lightning.lite
+.. currentmodule:: pi_ml.lite
 
 .. autosummary::
     :toctree: api
@@ -261,7 +261,7 @@ LightningLite API
 Tuner API
 ---------
 
-.. currentmodule:: pytorch_lightning.tuner.tuning
+.. currentmodule:: pi_ml.tuner.tuning
 
 .. autosummary::
     :toctree: api
@@ -273,7 +273,7 @@ Tuner API
 Utilities API
 -------------
 
-.. currentmodule:: pytorch_lightning.utilities
+.. currentmodule:: pi_ml.utilities
 
 .. autosummary::
     :toctree: api

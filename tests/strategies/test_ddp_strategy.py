@@ -18,10 +18,10 @@ import pytest
 import torch
 from torch.nn.parallel import DistributedDataParallel
 
-from pytorch_lightning import LightningModule, Trainer
-from pytorch_lightning.plugins.environments import LightningEnvironment
-from pytorch_lightning.strategies import DDPStrategy
-from pytorch_lightning.trainer.states import TrainerFn
+from pi_ml import LightningModule, Trainer
+from pi_ml.plugins.environments import LightningEnvironment
+from pi_ml.strategies import DDPStrategy
+from pi_ml.trainer.states import TrainerFn
 from tests.helpers.boring_model import BoringModel
 from tests.helpers.runif import RunIf
 

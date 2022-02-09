@@ -25,7 +25,7 @@ test: clean
 	# install APEX, see https://github.com/NVIDIA/apex#linux
 
 	# run tests with coverage
-	python -m coverage run --source pytorch_lightning -m pytest pytorch_lightning tests pl_examples -v
+	python -m coverage run --source pi_ml -m pytest pi_ml tests pl_examples -v
 	python -m coverage report
 
 docs: clean

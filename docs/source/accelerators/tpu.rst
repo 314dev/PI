@@ -112,7 +112,7 @@ To use a full TPU pod skip to the TPU pod section.
 
 .. code-block:: python
 
-    import pytorch_lightning as pl
+    import pi_ml as pl
 
     my_model = MyLightningModule()
     trainer = pl.Trainer(tpu_cores=8)
@@ -197,7 +197,7 @@ set the 16-bit flag.
 
 .. code-block:: python
 
-    import pytorch_lightning as pl
+    import pi_ml as pl
 
     my_model = MyLightningModule()
     trainer = pl.Trainer(tpu_cores=8, precision=16)
@@ -228,9 +228,9 @@ Example:
 
 .. code-block:: python
 
-    from pytorch_lightning.core.lightning import LightningModule
+    from pi_ml.core.lightning import LightningModule
     from torch import nn
-    from pytorch_lightning.trainer.trainer import Trainer
+    from pi_ml.trainer.trainer import Trainer
 
 
     class WeightSharingModule(LightningModule):
@@ -297,9 +297,9 @@ Troubleshooting
     RuntimeError: tensorflow/compiler/xla/xla_client/computation_client.cc:273 : Missing XLA configuration
     Traceback (most recent call last):
     ...
-    File "/home/kaushikbokka/pytorch-lightning/pytorch_lightning/utilities/device_parser.py", line 125, in parse_tpu_cores
+    File "/home/kaushikbokka/pytorch-lightning/pi_ml/utilities/device_parser.py", line 125, in parse_tpu_cores
         raise MisconfigurationException('No TPU devices were found.')
-    pytorch_lightning.utilities.exceptions.MisconfigurationException: No TPU devices were found.
+    pi_ml.utilities.exceptions.MisconfigurationException: No TPU devices were found.
 
 This means the system is missing XLA configuration. You would need to set up XRT TPU device configuration.
 
@@ -353,7 +353,7 @@ PyTorch XLA only supports Tensor objects for CPU to TPU data transfer. Might cau
 
 .. code-block:: python
 
-    import pytorch_lightning as pl
+    import pi_ml as pl
 
     my_model = MyLightningModule()
     trainer = pl.Trainer(tpu_cores=8, strategy="tpu_spawn_debug")

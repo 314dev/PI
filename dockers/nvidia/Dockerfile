@@ -62,6 +62,6 @@ RUN \
     pip --version && \
     pip list | grep torch && \
     python -c "import torch; assert torch.__version__.startswith('$TORCH_VERSION'), torch.__version__" && \
-    python -c "import pytorch_lightning as pl; print(pl.__version__)"
+    python -c "import pi_ml as pl; print(pl.__version__)"
 
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]

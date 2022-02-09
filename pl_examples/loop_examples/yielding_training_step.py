@@ -19,11 +19,11 @@ import torch
 
 from pl_examples.domain_templates.generative_adversarial_net import GAN as GANTemplate
 from pl_examples.domain_templates.generative_adversarial_net import MNISTDataModule
-from pytorch_lightning import Trainer
-from pytorch_lightning.loops import OptimizerLoop
-from pytorch_lightning.loops.optimization.optimizer_loop import ClosureResult
-from pytorch_lightning.loops.utilities import _build_training_step_kwargs
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.loops import OptimizerLoop
+from pi_ml.loops.optimization.optimizer_loop import ClosureResult
+from pi_ml.loops.utilities import _build_training_step_kwargs
+from pi_ml.utilities.exceptions import MisconfigurationException
 
 #############################################################################################
 #                                    Yield Loop                                             #
@@ -43,7 +43,7 @@ from pytorch_lightning.utilities.exceptions import MisconfigurationException
 #                        Step 1 / 3: Implement a custom OptimizerLoop                       #
 #                                                                                           #
 # The `training_step` gets called in the                                                    #
-# `pytorch_lightning.loops.optimization.OptimizerLoop`. To make it into a Python generator, #
+# `pi_ml.loops.optimization.OptimizerLoop`. To make it into a Python generator, #
 # we need to override the place where it gets called.                                       #
 #############################################################################################
 

@@ -22,9 +22,9 @@ import torch.nn.utils.prune as pytorch_prune
 from torch import nn
 from torch.nn import Sequential
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint, ModelPruning
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.callbacks import ModelCheckpoint, ModelPruning
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers.boring_model import BoringModel
 from tests.helpers.runif import RunIf
 

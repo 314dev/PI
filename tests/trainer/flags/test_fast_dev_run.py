@@ -4,9 +4,9 @@ from unittest.mock import Mock
 import pytest
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
-from pytorch_lightning.loggers.base import DummyLogger
+from pi_ml import Trainer
+from pi_ml.callbacks import EarlyStopping, ModelCheckpoint
+from pi_ml.loggers.base import DummyLogger
 from tests.helpers import BoringModel
 
 

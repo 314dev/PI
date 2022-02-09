@@ -19,8 +19,8 @@ from unittest import mock
 import pytest
 
 import tests.helpers.utils as tutils
-from pytorch_lightning import Trainer
-from pytorch_lightning.utilities import argparse
+from pi_ml import Trainer
+from pi_ml.utilities import argparse
 from tests.helpers.runif import RunIf
 
 
@@ -192,7 +192,7 @@ def test_init_from_argparse_args(cli_args, extra_args):
     unknown_args = dict(unknown_arg=0)
 
     # unkown args in the argparser/namespace should be ignored
-    with mock.patch("pytorch_lightning.Trainer.__init__", autospec=True, return_value=None) as init:
+    with mock.patch("pi_ml.Trainer.__init__", autospec=True, return_value=None) as init:
         trainer = Trainer.from_argparse_args(Namespace(**cli_args, **unknown_args), **extra_args)
         expected = dict(cli_args)
         expected.update(extra_args)  # extra args should override any cli arg

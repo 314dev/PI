@@ -14,7 +14,7 @@
 import os
 from unittest.mock import Mock
 
-from pytorch_lightning.plugins import TPUBf16PrecisionPlugin
+from pi_ml.plugins import TPUBf16PrecisionPlugin
 
 
 def test_teardown():

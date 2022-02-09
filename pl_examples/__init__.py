@@ -2,7 +2,7 @@ import os
 
 from six.moves import urllib
 
-from pytorch_lightning.utilities import _module_available
+from pi_ml.utilities import _module_available
 
 # TorchVision hotfix https://github.com/pytorch/vision/issues/1938
 opener = urllib.request.build_opener()

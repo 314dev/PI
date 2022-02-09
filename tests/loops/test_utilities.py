@@ -14,8 +14,8 @@
 import pytest
 import torch
 
-from pytorch_lightning.loops.utilities import _extract_hiddens
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml.loops.utilities import _extract_hiddens
+from pi_ml.utilities.exceptions import MisconfigurationException
 
 
 def test_extract_hiddens():

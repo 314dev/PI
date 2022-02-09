@@ -18,15 +18,15 @@ import pytest
 import torch
 import torch.nn.functional as F
 
-from pytorch_lightning import Callback, seed_everything, Trainer
-from pytorch_lightning.accelerators import CPUAccelerator, IPUAccelerator
-from pytorch_lightning.core.lightning import LightningModule
-from pytorch_lightning.plugins import IPUPrecisionPlugin
-from pytorch_lightning.strategies.ipu import IPUStrategy
-from pytorch_lightning.trainer.states import RunningStage, TrainerFn
-from pytorch_lightning.trainer.supporters import CombinedLoader
-from pytorch_lightning.utilities import _AcceleratorType, _IPU_AVAILABLE
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Callback, seed_everything, Trainer
+from pi_ml.accelerators import CPUAccelerator, IPUAccelerator
+from pi_ml.core.lightning import LightningModule
+from pi_ml.plugins import IPUPrecisionPlugin
+from pi_ml.strategies.ipu import IPUStrategy
+from pi_ml.trainer.states import RunningStage, TrainerFn
+from pi_ml.trainer.supporters import CombinedLoader
+from pi_ml.utilities import _AcceleratorType, _IPU_AVAILABLE
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers.boring_model import BoringModel
 from tests.helpers.datamodules import ClassifDataModule
 from tests.helpers.runif import RunIf

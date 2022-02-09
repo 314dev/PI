@@ -18,14 +18,14 @@ import torch
 import torch.nn as nn
 from torch.nn import DataParallel
 
-from pytorch_lightning import LightningModule
-from pytorch_lightning.overrides import LightningDistributedModule
-from pytorch_lightning.overrides.data_parallel import (
+from pi_ml import LightningModule
+from pi_ml.overrides import LightningDistributedModule
+from pi_ml.overrides.data_parallel import (
     LightningParallelModule,
     python_scalar_to_tensor,
     unsqueeze_scalar_tensor,
 )
-from pytorch_lightning.trainer.states import RunningStage
+from pi_ml.trainer.states import RunningStage
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

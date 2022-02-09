@@ -14,7 +14,7 @@
 import torch
 from torchmetrics.functional import accuracy
 
-from pytorch_lightning import LightningDataModule, LightningModule, Trainer
+from pi_ml import LightningDataModule, LightningModule, Trainer
 from tests.helpers import BoringModel
 from tests.helpers.utils import get_default_logger, load_model_from_checkpoint, reset_seed
 

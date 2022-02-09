@@ -25,9 +25,9 @@ from torch.nn import ModuleDict, ModuleList
 from torchmetrics import Metric, MetricCollection
 
 import tests.helpers.utils as tutils
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.trainer.connectors.logger_connector.result import (
+from pi_ml import Trainer
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.trainer.connectors.logger_connector.result import (
     _Metadata,
     _ResultCollection,
     _ResultMetric,

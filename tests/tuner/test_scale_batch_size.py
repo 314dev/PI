@@ -19,10 +19,10 @@ import torch
 from torch.utils.data import DataLoader
 
 import tests.helpers.utils as tutils
-from pytorch_lightning import Trainer
-from pytorch_lightning.tuner.tuning import Tuner
-from pytorch_lightning.utilities import AMPType
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.tuner.tuning import Tuner
+from pi_ml.utilities import AMPType
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringDataModule, BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 

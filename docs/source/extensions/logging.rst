@@ -1,8 +1,8 @@
 .. testsetup:: *
 
-    from pytorch_lightning.core.lightning import LightningModule
-    from pytorch_lightning.trainer.trainer import Trainer
-    from pytorch_lightning import loggers as pl_loggers
+    from pi_ml.core.lightning import LightningModule
+    from pi_ml.trainer.trainer import Trainer
+    from pi_ml import loggers as pl_loggers
 
 .. role:: hidden
     :class: hidden-section
@@ -20,7 +20,7 @@ Supported Loggers
 
 The following are loggers we support:
 
-.. currentmodule:: pytorch_lightning.loggers
+.. currentmodule:: pi_ml.loggers
 
 .. autosummary::
     :toctree: generated
@@ -41,7 +41,7 @@ By default, Lightning uses ``TensorBoard`` logger under the hood, and stores the
 
 .. testcode::
 
-    from pytorch_lightning import Trainer
+    from pi_ml import Trainer
 
     # Automatically logs to a directory (by default ``lightning_logs/``)
     trainer = Trainer()
@@ -59,11 +59,11 @@ To visualize tensorboard in a jupyter notebook environment, run the following co
     %reload_ext tensorboard
     %tensorboard --logdir=lightning_logs/
 
-You can also pass a custom Logger to the :class:`~pytorch_lightning.trainer.trainer.Trainer`.
+You can also pass a custom Logger to the :class:`~pi_ml.trainer.trainer.Trainer`.
 
 .. testcode::
 
-    from pytorch_lightning import loggers as pl_loggers
+    from pi_ml import loggers as pl_loggers
 
     tb_logger = pl_loggers.TensorBoardLogger(save_dir="logs/")
     trainer = Trainer(logger=tb_logger)
@@ -103,7 +103,7 @@ Lightning offers automatic log functionalities for logging scalars, or manual lo
 Automatic Logging
 =================
 
-Use the :meth:`~pytorch_lightning.core.lightning.LightningModule.log`
+Use the :meth:`~pi_ml.core.lightning.LightningModule.log`
 method to log from anywhere in a :doc:`lightning module <../common/lightning_module>` and :doc:`callbacks <../extensions/callbacks>`.
 
 .. code-block:: python
@@ -116,22 +116,22 @@ method to log from anywhere in a :doc:`lightning module <../common/lightning_mod
     def training_step(self, batch, batch_idx):
         self.log("performance", {"acc": acc, "recall": recall})
 
-Depending on where the :meth:`~pytorch_lightning.core.lightning.LightningModule.log` method is called, Lightning auto-determines
+Depending on where the :meth:`~pi_ml.core.lightning.LightningModule.log` method is called, Lightning auto-determines
 the correct logging mode for you. Of course you can override the default behavior by manually setting the
-:meth:`~pytorch_lightning.core.lightning.LightningModule.log` parameters.
+:meth:`~pi_ml.core.lightning.LightningModule.log` parameters.
 
 .. code-block:: python
 
     def training_step(self, batch, batch_idx):
         self.log("my_loss", loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
 
-The :meth:`~pytorch_lightning.core.lightning.LightningModule.log` method has a few options:
+The :meth:`~pi_ml.core.lightning.LightningModule.log` method has a few options:
 
 * ``on_step``: Logs the metric at the current step.
 * ``on_epoch``: Automatically accumulates and logs at the end of the epoch.
 * ``prog_bar``: Logs to the progress bar (Default: ``False``).
 * ``logger``: Logs to the logger like ``Tensorboard``, or any other custom logger passed to the
-    :class:`~pytorch_lightning.trainer.trainer.Trainer` (Default: ``True``).
+    :class:`~pi_ml.trainer.trainer.Trainer` (Default: ``True``).
 * ``reduce_fx``: Reduction function over step values for end of epoch. Uses :meth:`torch.mean` by default.
 * ``enable_graph``: If True, will not auto detach the graph.
 * ``sync_dist``: If True, reduces the metric across devices. Use with care as this may lead to a significant
@@ -176,7 +176,7 @@ The :meth:`~pytorch_lightning.core.lightning.LightningModule.log` method has a f
 
     -   Setting both ``on_step=True`` and ``on_epoch=True`` will create two keys per metric you log with
         suffix ``_step`` and ``_epoch`` respectively. You can refer to these keys e.g. in the `monitor`
-        argument of :class:`~pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint` or in the graphs plotted to the logger of your choice.
+        argument of :class:`~pi_ml.callbacks.model_checkpoint.ModelCheckpoint` or in the graphs plotted to the logger of your choice.
 
 
 If your work requires to log in an unsupported method, please open an issue with a clear description of why it is blocking you.
@@ -204,13 +204,13 @@ If you want to log anything that is not a scalar, like histograms, text, images,
 Make a Custom Logger
 ********************
 
-You can implement your own logger by writing a class that inherits from :class:`~pytorch_lightning.loggers.base.LightningLoggerBase`.
-Use the :func:`~pytorch_lightning.loggers.base.rank_zero_experiment` and :func:`~pytorch_lightning.utilities.rank_zero.rank_zero_only` decorators to make sure that only the first process in DDP training creates the experiment and logs the data respectively.
+You can implement your own logger by writing a class that inherits from :class:`~pi_ml.loggers.base.LightningLoggerBase`.
+Use the :func:`~pi_ml.loggers.base.rank_zero_experiment` and :func:`~pi_ml.utilities.rank_zero.rank_zero_only` decorators to make sure that only the first process in DDP training creates the experiment and logs the data respectively.
 
 .. testcode::
 
-    from pytorch_lightning.loggers.base import LightningLoggerBase, rank_zero_experiment
-    from pytorch_lightning.utilities.distributed import rank_zero_only
+    from pi_ml.loggers.base import LightningLoggerBase, rank_zero_experiment
+    from pi_ml.utilities.distributed import rank_zero_only
 
 
     class MyLogger(LightningLoggerBase):
@@ -264,7 +264,7 @@ Logging frequency
 =================
 
 It may slow training down to log every single batch. By default, Lightning logs every 50 rows, or 50 training steps.
-To change this behaviour, set the ``log_every_n_steps`` :class:`~pytorch_lightning.trainer.trainer.Trainer` flag.
+To change this behaviour, set the ``log_every_n_steps`` :class:`~pi_ml.trainer.trainer.Trainer` flag.
 
 .. testcode::
 
@@ -276,7 +276,7 @@ Log Writing Frequency
 =====================
 
 Writing to a logger can be expensive, so by default Lightning writes logs to disk or to the given logger every 100 training steps.
-If wish to flush logs to the filesystem at a different step rate, use the ``flush_logs_every_n_steps`` :class:`~pytorch_lightning.trainer.trainer.Trainer` flag.
+If wish to flush logs to the filesystem at a different step rate, use the ``flush_logs_every_n_steps`` :class:`~pi_ml.trainer.trainer.Trainer` flag.
 
 .. testcode::
 
@@ -284,7 +284,7 @@ If wish to flush logs to the filesystem at a different step rate, use the ``flus
     trainer = Trainer(flush_logs_every_n_steps=k)
 
 Unlike the ``log_every_n_steps``, this argument does not apply to all loggers.
-The example shown here works with :class:`~pytorch_lightning.loggers.tensorboard.TensorBoardLogger`,
+The example shown here works with :class:`~pi_ml.loggers.tensorboard.TensorBoardLogger`,
 which is the default logger in Lightning.
 
 ----------
@@ -293,7 +293,7 @@ which is the default logger in Lightning.
 Progress Bar
 ************
 
-You can add any metric to the progress bar using :meth:`~pytorch_lightning.core.lightning.LightningModule.log`
+You can add any metric to the progress bar using :meth:`~pi_ml.core.lightning.LightningModule.log`
 method, setting ``prog_bar=True``.
 
 
@@ -308,11 +308,11 @@ Modifying the Progress Bar
 
 The progress bar by default already includes the training loss and version number of the experiment
 if you are using a logger. These defaults can be customized by overriding the
-:meth:`~pytorch_lightning.callbacks.progress.base.ProgressBarBase.get_metrics` hook in your logger.
+:meth:`~pi_ml.callbacks.progress.base.ProgressBarBase.get_metrics` hook in your logger.
 
 .. code-block:: python
 
-    from pytorch_lightning.callbacks.progress import Tqdm
+    from pi_ml.callbacks.progress import Tqdm
 
 
     class CustomProgressBar(Tqdm):
@@ -339,10 +339,10 @@ or redirect output for certain modules to log files:
     import logging
 
     # configure logging at the root level of Lightning
-    logging.getLogger("pytorch_lightning").setLevel(logging.ERROR)
+    logging.getLogger("pi_ml").setLevel(logging.ERROR)
 
     # configure logging on module level, redirect to file
-    logger = logging.getLogger("pytorch_lightning.core")
+    logger = logging.getLogger("pi_ml.core")
     logger.addHandler(logging.FileHandler("core.log"))
 
 Read more about custom Python logging `here <https://docs.python.org/3/library/logging.html>`_.

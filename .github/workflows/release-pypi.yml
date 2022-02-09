@@ -132,7 +132,7 @@ jobs:
         ls -lh dist/
         pip install dist/*.whl
 
-        pl_ver=$(python -c "import pytorch_lightning as pl ; print(pl.__version__)" 2>&1)
+        pl_ver=$(python -c "import pi_ml as pl ; print(pl.__version__)" 2>&1)
         # generate checkpoint to this version
         bash legacy/generate_checkpoints.sh $pl_ver
 

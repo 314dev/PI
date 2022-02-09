@@ -18,9 +18,9 @@ from unittest.mock import DEFAULT, Mock
 import pytest
 from torch.utils.data import DataLoader
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ProgressBarBase, RichProgressBar
-from pytorch_lightning.callbacks.progress.rich_progress import RichProgressBarTheme
+from pi_ml import Trainer
+from pi_ml.callbacks import ProgressBarBase, RichProgressBar
+from pi_ml.callbacks.progress.rich_progress import RichProgressBarTheme
 from tests.helpers.boring_model import BoringModel, RandomDataset, RandomIterableDataset
 from tests.helpers.runif import RunIf
 
@@ -73,26 +73,26 @@ def test_rich_progress_bar(tmpdir, dataset):
     )
     model = TestModel()
 
-    with mock.patch("pytorch_lightning.callbacks.progress.rich_progress.Progress.update") as mocked:
+    with mock.patch("pi_ml.callbacks.progress.rich_progress.Progress.update") as mocked:
         trainer.fit(model)
     # 3 for main progress bar and 1 for val progress bar
     assert mocked.call_count == 4
 
-    with mock.patch("pytorch_lightning.callbacks.progress.rich_progress.Progress.update") as mocked:
+    with mock.patch("pi_ml.callbacks.progress.rich_progress.Progress.update") as mocked:
         trainer.validate(model)
     assert mocked.call_count == 1
 
-    with mock.patch("pytorch_lightning.callbacks.progress.rich_progress.Progress.update") as mocked:
+    with mock.patch("pi_ml.callbacks.progress.rich_progress.Progress.update") as mocked:
         trainer.test(model)
     assert mocked.call_count == 1
 
-    with mock.patch("pytorch_lightning.callbacks.progress.rich_progress.Progress.update") as mocked:
+    with mock.patch("pi_ml.callbacks.progress.rich_progress.Progress.update") as mocked:
         trainer.predict(model)
     assert mocked.call_count == 1
 
 
 def test_rich_progress_bar_import_error(monkeypatch):
-    import pytorch_lightning.callbacks.progress.rich_progress as imports
+    import pi_ml.callbacks.progress.rich_progress as imports
 
     monkeypatch.setattr(imports, "_RICH_AVAILABLE", False)
     with pytest.raises(ModuleNotFoundError, match="`RichProgressBar` requires `rich` >= 10.2.2."):
@@ -103,7 +103,7 @@ def test_rich_progress_bar_import_error(monkeypatch):
 def test_rich_progress_bar_custom_theme(tmpdir):
     """Test to ensure that custom theme styles are used."""
     with mock.patch.multiple(
-        "pytorch_lightning.callbacks.progress.rich_progress",
+        "pi_ml.callbacks.progress.rich_progress",
         CustomBarColumn=DEFAULT,
         BatchesProcessedColumn=DEFAULT,
         CustomTimeColumn=DEFAULT,
@@ -140,7 +140,7 @@ def test_rich_progress_bar_keyboard_interrupt(tmpdir):
     model = TestModel()
 
     with mock.patch(
-        "pytorch_lightning.callbacks.progress.rich_progress.Progress.stop", autospec=True
+        "pi_ml.callbacks.progress.rich_progress.Progress.stop", autospec=True
     ) as mock_progress_stop:
         progress_bar = RichProgressBar()
         trainer = Trainer(
@@ -178,7 +178,7 @@ def test_rich_progress_bar_leave(tmpdir, leave, reset_call_count):
     model = BoringModel()
 
     with mock.patch(
-        "pytorch_lightning.callbacks.progress.rich_progress.Progress.reset", autospec=True
+        "pi_ml.callbacks.progress.rich_progress.Progress.reset", autospec=True
     ) as mock_progress_reset:
         progress_bar = RichProgressBar(leave=leave)
         trainer = Trainer(
@@ -193,7 +193,7 @@ def test_rich_progress_bar_leave(tmpdir, leave, reset_call_count):
 
 
 @RunIf(rich=True)
-@mock.patch("pytorch_lightning.callbacks.progress.rich_progress.Progress.update")
+@mock.patch("pi_ml.callbacks.progress.rich_progress.Progress.update")
 def test_rich_progress_bar_refresh_rate_disabled(progress_update, tmpdir):
     trainer = Trainer(
         default_root_dir=tmpdir,

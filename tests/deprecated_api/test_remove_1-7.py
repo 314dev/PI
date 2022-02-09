@@ -20,21 +20,21 @@ from unittest.mock import Mock
 import pytest
 import torch
 
-from pytorch_lightning import Callback, LightningDataModule, Trainer
-from pytorch_lightning.callbacks.gpu_stats_monitor import GPUStatsMonitor
-from pytorch_lightning.callbacks.lr_monitor import LearningRateMonitor
-from pytorch_lightning.callbacks.progress import ProgressBar
-from pytorch_lightning.callbacks.xla_stats_monitor import XLAStatsMonitor
-from pytorch_lightning.loggers import LoggerCollection, TestTubeLogger
-from pytorch_lightning.overrides.distributed import IndexBatchSamplerWrapper
-from pytorch_lightning.plugins.environments import (
+from pi_ml import Callback, LightningDataModule, Trainer
+from pi_ml.callbacks.gpu_stats_monitor import GPUStatsMonitor
+from pi_ml.callbacks.lr_monitor import LearningRateMonitor
+from pi_ml.callbacks.progress import ProgressBar
+from pi_ml.callbacks.xla_stats_monitor import XLAStatsMonitor
+from pi_ml.loggers import LoggerCollection, TestTubeLogger
+from pi_ml.overrides.distributed import IndexBatchSamplerWrapper
+from pi_ml.plugins.environments import (
     KubeflowEnvironment,
     LightningEnvironment,
     LSFEnvironment,
     SLURMEnvironment,
     TorchElasticEnvironment,
 )
-from pytorch_lightning.strategies import SingleDeviceStrategy
+from pi_ml.strategies import SingleDeviceStrategy
 from tests.deprecated_api import _soft_unimport_module
 from tests.helpers import BoringModel
 from tests.helpers.datamodules import MNISTDataModule
@@ -50,15 +50,15 @@ def test_v1_7_0_deprecated_lightning_module_summarize(tmpdir):
 
 
 def test_v1_7_0_moved_model_summary_and_layer_summary(tmpdir):
-    _soft_unimport_module("pytorch_lightning.core.memory")
-    with pytest.deprecated_call(match="to `pytorch_lightning.utilities.model_summary` since v1.5"):
-        from pytorch_lightning.core.memory import LayerSummary, ModelSummary  # noqa: F401
+    _soft_unimport_module("pi_ml.core.memory")
+    with pytest.deprecated_call(match="to `pi_ml.utilities.model_summary` since v1.5"):
+        from pi_ml.core.memory import LayerSummary, ModelSummary  # noqa: F401
 
 
 def test_v1_7_0_moved_get_memory_profile_and_get_gpu_memory_map(tmpdir):
-    _soft_unimport_module("pytorch_lightning.core.memory")
-    with pytest.deprecated_call(match="to `pytorch_lightning.utilities.memory` since v1.5"):
-        from pytorch_lightning.core.memory import get_gpu_memory_map, get_memory_profile  # noqa: F401
+    _soft_unimport_module("pi_ml.core.memory")
+    with pytest.deprecated_call(match="to `pi_ml.utilities.memory` since v1.5"):
+        from pi_ml.core.memory import get_gpu_memory_map, get_memory_profile  # noqa: F401
 
 
 def test_v1_7_0_deprecated_model_size():
@@ -197,7 +197,7 @@ def test_v1_7_0_deprecated_on_task_dataloader(tmpdir):
         _run(model, "predict")
 
 
-@mock.patch("pytorch_lightning.loggers.test_tube.Experiment")
+@mock.patch("pi_ml.loggers.test_tube.Experiment")
 def test_v1_7_0_test_tube_logger(_, tmpdir):
     with pytest.deprecated_call(match="The TestTubeLogger is deprecated since v1.5 and will be removed in v1.7"):
         _ = TestTubeLogger(tmpdir)
@@ -275,7 +275,7 @@ def test_v1_7_0_lightning_logger_base_close(tmpdir):
 
 def test_v1_7_0_deprecate_lightning_distributed(tmpdir):
     with pytest.deprecated_call(match="LightningDistributed is deprecated in v1.5 and will be removed in v1.7."):
-        from pytorch_lightning.distributed.dist import LightningDistributed
+        from pi_ml.distributed.dist import LightningDistributed
 
         _ = LightningDistributed()
 
@@ -342,11 +342,11 @@ def test_v1_7_0_deprecate_on_post_move_to_device(tmpdir):
 
 def test_v1_7_0_deprecate_parameter_validation():
 
-    _soft_unimport_module("pytorch_lightning.core.decorators")
+    _soft_unimport_module("pi_ml.core.decorators")
     with pytest.deprecated_call(
-        match="Using `pytorch_lightning.core.decorators.parameter_validation` is deprecated in v1.5"
+        match="Using `pi_ml.core.decorators.parameter_validation` is deprecated in v1.5"
     ):
-        from pytorch_lightning.core.decorators import parameter_validation  # noqa: F401
+        from pi_ml.core.decorators import parameter_validation  # noqa: F401
 
 
 def test_v1_7_0_passing_strategy_to_accelerator_trainer_flag():

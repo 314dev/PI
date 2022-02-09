@@ -13,14 +13,14 @@ from torch.optim import Optimizer
 from torch.utils.data import DataLoader
 from torchmetrics import Accuracy
 
-from pytorch_lightning import LightningDataModule, LightningModule, seed_everything, Trainer
-from pytorch_lightning.callbacks import Callback, LearningRateMonitor, ModelCheckpoint
-from pytorch_lightning.plugins import DeepSpeedPrecisionPlugin
-from pytorch_lightning.strategies import DeepSpeedStrategy
-from pytorch_lightning.strategies.deepspeed import LightningDeepSpeedModule
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.imports import _DEEPSPEED_AVAILABLE
-from pytorch_lightning.utilities.meta import init_meta_context
+from pi_ml import LightningDataModule, LightningModule, seed_everything, Trainer
+from pi_ml.callbacks import Callback, LearningRateMonitor, ModelCheckpoint
+from pi_ml.plugins import DeepSpeedPrecisionPlugin
+from pi_ml.strategies import DeepSpeedStrategy
+from pi_ml.strategies.deepspeed import LightningDeepSpeedModule
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.imports import _DEEPSPEED_AVAILABLE
+from pi_ml.utilities.meta import init_meta_context
 from tests.helpers.boring_model import BoringModel, RandomDataset, RandomIterableDataset
 from tests.helpers.datamodules import ClassifDataModule
 from tests.helpers.runif import RunIf
@@ -219,7 +219,7 @@ def test_warn_deepspeed_ignored(tmpdir):
         precision=16,
         track_grad_norm=2,
     )
-    from pytorch_lightning.plugins.precision.deepspeed import warning_cache
+    from pi_ml.plugins.precision.deepspeed import warning_cache
 
     with pytest.warns(UserWarning, match="will be ignored since DeepSpeed handles the backward"):
         trainer.fit(model)

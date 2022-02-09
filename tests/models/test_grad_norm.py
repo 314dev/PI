@@ -16,7 +16,7 @@ from unittest.mock import patch
 import numpy as np
 import pytest
 
-from pytorch_lightning import Trainer
+from pi_ml import Trainer
 from tests.helpers import BoringModel
 from tests.helpers.utils import reset_seed
 

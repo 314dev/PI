@@ -15,7 +15,7 @@
 import torch
 from torch.nn import functional as F
 
-import pytorch_lightning as pl
+import pi_ml as pl
 from pl_examples.basic_examples.mnist_datamodule import MNISTDataModule
 
 

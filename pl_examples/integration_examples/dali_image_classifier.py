@@ -21,11 +21,11 @@ from packaging.version import Version
 from torch.nn import functional as F
 from torch.utils.data import random_split
 
-import pytorch_lightning as pl
+import pi_ml as pl
 from pl_examples import _DALI_AVAILABLE, _DATASETS_PATH, cli_lightning_logo
 from pl_examples.basic_examples.mnist_datamodule import MNIST
-from pytorch_lightning.utilities.cli import LightningCLI
-from pytorch_lightning.utilities.imports import _TORCHVISION_AVAILABLE
+from pi_ml.utilities.cli import LightningCLI
+from pi_ml.utilities.imports import _TORCHVISION_AVAILABLE
 
 if _TORCHVISION_AVAILABLE:
     from torchvision import transforms

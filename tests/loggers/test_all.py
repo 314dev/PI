@@ -21,8 +21,8 @@ import pytest
 import torch
 
 import tests.helpers.utils as tutils
-from pytorch_lightning import Callback, Trainer
-from pytorch_lightning.loggers import (
+from pi_ml import Callback, Trainer
+from pi_ml.loggers import (
     CometLogger,
     CSVLogger,
     MLFlowLogger,
@@ -31,7 +31,7 @@ from pytorch_lightning.loggers import (
     TestTubeLogger,
     WandbLogger,
 )
-from pytorch_lightning.loggers.base import DummyExperiment
+from pi_ml.loggers.base import DummyExperiment
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 from tests.loggers.test_comet import _patch_comet_atexit
@@ -64,26 +64,26 @@ def test_loggers_fit_test_all(tmpdir, monkeypatch):
 
     _test_loggers_fit_test(tmpdir, TensorBoardLogger)
 
-    with mock.patch("pytorch_lightning.loggers.comet.comet_ml"), mock.patch(
-        "pytorch_lightning.loggers.comet.CometOfflineExperiment"
+    with mock.patch("pi_ml.loggers.comet.comet_ml"), mock.patch(
+        "pi_ml.loggers.comet.CometOfflineExperiment"
     ):
         _patch_comet_atexit(monkeypatch)
         _test_loggers_fit_test(tmpdir, CometLogger)
 
-    with mock.patch("pytorch_lightning.loggers.mlflow.mlflow"), mock.patch(
-        "pytorch_lightning.loggers.mlflow.MlflowClient"
+    with mock.patch("pi_ml.loggers.mlflow.mlflow"), mock.patch(
+        "pi_ml.loggers.mlflow.MlflowClient"
     ):
         _test_loggers_fit_test(tmpdir, MLFlowLogger)
 
-    with mock.patch("pytorch_lightning.loggers.neptune.neptune", new_callable=create_neptune_mock):
+    with mock.patch("pi_ml.loggers.neptune.neptune", new_callable=create_neptune_mock):
         _test_loggers_fit_test(tmpdir, NeptuneLogger)
 
-    with mock.patch("pytorch_lightning.loggers.test_tube.Experiment"), pytest.deprecated_call(
+    with mock.patch("pi_ml.loggers.test_tube.Experiment"), pytest.deprecated_call(
         match="TestTubeLogger is deprecated since v1.5"
     ):
         _test_loggers_fit_test(tmpdir, TestTubeLogger)
 
-    with mock.patch("pytorch_lightning.loggers.wandb.wandb") as wandb:
+    with mock.patch("pi_ml.loggers.wandb.wandb") as wandb:
         wandb.run = None
         wandb.init().step = 0
         _test_loggers_fit_test(tmpdir, WandbLogger)
@@ -167,23 +167,23 @@ def test_loggers_save_dir_and_weights_save_path_all(tmpdir, monkeypatch):
 
     _test_loggers_save_dir_and_weights_save_path(tmpdir, TensorBoardLogger)
 
-    with mock.patch("pytorch_lightning.loggers.comet.comet_ml"), mock.patch(
-        "pytorch_lightning.loggers.comet.CometOfflineExperiment"
+    with mock.patch("pi_ml.loggers.comet.comet_ml"), mock.patch(
+        "pi_ml.loggers.comet.CometOfflineExperiment"
     ):
         _patch_comet_atexit(monkeypatch)
         _test_loggers_save_dir_and_weights_save_path(tmpdir, CometLogger)
 
-    with mock.patch("pytorch_lightning.loggers.mlflow.mlflow"), mock.patch(
-        "pytorch_lightning.loggers.mlflow.MlflowClient"
+    with mock.patch("pi_ml.loggers.mlflow.mlflow"), mock.patch(
+        "pi_ml.loggers.mlflow.MlflowClient"
     ):
         _test_loggers_save_dir_and_weights_save_path(tmpdir, MLFlowLogger)
 
-    with mock.patch("pytorch_lightning.loggers.test_tube.Experiment"), pytest.deprecated_call(
+    with mock.patch("pi_ml.loggers.test_tube.Experiment"), pytest.deprecated_call(
         match="TestTubeLogger is deprecated since v1.5"
     ):
         _test_loggers_save_dir_and_weights_save_path(tmpdir, TestTubeLogger)
 
-    with mock.patch("pytorch_lightning.loggers.wandb.wandb"):
+    with mock.patch("pi_ml.loggers.wandb.wandb"):
         _test_loggers_save_dir_and_weights_save_path(tmpdir, WandbLogger)
 
 
@@ -368,8 +368,8 @@ def test_logger_with_prefix_all(tmpdir, monkeypatch):
     prefix = "tmp"
 
     # Comet
-    with mock.patch("pytorch_lightning.loggers.comet.comet_ml"), mock.patch(
-        "pytorch_lightning.loggers.comet.CometOfflineExperiment"
+    with mock.patch("pi_ml.loggers.comet.comet_ml"), mock.patch(
+        "pi_ml.loggers.comet.CometOfflineExperiment"
     ):
         _patch_comet_atexit(monkeypatch)
         logger = _instantiate_logger(CometLogger, save_dir=tmpdir, prefix=prefix)
@@ -377,15 +377,15 @@ def test_logger_with_prefix_all(tmpdir, monkeypatch):
         logger.experiment.log_metrics.assert_called_once_with({"tmp-test": 1.0}, epoch=None, step=0)
 
     # MLflow
-    with mock.patch("pytorch_lightning.loggers.mlflow.mlflow"), mock.patch(
-        "pytorch_lightning.loggers.mlflow.MlflowClient"
+    with mock.patch("pi_ml.loggers.mlflow.mlflow"), mock.patch(
+        "pi_ml.loggers.mlflow.MlflowClient"
     ):
         logger = _instantiate_logger(MLFlowLogger, save_dir=tmpdir, prefix=prefix)
         logger.log_metrics({"test": 1.0}, step=0)
         logger.experiment.log_metric.assert_called_once_with(ANY, "tmp-test", 1.0, ANY, 0)
 
     # Neptune
-    with mock.patch("pytorch_lightning.loggers.neptune.neptune"):
+    with mock.patch("pi_ml.loggers.neptune.neptune"):
         logger = _instantiate_logger(NeptuneLogger, api_key="test", project="project", save_dir=tmpdir, prefix=prefix)
         assert logger.experiment.__getitem__.call_count == 2
         logger.log_metrics({"test": 1.0}, step=0)
@@ -394,13 +394,13 @@ def test_logger_with_prefix_all(tmpdir, monkeypatch):
         logger.experiment.__getitem__().log.assert_called_once_with(1.0)
 
     # TensorBoard
-    with mock.patch("pytorch_lightning.loggers.tensorboard.SummaryWriter"):
+    with mock.patch("pi_ml.loggers.tensorboard.SummaryWriter"):
         logger = _instantiate_logger(TensorBoardLogger, save_dir=tmpdir, prefix=prefix)
         logger.log_metrics({"test": 1.0}, step=0)
         logger.experiment.add_scalar.assert_called_once_with("tmp-test", 1.0, 0)
 
     # TestTube
-    with mock.patch("pytorch_lightning.loggers.test_tube.Experiment"), pytest.deprecated_call(
+    with mock.patch("pi_ml.loggers.test_tube.Experiment"), pytest.deprecated_call(
         match="TestTubeLogger is deprecated since v1.5"
     ):
         logger = _instantiate_logger(TestTubeLogger, save_dir=tmpdir, prefix=prefix)
@@ -408,7 +408,7 @@ def test_logger_with_prefix_all(tmpdir, monkeypatch):
         logger.experiment.log.assert_called_once_with({"tmp-test": 1.0}, global_step=0)
 
     # WandB
-    with mock.patch("pytorch_lightning.loggers.wandb.wandb") as wandb:
+    with mock.patch("pi_ml.loggers.wandb.wandb") as wandb:
         logger = _instantiate_logger(WandbLogger, save_dir=tmpdir, prefix=prefix)
         wandb.run = None
         wandb.init().step = 0

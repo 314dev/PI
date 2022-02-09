@@ -22,9 +22,9 @@ import pytest
 import torch
 import yaml
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.utilities.imports import _compare_version, _OMEGACONF_AVAILABLE
+from pi_ml import Trainer
+from pi_ml.loggers import TensorBoardLogger
+from pi_ml.utilities.imports import _compare_version, _OMEGACONF_AVAILABLE
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 
@@ -248,7 +248,7 @@ def test_tensorboard_log_graph_warning_no_example_input_array(tmpdir):
         logger.log_graph(model)
 
 
-@mock.patch("pytorch_lightning.loggers.TensorBoardLogger.log_metrics")
+@mock.patch("pi_ml.loggers.TensorBoardLogger.log_metrics")
 def test_tensorboard_with_accummulated_gradients(mock_log_metrics, tmpdir):
     """Tests to ensure that tensorboard log properly when accumulated_gradients > 1."""
 
@@ -286,7 +286,7 @@ def test_tensorboard_with_accummulated_gradients(mock_log_metrics, tmpdir):
     assert count_steps == model.indexes
 
 
-@mock.patch("pytorch_lightning.loggers.tensorboard.SummaryWriter")
+@mock.patch("pi_ml.loggers.tensorboard.SummaryWriter")
 def test_tensorboard_finalize(summary_writer, tmpdir):
     """Test that the SummaryWriter closes in finalize."""
     logger = TensorBoardLogger(save_dir=tmpdir)
@@ -307,7 +307,7 @@ def test_tensorboard_save_hparams_to_yaml_once(tmpdir):
     assert not os.path.isfile(os.path.join(tmpdir, hparams_file))
 
 
-@mock.patch("pytorch_lightning.loggers.tensorboard.log")
+@mock.patch("pi_ml.loggers.tensorboard.log")
 def test_tensorboard_with_symlink(log, tmpdir):
     """Tests a specific failure case when tensorboard logger is used with empty name, symbolic link ``save_dir``,
     and relative paths."""

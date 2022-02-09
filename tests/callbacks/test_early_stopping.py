@@ -22,9 +22,9 @@ import numpy as np
 import pytest
 import torch
 
-from pytorch_lightning import seed_everything, Trainer
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import seed_everything, Trainer
+from pi_ml.callbacks import EarlyStopping, ModelCheckpoint
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel
 from tests.helpers.datamodules import ClassifDataModule
 from tests.helpers.runif import RunIf
@@ -473,7 +473,7 @@ def test_check_on_train_epoch_end_smart_handling(tmpdir, case):
 
     side_effect = [(False, "A"), (True, "B")]
     with mock.patch(
-        "pytorch_lightning.callbacks.EarlyStopping._evaluate_stopping_criteria", side_effect=side_effect
+        "pi_ml.callbacks.EarlyStopping._evaluate_stopping_criteria", side_effect=side_effect
     ) as es_mock:
         trainer.fit(model)
 
@@ -490,7 +490,7 @@ def test_early_stopping_squeezes():
     trainer.callback_metrics["foo"] = torch.tensor([[[0]]])
 
     with mock.patch(
-        "pytorch_lightning.callbacks.EarlyStopping._evaluate_stopping_criteria", return_value=(False, "")
+        "pi_ml.callbacks.EarlyStopping._evaluate_stopping_criteria", return_value=(False, "")
     ) as es_mock:
         early_stopping._run_early_stopping_check(trainer)
 

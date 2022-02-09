@@ -16,8 +16,8 @@ import torch
 from torch.utils.data import DataLoader, DistributedSampler, RandomSampler, Sampler, SequentialSampler
 
 from legacy.simple_classif_training import ClassifDataModule, ClassificationModel
-from pytorch_lightning import Trainer
-from pytorch_lightning.trainer.states import RunningStage
+from pi_ml import Trainer
+from pi_ml.trainer.states import RunningStage
 from tests.helpers.boring_model import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 

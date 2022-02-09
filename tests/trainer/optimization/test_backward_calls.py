@@ -3,7 +3,7 @@ from unittest.mock import patch
 import pytest
 import torch
 
-from pytorch_lightning import Trainer
+from pi_ml import Trainer
 from tests.helpers import BoringModel
 
 

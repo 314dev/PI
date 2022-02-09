@@ -23,11 +23,11 @@ import pytest
 import torch
 from torch.utils.data.dataloader import DataLoader
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint, ProgressBarBase, TQDMProgressBar
-from pytorch_lightning.callbacks.progress.tqdm_progress import Tqdm
-from pytorch_lightning.core.lightning import LightningModule
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.callbacks import ModelCheckpoint, ProgressBarBase, TQDMProgressBar
+from pi_ml.callbacks.progress.tqdm_progress import Tqdm
+from pi_ml.core.lightning import LightningModule
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers.boring_model import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 
@@ -327,7 +327,7 @@ def test_main_progress_bar_update_amount(
         logger=False,
         enable_checkpointing=False,
     )
-    with mock.patch("pytorch_lightning.callbacks.progress.tqdm_progress.Tqdm", MockTqdm):
+    with mock.patch("pi_ml.callbacks.progress.tqdm_progress.Tqdm", MockTqdm):
         trainer.fit(model)
     if train_batches > 0:
         assert progress_bar.main_progress_bar.n_values == train_updates
@@ -348,7 +348,7 @@ def test_test_progress_bar_update_amount(tmpdir, test_batches: int, refresh_rate
         logger=False,
         enable_checkpointing=False,
     )
-    with mock.patch("pytorch_lightning.callbacks.progress.tqdm_progress.Tqdm", MockTqdm):
+    with mock.patch("pi_ml.callbacks.progress.tqdm_progress.Tqdm", MockTqdm):
         trainer.test(model)
     assert progress_bar.test_progress_bar.n_values == updates
 
@@ -464,7 +464,7 @@ def test_tqdm_progress_bar_print_no_train(tqdm_write, tmpdir):
 
 
 @mock.patch("builtins.print")
-@mock.patch("pytorch_lightning.callbacks.progress.tqdm_progress.Tqdm.write")
+@mock.patch("pi_ml.callbacks.progress.tqdm_progress.Tqdm.write")
 def test_tqdm_progress_bar_print_disabled(tqdm_write, mock_print, tmpdir):
     """Test that printing in LightningModule goes through built-in print function when progress bar is disabled."""
     model = PrintModel()
@@ -626,7 +626,7 @@ def test_tqdm_progress_bar_correct_value_epoch_end(tmpdir):
     assert pbar.calls["test"] == []
 
 
-@mock.patch("pytorch_lightning.trainer.trainer.Trainer.is_global_zero", new_callable=PropertyMock, return_value=False)
+@mock.patch("pi_ml.trainer.trainer.Trainer.is_global_zero", new_callable=PropertyMock, return_value=False)
 def test_tqdm_progress_bar_disabled_when_not_rank_zero(is_global_zero):
     """Test that the progress bar is disabled when not in global rank zero."""
     progress_bar = TQDMProgressBar()

@@ -5,12 +5,12 @@ from typing import Any, Dict, Union
 import pytest
 import torch
 
-import pytorch_lightning as pl
-from pytorch_lightning import Trainer
-from pytorch_lightning.accelerators import CPUAccelerator
-from pytorch_lightning.plugins.io.torch_plugin import TorchCheckpointIO
-from pytorch_lightning.plugins.precision.precision_plugin import PrecisionPlugin
-from pytorch_lightning.strategies import SingleDeviceStrategy
+import pi_ml as pl
+from pi_ml import Trainer
+from pi_ml.accelerators import CPUAccelerator
+from pi_ml.plugins.io.torch_plugin import TorchCheckpointIO
+from pi_ml.plugins.precision.precision_plugin import PrecisionPlugin
+from pi_ml.strategies import SingleDeviceStrategy
 from tests.helpers.boring_model import BoringModel
 
 

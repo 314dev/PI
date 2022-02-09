@@ -15,8 +15,8 @@ from unittest.mock import patch
 
 import pytest
 
-from pytorch_lightning.loops import TrainingEpochLoop
-from pytorch_lightning.trainer.trainer import Trainer
+from pi_ml.loops import TrainingEpochLoop
+from pi_ml.trainer.trainer import Trainer
 from tests.helpers.boring_model import BoringModel
 
 _out00 = {"loss": 0.0}

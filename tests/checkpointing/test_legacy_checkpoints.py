@@ -19,8 +19,8 @@ from unittest.mock import patch
 import pytest
 import torch
 
-import pytorch_lightning as pl
-from pytorch_lightning import Callback, Trainer
+import pi_ml as pl
+from pi_ml import Callback, Trainer
 from tests import _PATH_LEGACY, _PROJECT_ROOT
 
 LEGACY_CHECKPOINTS_PATH = os.path.join(_PATH_LEGACY, "checkpoints")

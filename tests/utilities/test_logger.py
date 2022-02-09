@@ -16,8 +16,8 @@ from argparse import ArgumentParser, Namespace
 import numpy as np
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.utilities.logger import (
+from pi_ml import Trainer
+from pi_ml.utilities.logger import (
     _add_prefix,
     _convert_params,
     _flatten_dict,

@@ -19,9 +19,9 @@ from typing import Optional, Type
 
 import pytest
 
-from pytorch_lightning import seed_everything
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.loggers import TensorBoardLogger
+from pi_ml import seed_everything
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.loggers import TensorBoardLogger
 from tests import _TEMP_PATH, RANDOM_PORTS
 from tests.helpers.boring_model import BoringModel
 

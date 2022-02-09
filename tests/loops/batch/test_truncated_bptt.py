@@ -18,7 +18,7 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, TensorDataset
 
-from pytorch_lightning import LightningModule, Trainer
+from pi_ml import LightningModule, Trainer
 
 
 class LSTMModel(LightningModule):

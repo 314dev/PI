@@ -13,24 +13,24 @@
 # limitations under the License.
 import sys
 
-import pytorch_lightning
-from pytorch_lightning.utilities.migration import pl_legacy_patch
+import pi_ml
+from pi_ml.utilities.migration import pl_legacy_patch
 
 
 def test_patch_legacy_argparse_utils():
     with pl_legacy_patch():
-        from pytorch_lightning.utilities import argparse_utils
+        from pi_ml.utilities import argparse_utils
 
         assert callable(argparse_utils._gpus_arg_default)
-        assert "pytorch_lightning.utilities.argparse_utils" in sys.modules
+        assert "pi_ml.utilities.argparse_utils" in sys.modules
 
-    assert "pytorch_lightning.utilities.argparse_utils" not in sys.modules
+    assert "pi_ml.utilities.argparse_utils" not in sys.modules
 
 
 def test_patch_legacy_gpus_arg_default():
     with pl_legacy_patch():
-        from pytorch_lightning.utilities.argparse import _gpus_arg_default
+        from pi_ml.utilities.argparse import _gpus_arg_default
 
         assert callable(_gpus_arg_default)
-    assert not hasattr(pytorch_lightning.utilities.argparse, "_gpus_arg_default")
-    assert not hasattr(pytorch_lightning.utilities.argparse, "_gpus_arg_default")
+    assert not hasattr(pi_ml.utilities.argparse, "_gpus_arg_default")
+    assert not hasattr(pi_ml.utilities.argparse, "_gpus_arg_default")

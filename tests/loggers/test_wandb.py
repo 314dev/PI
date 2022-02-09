@@ -17,13 +17,13 @@ from unittest import mock
 
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.loggers import WandbLogger
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.loggers import WandbLogger
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel
 
 
-@mock.patch("pytorch_lightning.loggers.wandb.wandb")
+@mock.patch("pi_ml.loggers.wandb.wandb")
 def test_wandb_logger_init(wandb):
     """Verify that basic functionality of wandb logger works.
 
@@ -82,7 +82,7 @@ def test_wandb_logger_init(wandb):
     assert logger.version == wandb.init().id
 
 
-@mock.patch("pytorch_lightning.loggers.wandb.wandb")
+@mock.patch("pi_ml.loggers.wandb.wandb")
 def test_wandb_pickle(wandb, tmpdir):
     """Verify that pickling trainer with wandb logger works.
 
@@ -119,7 +119,7 @@ def test_wandb_pickle(wandb, tmpdir):
     del os.environ["WANDB_MODE"]
 
 
-@mock.patch("pytorch_lightning.loggers.wandb.wandb")
+@mock.patch("pi_ml.loggers.wandb.wandb")
 def test_wandb_logger_dirs_creation(wandb, tmpdir):
     """Test that the logger creates the folders and files in the right place."""
     logger = WandbLogger(save_dir=str(tmpdir), offline=True)
@@ -150,7 +150,7 @@ def test_wandb_logger_dirs_creation(wandb, tmpdir):
     assert trainer.log_dir == logger.save_dir
 
 
-@mock.patch("pytorch_lightning.loggers.wandb.wandb")
+@mock.patch("pi_ml.loggers.wandb.wandb")
 def test_wandb_log_model(wandb, tmpdir):
     """Test that the logger creates the folders and files in the right place."""
 
@@ -186,7 +186,7 @@ def test_wandb_log_model(wandb, tmpdir):
     assert not wandb.init().log_artifact.called
 
     # test correct metadata
-    import pytorch_lightning.loggers.wandb as pl_wandb
+    import pi_ml.loggers.wandb as pl_wandb
 
     pl_wandb._WANDB_GREATER_EQUAL_0_10_22 = True
     wandb.init().log_artifact.reset_mock()
@@ -215,7 +215,7 @@ def test_wandb_log_model(wandb, tmpdir):
     )
 
 
-@mock.patch("pytorch_lightning.loggers.wandb.wandb")
+@mock.patch("pi_ml.loggers.wandb.wandb")
 def test_wandb_log_media(wandb, tmpdir):
     """Test that the logger creates the folders and files in the right place."""
 
@@ -284,7 +284,7 @@ def test_wandb_log_media(wandb, tmpdir):
     wandb.init().log.assert_called_once_with({"samples": wandb.Table(), "trainer/global_step": 5})
 
 
-@mock.patch("pytorch_lightning.loggers.wandb.wandb")
+@mock.patch("pi_ml.loggers.wandb.wandb")
 def test_wandb_logger_offline_log_model(wandb, tmpdir):
     """Test that log_model=True raises an error in offline mode."""
     with pytest.raises(MisconfigurationException, match="checkpoints cannot be uploaded in offline mode"):

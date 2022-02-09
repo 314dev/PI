@@ -13,9 +13,9 @@
 # limitations under the License.
 import tests.helpers.pipelines as tpipes
 import tests.helpers.utils as tutils
-from pytorch_lightning.callbacks import EarlyStopping
-from pytorch_lightning.trainer import Trainer
-from pytorch_lightning.utilities import memory
+from pi_ml.callbacks import EarlyStopping
+from pi_ml.trainer import Trainer
+from pi_ml.utilities import memory
 from tests.helpers import BoringModel
 from tests.helpers.datamodules import ClassifDataModule
 from tests.helpers.runif import RunIf

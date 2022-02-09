@@ -17,10 +17,10 @@ from unittest import mock
 import pytest
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.plugins.environments import LightningEnvironment, SLURMEnvironment, TorchElasticEnvironment
-from pytorch_lightning.strategies import DDP2Strategy, DDPShardedStrategy, DDPStrategy, DeepSpeedStrategy
-from pytorch_lightning.utilities.rank_zero import rank_zero_only
+from pi_ml import Trainer
+from pi_ml.plugins.environments import LightningEnvironment, SLURMEnvironment, TorchElasticEnvironment
+from pi_ml.strategies import DDP2Strategy, DDPShardedStrategy, DDPStrategy, DeepSpeedStrategy
+from pi_ml.utilities.rank_zero import rank_zero_only
 from tests.helpers.runif import RunIf
 
 

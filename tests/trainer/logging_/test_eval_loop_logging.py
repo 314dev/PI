@@ -23,11 +23,11 @@ import numpy as np
 import pytest
 import torch
 
-from pytorch_lightning import callbacks, Trainer
-from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.loops.dataloader import EvaluationLoop
-from pytorch_lightning.trainer.states import RunningStage
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import callbacks, Trainer
+from pi_ml.loggers import TensorBoardLogger
+from pi_ml.loops.dataloader import EvaluationLoop
+from pi_ml.trainer.states import RunningStage
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 
@@ -511,7 +511,7 @@ def test_log_works_in_test_callback(tmpdir):
         assert is_included if should_include else not is_included
 
 
-@mock.patch("pytorch_lightning.loggers.TensorBoardLogger.log_metrics")
+@mock.patch("pi_ml.loggers.TensorBoardLogger.log_metrics")
 def test_validation_step_log_with_tensorboard(mock_log_metrics, tmpdir):
     """This tests make sure we properly log_metrics to loggers."""
 
@@ -847,7 +847,7 @@ expected3 = """
     ],
 )
 def test_native_print_results(monkeypatch, inputs, expected):
-    import pytorch_lightning.loops.dataloader.evaluation_loop as imports
+    import pi_ml.loops.dataloader.evaluation_loop as imports
 
     monkeypatch.setattr(imports, "_RICH_AVAILABLE", False)
     out = StringIO()

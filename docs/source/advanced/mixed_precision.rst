@@ -1,6 +1,6 @@
 .. testsetup:: *
 
-    from pytorch_lightning import Trainer
+    from pi_ml import Trainer
 
 
 .. _amp:
@@ -203,7 +203,7 @@ Lightning supports training models with double precision/64-bit. You can set it 
 Precision Plugins
 *****************
 
-You can also customize and pass your own Precision Plugin by subclassing the :class:`~pytorch_lightning.plugins.precision.precision_plugin.PrecisionPlugin` class.
+You can also customize and pass your own Precision Plugin by subclassing the :class:`~pi_ml.plugins.precision.precision_plugin.PrecisionPlugin` class.
 
 - Perform pre and post backward/optimizer step operations such as scaling gradients.
 - Provide context managers for forward, training_step, etc.

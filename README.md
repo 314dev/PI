@@ -17,7 +17,7 @@ import torch.nn.functional as F
 from torchvision.datasets import MNIST
 from torch.utils.data import DataLoader, random_split
 from torchvision import transforms
-import pytorch_lightning as pl
+import pi_ml as pl
 import pi-ml as pi
 ```
 

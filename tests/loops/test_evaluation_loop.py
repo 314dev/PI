@@ -16,14 +16,14 @@ from unittest import mock
 import torch
 from torch.utils.data.dataloader import DataLoader
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.loops import EvaluationEpochLoop
-from pytorch_lightning.utilities.model_helpers import is_overridden
+from pi_ml import Trainer
+from pi_ml.loops import EvaluationEpochLoop
+from pi_ml.utilities.model_helpers import is_overridden
 from tests.helpers.boring_model import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 
 
-@mock.patch("pytorch_lightning.loops.dataloader.evaluation_loop.EvaluationLoop._on_evaluation_epoch_end")
+@mock.patch("pi_ml.loops.dataloader.evaluation_loop.EvaluationLoop._on_evaluation_epoch_end")
 def test_on_evaluation_epoch_end(eval_epoch_end_mock, tmpdir):
     """Tests that `on_evaluation_epoch_end` is called for `on_validation_epoch_end` and `on_test_epoch_end`
     hooks."""
@@ -43,7 +43,7 @@ def test_on_evaluation_epoch_end(eval_epoch_end_mock, tmpdir):
 
 
 @mock.patch(
-    "pytorch_lightning.trainer.connectors.logger_connector.logger_connector.LoggerConnector.log_eval_end_metrics"
+    "pi_ml.trainer.connectors.logger_connector.logger_connector.LoggerConnector.log_eval_end_metrics"
 )
 def test_log_epoch_metrics_before_on_evaluation_end(update_eval_epoch_metrics_mock, tmpdir):
     """Test that the epoch metrics are logged before the `on_evaluation_end` hook is fired."""

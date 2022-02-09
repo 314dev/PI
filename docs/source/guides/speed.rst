@@ -1,8 +1,8 @@
 .. testsetup:: *
 
-    from pytorch_lightning.trainer.trainer import Trainer
-    from pytorch_lightning.callbacks.early_stopping import EarlyStopping
-    from pytorch_lightning.core.lightning import LightningModule
+    from pi_ml.trainer.trainer import Trainer
+    from pi_ml.callbacks.early_stopping import EarlyStopping
+    from pi_ml.core.lightning import LightningModule
 
 .. _training-speedup:
 
@@ -28,9 +28,9 @@ GPU Training
 
 Lightning supports a variety of plugins to further speed up distributed GPU training. Most notably:
 
-* :class:`~pytorch_lightning.strategies.DDPStrategy`
-* :class:`~pytorch_lightning.strategies.DDPShardedStrategy`
-* :class:`~pytorch_lightning.strategies.DeepSpeedStrategy`
+* :class:`~pi_ml.strategies.DDPStrategy`
+* :class:`~pi_ml.strategies.DDPShardedStrategy`
+* :class:`~pi_ml.strategies.DeepSpeedStrategy`
 
 .. code-block:: python
 
@@ -52,7 +52,7 @@ Refer to :doc:`Advanced GPU Optimized Training for more details <../advanced/adv
 
 Prefer DDP over DP
 ^^^^^^^^^^^^^^^^^^
-:class:`~pytorch_lightning.strategies.dp.DataParallelStrategy` performs 3 GPU transfers for EVERY batch:
+:class:`~pi_ml.strategies.dp.DataParallelStrategy` performs 3 GPU transfers for EVERY batch:
 
 1. Copy the model to the device.
 2. Copy the data to the device.
@@ -65,7 +65,7 @@ Prefer DDP over DP
 
 |
 
-Whereas :class:`~pytorch_lightning.strategies.ddp.DDPStrategy` only performs 2 transfer operations, making DDP much faster than DP:
+Whereas :class:`~pi_ml.strategies.ddp.DDPStrategy` only performs 2 transfer operations, making DDP much faster than DP:
 
 1. Moving data to the device.
 2. Transfer and sync gradients.
@@ -89,7 +89,7 @@ When enabled, it can result in a performance hit, and can be disabled in most ca
 
 .. code-block:: python
 
-    from pytorch_lightning.strategies import DDPStrategy
+    from pi_ml.strategies import DDPStrategy
 
     trainer = pl.Trainer(
         gpus=2,
@@ -98,7 +98,7 @@ When enabled, it can result in a performance hit, and can be disabled in most ca
 
 .. code-block:: python
 
-    from pytorch_lightning.strategies import DDPSpawnStrategy
+    from pi_ml.strategies import DDPSpawnStrategy
 
     trainer = pl.Trainer(
         gpus=2,
@@ -157,7 +157,7 @@ For debugging purposes or for dataloaders that load very small datasets, it is d
     warnings.filterwarnings("ignore", ".*Consider increasing the value of the `num_workers` argument*")
 
     # or to ignore all warnings which could be false positives
-    from pytorch_lightning.utilities.warnings import PossibleUserWarning
+    from pi_ml.utilities.warnings import PossibleUserWarning
 
     warnings.filterwarnings("ignore", category=PossibleUserWarning)
 
@@ -221,7 +221,7 @@ Early Stopping
 **************
 
 Usually, long training epochs can lead to either overfitting or no major improvements in your metrics due to no limited convergence.
-Here :class:`~pytorch_lightning.callbacks.early_stopping.EarlyStopping` callback can help you stop the training entirely by monitoring a metric of your choice.
+Here :class:`~pi_ml.callbacks.early_stopping.EarlyStopping` callback can help you stop the training entirely by monitoring a metric of your choice.
 
 You can read more about it :ref:`here <early_stopping>`.
 
@@ -399,8 +399,8 @@ Here is an explanation of what it does:
 When performing gradient accumulation, there is no need to perform grad synchronization during the accumulation phase.
 Setting ``sync_grad`` to ``False`` will block this synchronization and improve your training speed.
 
-:class:`~pytorch_lightning.core.optimizer.LightningOptimizer` provides a
-:meth:`~pytorch_lightning.core.optimizer.LightningOptimizer.toggle_model` function as a
+:class:`~pi_ml.core.optimizer.LightningOptimizer` provides a
+:meth:`~pi_ml.core.optimizer.LightningOptimizer.toggle_model` function as a
 :func:`contextlib.contextmanager` for advanced users.
 
 Here is an example for advanced use-case:
@@ -469,7 +469,7 @@ Here is an example for advanced use-case:
 Set Grads to None
 *****************
 
-In order to modestly improve performance, you can override :meth:`~pytorch_lightning.core.lightning.LightningModule.optimizer_zero_grad`.
+In order to modestly improve performance, you can override :meth:`~pi_ml.core.lightning.LightningModule.optimizer_zero_grad`.
 
 For a more detailed explanation of pros / cons of this technique,
 read the documentation for :meth:`~torch.optim.Optimizer.zero_grad` by the PyTorch team.

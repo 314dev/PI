@@ -13,9 +13,9 @@
 # limitations under the License.
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.plugins import CheckpointIO
-from pytorch_lightning.strategies import (
+from pi_ml import Trainer
+from pi_ml.plugins import CheckpointIO
+from pi_ml.strategies import (
     DDPFullyShardedStrategy,
     DDPShardedStrategy,
     DDPSpawnShardedStrategy,

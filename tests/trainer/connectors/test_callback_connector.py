@@ -15,8 +15,8 @@ import logging
 
 import torch
 
-from pytorch_lightning import Callback, LightningModule, Trainer
-from pytorch_lightning.callbacks import (
+from pi_ml import Callback, LightningModule, Trainer
+from pi_ml.callbacks import (
     EarlyStopping,
     GradientAccumulationScheduler,
     LearningRateMonitor,
@@ -25,7 +25,7 @@ from pytorch_lightning.callbacks import (
     ProgressBarBase,
     TQDMProgressBar,
 )
-from pytorch_lightning.trainer.connectors.callback_connector import CallbackConnector
+from pi_ml.trainer.connectors.callback_connector import CallbackConnector
 from tests.helpers import BoringModel
 
 

@@ -20,8 +20,8 @@ from unittest.mock import call, MagicMock, patch
 import pytest
 import torch
 
-from pytorch_lightning import __version__, Trainer
-from pytorch_lightning.loggers import NeptuneLogger
+from pi_ml import __version__, Trainer
+from pi_ml.loggers import NeptuneLogger
 from tests.helpers import BoringModel
 
 
@@ -76,7 +76,7 @@ def tmpdir_unittest_fixture(request, tmpdir):
     request.cls.tmpdir = tmpdir
 
 
-@patch("pytorch_lightning.loggers.neptune.neptune", new_callable=create_neptune_mock)
+@patch("pi_ml.loggers.neptune.neptune", new_callable=create_neptune_mock)
 class TestNeptuneLogger(unittest.TestCase):
     def test_neptune_online(self, neptune):
         logger = NeptuneLogger(api_key="test", project="project")
@@ -91,7 +91,7 @@ class TestNeptuneLogger(unittest.TestCase):
         created_run_mock.__getitem__.assert_has_calls([call("sys/id"), call("sys/name")], any_order=True)
         created_run_mock.__setitem__.assert_called_once_with("source_code/integrations/pytorch-lightning", __version__)
 
-    @patch("pytorch_lightning.loggers.neptune.Run", Run)
+    @patch("pi_ml.loggers.neptune.Run", Run)
     def test_online_with_custom_run(self, neptune):
         created_run = Run()
         logger = NeptuneLogger(run=created_run)
@@ -101,7 +101,7 @@ class TestNeptuneLogger(unittest.TestCase):
         self.assertEqual(logger.version, "TEST-42")
         self.assertEqual(neptune.init.call_count, 0)
 
-    @patch("pytorch_lightning.loggers.neptune.Run", Run)
+    @patch("pi_ml.loggers.neptune.Run", Run)
     def test_neptune_pickling(self, neptune):
         unpickleable_run = Run()
         logger = NeptuneLogger(run=unpickleable_run)
@@ -113,7 +113,7 @@ class TestNeptuneLogger(unittest.TestCase):
         neptune.init.assert_called_once_with(name="Test name", run="TEST-42")
         self.assertIsNotNone(unpickled.experiment)
 
-    @patch("pytorch_lightning.loggers.neptune.Run", Run)
+    @patch("pi_ml.loggers.neptune.Run", Run)
     def test_online_with_wrong_kwargs(self, neptune):
         """Tests combinations of kwargs together with `run` kwarg which makes some of other parameters unavailable
         in init."""
@@ -354,9 +354,9 @@ class TestNeptuneLoggerDeprecatedUsages(unittest.TestCase):
         for legacy_kwarg in legacy_neptune_kwargs:
             self._assert_legacy_usage(NeptuneLogger, **{legacy_kwarg: None})
 
-    @patch("pytorch_lightning.loggers.neptune.warnings")
-    @patch("pytorch_lightning.loggers.neptune.NeptuneFile")
-    @patch("pytorch_lightning.loggers.neptune.neptune")
+    @patch("pi_ml.loggers.neptune.warnings")
+    @patch("pi_ml.loggers.neptune.NeptuneFile")
+    @patch("pi_ml.loggers.neptune.neptune")
     def test_legacy_functions(self, neptune, neptune_file_mock, warnings_mock):
         logger = NeptuneLogger(api_key="test", project="project")
 

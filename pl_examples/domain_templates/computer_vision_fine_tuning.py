@@ -54,12 +54,12 @@ from torchvision import models, transforms
 from torchvision.datasets import ImageFolder
 from torchvision.datasets.utils import download_and_extract_archive
 
-import pytorch_lightning as pl
+import pi_ml as pl
 from pl_examples import cli_lightning_logo
-from pytorch_lightning import LightningDataModule
-from pytorch_lightning.callbacks.finetuning import BaseFinetuning
-from pytorch_lightning.utilities.cli import LightningCLI
-from pytorch_lightning.utilities.rank_zero import rank_zero_info
+from pi_ml import LightningDataModule
+from pi_ml.callbacks.finetuning import BaseFinetuning
+from pi_ml.utilities.cli import LightningCLI
+from pi_ml.utilities.rank_zero import rank_zero_info
 
 log = logging.getLogger(__name__)
 DATA_URL = "https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip"

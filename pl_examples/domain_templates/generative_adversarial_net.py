@@ -26,9 +26,9 @@ import torch.nn.functional as F
 
 from pl_examples import cli_lightning_logo
 from pl_examples.basic_examples.mnist_datamodule import MNISTDataModule
-from pytorch_lightning.core import LightningModule
-from pytorch_lightning.trainer import Trainer
-from pytorch_lightning.utilities.imports import _TORCHVISION_AVAILABLE
+from pi_ml.core import LightningModule
+from pi_ml.trainer import Trainer
+from pi_ml.utilities.imports import _TORCHVISION_AVAILABLE
 
 if _TORCHVISION_AVAILABLE:
     import torchvision

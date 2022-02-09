@@ -16,10 +16,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from pytorch_lightning import LightningModule, seed_everything, Trainer
-from pytorch_lightning.plugins.environments import LightningEnvironment
-from pytorch_lightning.strategies import DDPSpawnStrategy
-from pytorch_lightning.utilities import FLOAT16_EPSILON
+from pi_ml import LightningModule, seed_everything, Trainer
+from pi_ml.plugins.environments import LightningEnvironment
+from pi_ml.strategies import DDPSpawnStrategy
+from pi_ml.utilities import FLOAT16_EPSILON
 from tests.helpers.datamodules import MNISTDataModule
 from tests.helpers.runif import RunIf
 from tests.helpers.utils import set_random_main_port

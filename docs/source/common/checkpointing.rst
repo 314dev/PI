@@ -1,8 +1,8 @@
 .. testsetup:: *
 
     import os
-    from pytorch_lightning.trainer.trainer import Trainer
-    from pytorch_lightning.core.lightning import LightningModule
+    from pi_ml.trainer.trainer import Trainer
+    from pi_ml.core.lightning import LightningModule
 
 .. _checkpointing:
 
@@ -72,8 +72,8 @@ You can disable checkpointing by passing:
 Manual Saving
 =============
 
-You can manually save checkpoints and restore your model from the checkpointed state using :meth:`~pytorch_lightning.trainer.trainer.Trainer.save_checkpoint`
-and :meth:`~pytorch_lightning.core.saving.ModelIO.load_from_checkpoint`.
+You can manually save checkpoints and restore your model from the checkpointed state using :meth:`~pi_ml.trainer.trainer.Trainer.save_checkpoint`
+and :meth:`~pi_ml.core.saving.ModelIO.load_from_checkpoint`.
 
 .. code-block:: python
 
@@ -97,17 +97,17 @@ Lightning automatically ensures that the model is saved only on the main process
     # Saves only on the main process
     trainer.save_checkpoint("example.ckpt")
 
-Not using :meth:`~pytorch_lightning.trainer.trainer.Trainer.save_checkpoint` can lead to unexpected behavior and potential deadlock. Using other saving functions will result in all devices attempting to save the checkpoint. As a result, we highly recommend using the Trainer's save functionality.
-If using custom saving functions cannot be avoided, we recommend using the :func:`~pytorch_lightning.utilities.rank_zero.rank_zero_only` decorator to ensure saving occurs only on the main process. Note that this will only work if all ranks hold the exact same state and won't work when using
+Not using :meth:`~pi_ml.trainer.trainer.Trainer.save_checkpoint` can lead to unexpected behavior and potential deadlock. Using other saving functions will result in all devices attempting to save the checkpoint. As a result, we highly recommend using the Trainer's save functionality.
+If using custom saving functions cannot be avoided, we recommend using the :func:`~pi_ml.utilities.rank_zero.rank_zero_only` decorator to ensure saving occurs only on the main process. Note that this will only work if all ranks hold the exact same state and won't work when using
 model parallel distributed strategies such as deepspeed or sharded training.
 
 
 Modifying Checkpoint When Saving and Loading
 ============================================
 
-You can add/delete/modify custom states in your checkpoints before they are being saved or loaded. For this you can override :meth:`~pytorch_lightning.core.hooks.CheckpointHooks.on_save_checkpoint`
-and :meth:`~pytorch_lightning.core.hooks.CheckpointHooks.on_load_checkpoint` in your ``LightningModule`` or :meth:`~pytorch_lightning.callbacks.base.Callback.on_save_checkpoint` and
-:meth:`~pytorch_lightning.callbacks.base.Callback.on_load_checkpoint` methods in your ``Callback``.
+You can add/delete/modify custom states in your checkpoints before they are being saved or loaded. For this you can override :meth:`~pi_ml.core.hooks.CheckpointHooks.on_save_checkpoint`
+and :meth:`~pi_ml.core.hooks.CheckpointHooks.on_load_checkpoint` in your ``LightningModule`` or :meth:`~pi_ml.callbacks.base.Callback.on_save_checkpoint` and
+:meth:`~pi_ml.callbacks.base.Callback.on_load_checkpoint` methods in your ``Callback``.
 
 
 Checkpointing Hyperparameters
@@ -196,7 +196,7 @@ do the following:
 Conditional Checkpointing (ModelCheckpoint)
 *******************************************
 
-The :class:`~pytorch_lightning.callbacks.ModelCheckpoint` callback allows you to configure when/which/what/where checkpointing should happen. It follows the normal Callback hook structure so you can
+The :class:`~pi_ml.callbacks.ModelCheckpoint` callback allows you to configure when/which/what/where checkpointing should happen. It follows the normal Callback hook structure so you can
 hack it around/override its methods for your use-cases as well. Following are some of the common use-cases along with the arguments you need to specify to configure it:
 
 
@@ -225,7 +225,7 @@ Which
 
     .. testcode::
 
-        from pytorch_lightning.callbacks import ModelCheckpoint
+        from pi_ml.callbacks import ModelCheckpoint
 
 
         # saves top-K checkpoints based on "val_loss" metric
@@ -253,7 +253,7 @@ Which
 
     .. testcode::
 
-        from pytorch_lightning.callbacks import ModelCheckpoint
+        from pi_ml.callbacks import ModelCheckpoint
 
 
         class LitAutoEncoder(LightningModule):
@@ -284,13 +284,13 @@ What
 Where
 -----
 
-- It gives you the ability to specify the ``dirpath`` and ``filename`` for your checkpoints. Filename can also be dynamic so you can inject the metrics that are being logged using :meth:`~pytorch_lightning.core.lightning.LightningModule.log`.
+- It gives you the ability to specify the ``dirpath`` and ``filename`` for your checkpoints. Filename can also be dynamic so you can inject the metrics that are being logged using :meth:`~pi_ml.core.lightning.LightningModule.log`.
 
 |
 
     .. testcode::
 
-        from pytorch_lightning.callbacks import ModelCheckpoint
+        from pi_ml.callbacks import ModelCheckpoint
 
 
         # saves a file like: my/path/sample-mnist-epoch=02-val_loss=0.32.ckpt
@@ -301,7 +301,7 @@ Where
 
 |
 
-The :class:`~pytorch_lightning.callbacks.ModelCheckpoint` callback is very robust and should cover 99% of the use-cases. If you find a use-case that is not configured yet, feel free to open an issue with a feature request on GitHub
+The :class:`~pi_ml.callbacks.ModelCheckpoint` callback is very robust and should cover 99% of the use-cases. If you find a use-case that is not configured yet, feel free to open an issue with a feature request on GitHub
 and the Lightning Team will be happy to integrate/help integrate it.
 
 
@@ -318,8 +318,8 @@ Customize Checkpointing
 
 
 Lightning supports modifying the checkpointing save/load functionality through the ``CheckpointIO``. This encapsulates the save/load logic
-that is managed by the ``Strategy``. ``CheckpointIO`` is different from :meth:`~pytorch_lightning.core.hooks.CheckpointHooks.on_save_checkpoint`
-and :meth:`~pytorch_lightning.core.hooks.CheckpointHooks.on_load_checkpoint` methods as it determines how the checkpoint is saved/loaded to storage rather than
+that is managed by the ``Strategy``. ``CheckpointIO`` is different from :meth:`~pi_ml.core.hooks.CheckpointHooks.on_save_checkpoint`
+and :meth:`~pi_ml.core.hooks.CheckpointHooks.on_load_checkpoint` methods as it determines how the checkpoint is saved/loaded to storage rather than
 what's saved in the checkpoint.
 
 
@@ -332,10 +332,10 @@ Built-in Checkpoint IO Plugins
 
    * - Plugin
      - Description
-   * - :class:`~pytorch_lightning.plugins.io.TorchCheckpointIO`
+   * - :class:`~pi_ml.plugins.io.TorchCheckpointIO`
      - CheckpointIO that utilizes :func:`torch.save` and :func:`torch.load` to save and load checkpoints
        respectively, common for most use cases.
-   * - :class:`~pytorch_lightning.plugins.io.XLACheckpointIO`
+   * - :class:`~pi_ml.plugins.io.XLACheckpointIO`
      - CheckpointIO that utilizes :func:`xm.save` to save checkpoints for TPU training strategies.
 
 
@@ -346,10 +346,10 @@ Custom Checkpoint IO Plugin
 
 .. code-block:: python
 
-    from pytorch_lightning import Trainer
-    from pytorch_lightning.callbacks import ModelCheckpoint
-    from pytorch_lightning.plugins import CheckpointIO
-    from pytorch_lightning.strategies import SingleDeviceStrategy
+    from pi_ml import Trainer
+    from pi_ml.callbacks import ModelCheckpoint
+    from pi_ml.plugins import CheckpointIO
+    from pi_ml.strategies import SingleDeviceStrategy
 
 
     class CustomCheckpointIO(CheckpointIO):

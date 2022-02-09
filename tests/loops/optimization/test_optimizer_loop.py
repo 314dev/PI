@@ -19,10 +19,10 @@ import pytest
 import torch
 from torch.optim import Adam, SGD
 
-from pytorch_lightning import seed_everything, Trainer
-from pytorch_lightning.core.optimizer import LightningOptimizer
-from pytorch_lightning.loops.optimization.optimizer_loop import ClosureResult
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import seed_everything, Trainer
+from pi_ml.core.optimizer import LightningOptimizer
+from pi_ml.loops.optimization.optimizer_loop import ClosureResult
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel
 
 

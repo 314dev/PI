@@ -21,9 +21,9 @@ from torch import nn
 from torch.utils.data import DataLoader, Dataset
 from torchmetrics import Accuracy
 
-import pytorch_lightning as pl
-from pytorch_lightning import LightningDataModule, LightningModule, seed_everything
-from pytorch_lightning.callbacks import EarlyStopping
+import pi_ml as pl
+from pi_ml import LightningDataModule, LightningModule, seed_everything
+from pi_ml.callbacks import EarlyStopping
 
 PATH_LEGACY = os.path.dirname(__file__)
 

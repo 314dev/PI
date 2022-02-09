@@ -16,10 +16,10 @@ from unittest import mock
 import pytest
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.strategies import BaguaStrategy
-from pytorch_lightning.trainer.states import TrainerFn
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.strategies import BaguaStrategy
+from pi_ml.trainer.states import TrainerFn
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers.boring_model import BoringModel
 from tests.helpers.runif import RunIf
 
@@ -113,7 +113,7 @@ def test_qadam_configuration(tmpdir):
 
 
 def test_bagua_not_available(monkeypatch):
-    import pytorch_lightning.strategies.bagua as imports
+    import pi_ml.strategies.bagua as imports
 
     monkeypatch.setattr(imports, "_BAGUA_AVAILABLE", False)
     with mock.patch("torch.cuda.device_count", return_value=1):

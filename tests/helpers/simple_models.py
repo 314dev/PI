@@ -16,7 +16,7 @@ import torch.nn.functional as F
 from torch import nn
 from torchmetrics import Accuracy, MeanSquaredError
 
-from pytorch_lightning import LightningModule
+from pi_ml import LightningModule
 
 
 class ClassificationModel(LightningModule):

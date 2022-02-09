@@ -14,7 +14,7 @@ concurrency:
 jobs:
   conda:
     runs-on: ubuntu-20.04
-    container: pytorchlightning/pytorch_lightning:base-conda-py${{ matrix.python-version }}-torch${{ matrix.pytorch-version }}
+    container: pytorchlightning/pi_ml:base-conda-py${{ matrix.python-version }}-torch${{ matrix.pytorch-version }}
     strategy:
       fail-fast: false
       matrix:
@@ -47,7 +47,7 @@ jobs:
 
     - name: Tests
       run: |
-        coverage run --source pytorch_lightning -m pytest --timeout 150 pytorch_lightning tests -v --durations=50 --junitxml=junit/test-results-${{ runner.os }}-torch${{ matrix.pytorch-version }}.xml
+        coverage run --source pi_ml -m pytest --timeout 150 pi_ml tests -v --durations=50 --junitxml=junit/test-results-${{ runner.os }}-torch${{ matrix.pytorch-version }}.xml
       shell: bash -l {0}
 
     - name: Upload pytest results

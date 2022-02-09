@@ -16,10 +16,10 @@ from unittest.mock import Mock
 import pytest
 from torch.utils.data import DataLoader
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.trainer.connectors.data_connector import _DataLoaderSource
-from pytorch_lightning.trainer.states import TrainerFn
-from pytorch_lightning.utilities.warnings import PossibleUserWarning
+from pi_ml import Trainer
+from pi_ml.trainer.connectors.data_connector import _DataLoaderSource
+from pi_ml.trainer.states import TrainerFn
+from pi_ml.utilities.warnings import PossibleUserWarning
 from tests.helpers import BoringDataModule, BoringModel
 from tests.helpers.boring_model import RandomDataset
 

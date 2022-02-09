@@ -13,7 +13,7 @@
 # limitations under the License.
 import warnings
 
-from pytorch_lightning import Trainer
+from pi_ml import Trainer
 from tests.helpers.boring_model import BoringModel
 
 

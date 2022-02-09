@@ -22,11 +22,11 @@ import pytest
 import torch
 from torch.utils.data.dataloader import _MultiProcessingDataLoaderIter, DataLoader
 
-from pytorch_lightning import LightningModule, Trainer
-from pytorch_lightning.callbacks import Callback, ModelCheckpoint
-from pytorch_lightning.loops import EvaluationLoop, Loop, TrainingBatchLoop, TrainingEpochLoop
-from pytorch_lightning.trainer.progress import BaseProgress
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import LightningModule, Trainer
+from pi_ml.callbacks import Callback, ModelCheckpoint
+from pi_ml.loops import EvaluationLoop, Loop, TrainingBatchLoop, TrainingEpochLoop
+from pi_ml.trainer.progress import BaseProgress
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 

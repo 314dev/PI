@@ -17,11 +17,11 @@ from unittest.mock import MagicMock
 
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.plugins import CheckpointIO
-from pytorch_lightning.strategies import SingleDeviceStrategy
-from pytorch_lightning.utilities.types import _PATH
+from pi_ml import Trainer
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.plugins import CheckpointIO
+from pi_ml.strategies import SingleDeviceStrategy
+from pi_ml.utilities.types import _PATH
 from tests.helpers.boring_model import BoringModel
 
 

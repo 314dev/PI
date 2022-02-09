@@ -22,12 +22,12 @@ import torch.nn.functional as F
 from torch import nn
 from torch.utils.data import DataLoader, random_split
 
-import pytorch_lightning as pl
+import pi_ml as pl
 from pl_examples import _DATASETS_PATH, cli_lightning_logo
 from pl_examples.basic_examples.mnist_datamodule import MNIST
-from pytorch_lightning.utilities.cli import LightningCLI
-from pytorch_lightning.utilities.imports import _TORCHVISION_AVAILABLE
-from pytorch_lightning.utilities.rank_zero import rank_zero_only
+from pi_ml.utilities.cli import LightningCLI
+from pi_ml.utilities.imports import _TORCHVISION_AVAILABLE
+from pi_ml.utilities.rank_zero import rank_zero_only
 
 if _TORCHVISION_AVAILABLE:
     import torchvision

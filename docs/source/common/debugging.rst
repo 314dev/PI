@@ -1,6 +1,6 @@
 .. testsetup:: *
 
-    from pytorch_lightning.trainer.trainer import Trainer
+    from pi_ml.trainer.trainer import Trainer
 
 .. _debugging:
 
@@ -8,7 +8,7 @@
 Debugging
 #########
 
-The Lightning :class:`~pytorch_lightning.trainer.trainer.Trainer` is empowered with a lot of flags that can help you debug your :class:`~pytorch_lightning.core.lightning.LightningModule`.
+The Lightning :class:`~pi_ml.trainer.trainer.Trainer` is empowered with a lot of flags that can help you debug your :class:`~pi_ml.core.lightning.LightningModule`.
 
 .. raw:: html
 
@@ -36,8 +36,8 @@ for a single epoch. The point is to have a dry run to detect any bugs in the res
 
 Internally, it just updates ``limit_<train/test/val/predict>_batches=fast_dev_run`` and sets ``max_epoch=1`` to limit the batches.
 
-(See: :paramref:`~pytorch_lightning.trainer.trainer.Trainer.fast_dev_run`
-argument of :class:`~pytorch_lightning.trainer.trainer.Trainer`)
+(See: :paramref:`~pi_ml.trainer.trainer.Trainer.fast_dev_run`
+argument of :class:`~pi_ml.trainer.trainer.Trainer`)
 
 .. testcode::
 
@@ -50,8 +50,8 @@ argument of :class:`~pytorch_lightning.trainer.trainer.Trainer`)
 .. note::
 
     This argument will disable tuner, checkpoint callbacks, early stopping callbacks,
-    loggers and logger callbacks like :class:`~pytorch_lightning.callbacks.lr_monitor.LearningRateMonitor` and
-    :class:`~pytorch_lightning.callbacks.device_stats_monitor.DeviceStatsMonitor`.
+    loggers and logger callbacks like :class:`~pi_ml.callbacks.lr_monitor.LearningRateMonitor` and
+    :class:`~pi_ml.callbacks.device_stats_monitor.DeviceStatsMonitor`.
 
 
 Shorten Epochs
@@ -77,8 +77,8 @@ Validation Sanity Check
 Lightning runs a few steps of validation in the beginning of training.
 This avoids crashing in the validation loop sometime deep into a lengthy training loop.
 
-(See: :paramref:`~pytorch_lightning.trainer.trainer.Trainer.num_sanity_val_steps`
-argument of :class:`~pytorch_lightning.trainer.trainer.Trainer`)
+(See: :paramref:`~pi_ml.trainer.trainer.Trainer.num_sanity_val_steps`
+argument of :class:`~pi_ml.trainer.trainer.Trainer`)
 
 .. testcode::
 
@@ -92,8 +92,8 @@ Make Model Overfit on Subset of Data
 A good debugging technique is to take a tiny portion of your data (say 2 samples per class),
 and try to get your model to overfit. If it can't, it's a sign it won't work with large datasets.
 
-(See: :paramref:`~pytorch_lightning.trainer.trainer.Trainer.overfit_batches`
-argument of :class:`~pytorch_lightning.trainer.trainer.Trainer`)
+(See: :paramref:`~pi_ml.trainer.trainer.Trainer.overfit_batches`
+argument of :class:`~pi_ml.trainer.trainer.Trainer`)
 
 .. testcode::
 
@@ -119,8 +119,8 @@ Inspect Gradient Norms
 
 Logs the norm of the gradients to the logger.
 
-(See: :paramref:`~pytorch_lightning.trainer.trainer.Trainer.track_grad_norm`
-argument of :class:`~pytorch_lightning.trainer.trainer.Trainer`)
+(See: :paramref:`~pi_ml.trainer.trainer.Trainer.track_grad_norm`
+argument of :class:`~pi_ml.trainer.trainer.Trainer`)
 
 .. testcode::
 
@@ -151,11 +151,11 @@ Performance
 Log Device Statistics
 =====================
 
-Monitor and log device stats during training with the :class:`~pytorch_lightning.callbacks.device_stats_monitor.DeviceStatsMonitor`.
+Monitor and log device stats during training with the :class:`~pi_ml.callbacks.device_stats_monitor.DeviceStatsMonitor`.
 
 .. testcode::
 
-    from pytorch_lightning.callbacks import DeviceStatsMonitor
+    from pi_ml.callbacks import DeviceStatsMonitor
 
     trainer = Trainer(callbacks=[DeviceStatsMonitor()])
 
@@ -178,11 +178,11 @@ Print a Summary of Your LightningModule
 
 Whenever the ``.fit()`` function gets called, the Trainer will print the weights summary for the LightningModule.
 By default it only prints the top-level modules. If you want to show all submodules in your network, use the
-``max_depth`` option of :class:`~pytorch_lightning.callbacks.model_summary.ModelSummary` callback:
+``max_depth`` option of :class:`~pi_ml.callbacks.model_summary.ModelSummary` callback:
 
 .. testcode::
 
-    from pytorch_lightning.callbacks import ModelSummary
+    from pi_ml.callbacks import ModelSummary
 
     trainer = Trainer(callbacks=[ModelSummary(max_depth=-1)])
 
@@ -203,9 +203,9 @@ when you call ``.fit()`` on the Trainer. This can help you find bugs in the comp
 It is enabled by default and can be turned off using ``Trainer(enable_model_summary=False)``.
 
 See Also:
-    - :class:`~pytorch_lightning.callbacks.model_summary.ModelSummary`
-    - :func:`~pytorch_lightning.utilities.model_summary.summarize`
-    - :class:`~pytorch_lightning.utilities.model_summary.ModelSummary`
+    - :class:`~pi_ml.callbacks.model_summary.ModelSummary`
+    - :func:`~pi_ml.utilities.model_summary.summarize`
+    - :class:`~pi_ml.utilities.model_summary.ModelSummary`
 
 
 ----------------

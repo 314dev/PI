@@ -18,8 +18,8 @@ from typing import Type
 import pytest
 import torch
 
-from pytorch_lightning import seed_everything, Trainer
-from pytorch_lightning.strategies import DDPSpawnShardedStrategy
+from pi_ml import seed_everything, Trainer
+from pi_ml.strategies import DDPSpawnShardedStrategy
 from tests.helpers.boring_model import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 

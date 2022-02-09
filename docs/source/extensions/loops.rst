@@ -53,7 +53,7 @@ Think of this as swapping out the engine in a car!
 Understanding the Default Trainer Loop
 --------------------------------------
 
-The Lightning :class:`~pytorch_lightning.trainer.trainer.Trainer` automates the standard optimization loop which every PyTorch user is familiar with:
+The Lightning :class:`~pi_ml.trainer.trainer.Trainer` automates the standard optimization loop which every PyTorch user is familiar with:
 
 .. code-block:: python
 
@@ -65,7 +65,7 @@ The Lightning :class:`~pytorch_lightning.trainer.trainer.Trainer` automates the 
         loss.backward()
         optimizer.step()
 
-The core research logic is simply shifted to the :class:`~pytorch_lightning.core.lightning.LightningModule`:
+The core research logic is simply shifted to the :class:`~pi_ml.core.lightning.LightningModule`:
 
 .. code-block:: python
 
@@ -80,7 +80,7 @@ The core research logic is simply shifted to the :class:`~pytorch_lightning.core
         loss.backward()
         optimizer.step()
 
-Under the hood, the above loop is implemented using the :class:`~pytorch_lightning.loops.base.Loop` API like so:
+Under the hood, the above loop is implemented using the :class:`~pi_ml.loops.base.Loop` API like so:
 
 .. code-block:: python
 
@@ -113,18 +113,18 @@ Overriding the default Loops
 ----------------------------
 
 The fastest way to get started with loops, is to override functionality of an existing loop.
-Lightning has 4 main loops which relies on : :class:`~pytorch_lightning.loops.fit_loop.FitLoop` for fitting (training and validating),
-:class:`~pytorch_lightning.loops.dataloader.evaluation_loop.EvaluationLoop` for validating or testing,
-:class:`~pytorch_lightning.loops.dataloader.prediction_loop.PredictionLoop` for predicting.
+Lightning has 4 main loops which relies on : :class:`~pi_ml.loops.fit_loop.FitLoop` for fitting (training and validating),
+:class:`~pi_ml.loops.dataloader.evaluation_loop.EvaluationLoop` for validating or testing,
+:class:`~pi_ml.loops.dataloader.prediction_loop.PredictionLoop` for predicting.
 
 For simple changes that don't require a custom loop, you can modify each of these loops.
 
 Each loop has a series of methods that can be modified.
-For example with the :class:`~pytorch_lightning.loops.fit_loop.FitLoop`:
+For example with the :class:`~pi_ml.loops.fit_loop.FitLoop`:
 
 .. code-block:: python
 
-    from pytorch_lightning.loops import FitLoop
+    from pi_ml.loops import FitLoop
 
 
     class MyLoop(FitLoop):
@@ -144,7 +144,7 @@ Here is a simple example how to add a new hook:
 
 .. code-block:: python
 
-    from pytorch_lightning.loops import FitLoop
+    from pi_ml.loops import FitLoop
 
 
     class CustomFitLoop(FitLoop):
@@ -182,12 +182,12 @@ Now your code is FULLY flexible and you can still leverage ALL the best parts of
 Creating a New Loop From Scratch
 --------------------------------
 
-You can also go wild and implement a full loop from scratch by sub-classing the :class:`~pytorch_lightning.loops.base.Loop` base class.
+You can also go wild and implement a full loop from scratch by sub-classing the :class:`~pi_ml.loops.base.Loop` base class.
 You will need to override a minimum of two things:
 
 .. code-block:: python
 
-    from pytorch_lightning.loop import Loop
+    from pi_ml.loop import Loop
 
 
     class MyFancyLoop(Loop):
@@ -202,7 +202,7 @@ You will need to override a minimum of two things:
             Call the LightningModule methods at your leisure.
             """
 
-Finally, attach it into the :class:`~pytorch_lightning.trainer.trainer.Trainer`:
+Finally, attach it into the :class:`~pi_ml.trainer.trainer.Trainer`:
 
 .. code-block:: python
 
@@ -221,7 +221,7 @@ Loop API
 --------
 Here is the full API of methods available in the Loop base class.
 
-The :class:`~pytorch_lightning.loops.base.Loop` class is the base of all loops in the same way as the :class:`~pytorch_lightning.core.lightning.LightningModule` is the base of all models.
+The :class:`~pi_ml.loops.base.Loop` class is the base of all loops in the same way as the :class:`~pi_ml.core.lightning.LightningModule` is the base of all models.
 It defines a public interface that each loop implementation must follow, the key ones are:
 
 Properties
@@ -230,13 +230,13 @@ Properties
 done
 ~~~~
 
-.. autoattribute:: pytorch_lightning.loops.base.Loop.done
+.. autoattribute:: pi_ml.loops.base.Loop.done
     :noindex:
 
 skip (optional)
 ~~~~~~~~~~~~~~~
 
-.. autoattribute:: pytorch_lightning.loops.base.Loop.skip
+.. autoattribute:: pi_ml.loops.base.Loop.skip
     :noindex:
 
 Methods
@@ -245,19 +245,19 @@ Methods
 reset (optional)
 ~~~~~~~~~~~~~~~~
 
-.. automethod:: pytorch_lightning.loops.base.Loop.reset
+.. automethod:: pi_ml.loops.base.Loop.reset
     :noindex:
 
 advance
 ~~~~~~~
 
-.. automethod:: pytorch_lightning.loops.base.Loop.advance
+.. automethod:: pi_ml.loops.base.Loop.advance
     :noindex:
 
 run (optional)
 ~~~~~~~~~~~~~~
 
-.. automethod:: pytorch_lightning.loops.base.Loop.run
+.. automethod:: pi_ml.loops.base.Loop.run
     :noindex:
 
 
@@ -266,7 +266,7 @@ run (optional)
 Subloops
 --------
 
-When you want to customize nested loops within loops, use the :meth:`~pytorch_lightning.loops.base.Loop.replace` method:
+When you want to customize nested loops within loops, use the :meth:`~pi_ml.loops.base.Loop.replace` method:
 
 .. code-block:: python
 
@@ -275,7 +275,7 @@ When you want to customize nested loops within loops, use the :meth:`~pytorch_li
     # Trainer runs the fit loop with your new epoch loop!
     trainer.fit(model)
 
-Alternatively, for more fine-grained control, use the :meth:`~pytorch_lightning.loops.base.Loop.connect` method:
+Alternatively, for more fine-grained control, use the :meth:`~pi_ml.loops.base.Loop.connect` method:
 
 .. code-block:: python
 
@@ -325,7 +325,7 @@ Here is what the structure would look like in plain Python:
                 ...
 
 
-Each of these :code:`for`-loops represents a class implementing the :class:`~pytorch_lightning.loops.base.Loop` interface.
+Each of these :code:`for`-loops represents a class implementing the :class:`~pi_ml.loops.base.Loop` interface.
 
 
 .. list-table:: Trainer entry points and associated loops
@@ -334,32 +334,32 @@ Each of these :code:`for`-loops represents a class implementing the :class:`~pyt
 
    * - Built-in loop
      - Description
-   * - :class:`~pytorch_lightning.loops.fit_loop.FitLoop`
-     - The :class:`~pytorch_lightning.loops.fit_loop.FitLoop` is the top-level loop where training starts.
+   * - :class:`~pi_ml.loops.fit_loop.FitLoop`
+     - The :class:`~pi_ml.loops.fit_loop.FitLoop` is the top-level loop where training starts.
        It simply counts the epochs and iterates from one to the next by calling :code:`TrainingEpochLoop.run()` in its :code:`advance()` method.
-   * - :class:`~pytorch_lightning.loops.epoch.training_epoch_loop.TrainingEpochLoop`
-     - The :class:`~pytorch_lightning.loops.epoch.training_epoch_loop.TrainingEpochLoop` is the one that iterates over the dataloader that the user returns in their :meth:`~pytorch_lightning.core.lightning.LightningModule.train_dataloader` method.
+   * - :class:`~pi_ml.loops.epoch.training_epoch_loop.TrainingEpochLoop`
+     - The :class:`~pi_ml.loops.epoch.training_epoch_loop.TrainingEpochLoop` is the one that iterates over the dataloader that the user returns in their :meth:`~pi_ml.core.lightning.LightningModule.train_dataloader` method.
        Its main responsibilities are calling the :code:`*_epoch_start` and :code:`*_epoch_end` hooks, accumulating outputs if the user request them in one of these hooks, and running validation at the requested interval.
-       The validation is carried out by yet another loop, :class:`~pytorch_lightning.loops.epoch.validation_epoch_loop.ValidationEpochLoop`.
+       The validation is carried out by yet another loop, :class:`~pi_ml.loops.epoch.validation_epoch_loop.ValidationEpochLoop`.
 
        In the :code:`run()` method, the training epoch loop could in theory simply call the :code:`LightningModule.training_step` already and perform the optimization.
        However, Lightning has built-in support for automatic optimization with multiple optimizers and on top of that also supports :ref:`TBPTT <sequential-data>`.
-       For this reason there are actually two more loops nested under :class:`~pytorch_lightning.loops.epoch.training_epoch_loop.TrainingEpochLoop`.
-   * - :class:`~pytorch_lightning.loops.batch.training_batch_loop.TrainingBatchLoop`
-     - The responsibility of the :class:`~pytorch_lightning.loops.batch.training_batch_loop.TrainingBatchLoop` is to split a batch given by the :class:`~pytorch_lightning.loops.epoch.training_epoch_loop.TrainingEpochLoop` along the time-dimension and iterate over the list of splits.
+       For this reason there are actually two more loops nested under :class:`~pi_ml.loops.epoch.training_epoch_loop.TrainingEpochLoop`.
+   * - :class:`~pi_ml.loops.batch.training_batch_loop.TrainingBatchLoop`
+     - The responsibility of the :class:`~pi_ml.loops.batch.training_batch_loop.TrainingBatchLoop` is to split a batch given by the :class:`~pi_ml.loops.epoch.training_epoch_loop.TrainingEpochLoop` along the time-dimension and iterate over the list of splits.
        It also keeps track of the hidden state *hiddens* returned by the training step.
-       By default, when truncated back-propagation through time (TBPTT) is turned off, this loop does not do anything except redirect the call to the :class:`~pytorch_lightning.loops.optimization.optimizer_loop.OptimizerLoop`.
+       By default, when truncated back-propagation through time (TBPTT) is turned off, this loop does not do anything except redirect the call to the :class:`~pi_ml.loops.optimization.optimizer_loop.OptimizerLoop`.
        Read more about :ref:`TBPTT <sequential-data>`.
-   * - :class:`~pytorch_lightning.loops.optimization.optimizer_loop.OptimizerLoop`
-     - The :class:`~pytorch_lightning.loops.optimization.optimizer_loop.OptimizerLoop` iterates over one or multiple optimizers and for each one it calls the :meth:`~pytorch_lightning.core.lightning.LightningModule.training_step` method with the batch, the current batch index and the optimizer index if multiple optimizers are requested.
+   * - :class:`~pi_ml.loops.optimization.optimizer_loop.OptimizerLoop`
+     - The :class:`~pi_ml.loops.optimization.optimizer_loop.OptimizerLoop` iterates over one or multiple optimizers and for each one it calls the :meth:`~pi_ml.core.lightning.LightningModule.training_step` method with the batch, the current batch index and the optimizer index if multiple optimizers are requested.
        It is the leaf node in the tree of loops and performs the actual optimization (forward, zero grad, backward, optimizer step).
-   * - :class:`~pytorch_lightning.loops.optimization.manual_loop.ManualOptimization`
-     - Substitutes the :class:`~pytorch_lightning.loops.optimization.optimizer_loop.OptimizerLoop` in case of :ref:`manual_optimization` and implements the manual optimization step.
-   * - :class:`~pytorch_lightning.loops.dataloader.evaluation_loop.EvaluationLoop`
-     - The :class:`~pytorch_lightning.loops.dataloader.evaluation_loop.EvaluationLoop` is the top-level loop where validation/testing starts.
+   * - :class:`~pi_ml.loops.optimization.manual_loop.ManualOptimization`
+     - Substitutes the :class:`~pi_ml.loops.optimization.optimizer_loop.OptimizerLoop` in case of :ref:`manual_optimization` and implements the manual optimization step.
+   * - :class:`~pi_ml.loops.dataloader.evaluation_loop.EvaluationLoop`
+     - The :class:`~pi_ml.loops.dataloader.evaluation_loop.EvaluationLoop` is the top-level loop where validation/testing starts.
        It simply iterates over each evaluation dataloader from one to the next by calling :code:`EvaluationEpochLoop.run()` in its :code:`advance()` method.
-   * - :class:`~pytorch_lightning.loops.dataloader.prediction_loop.PredictionLoop`
-     - The :class:`~pytorch_lightning.loops.dataloader.prediction_loop.PredictionLoop` is the top-level loop where prediction starts.
+   * - :class:`~pi_ml.loops.dataloader.prediction_loop.PredictionLoop`
+     - The :class:`~pi_ml.loops.dataloader.prediction_loop.PredictionLoop` is the top-level loop where prediction starts.
        It simply iterates over each prediction dataloader from one to the next by calling :code:`PredictionEpochLoop.run()` in its :code:`advance()` method.
 
 
@@ -446,7 +446,7 @@ Advanced Examples
        To reduce variability, once all rounds are performed using the different folds, the trained models are ensembled and their predictions are
        averaged when estimating the model's predictive performance on the test dataset.
    * - `Yielding Training Step <https://github.com/PyTorchLightning/pytorch-lightning/blob/master/pl_examples/loop_examples/yielding_training_step.py>`_
-     - This loop enables you to write the :meth:`~pytorch_lightning.core.lightning.LightningModule.training_step` hook
+     - This loop enables you to write the :meth:`~pi_ml.core.lightning.LightningModule.training_step` hook
        as a Python Generator for automatic optimization with multiple optimizers, i.e., you can :code:`yield` loss
        values from it instead of returning them. This can enable more elegant and expressive implementations, as shown
        shown with a GAN in this example.

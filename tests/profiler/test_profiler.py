@@ -22,14 +22,14 @@ import numpy as np
 import pytest
 import torch
 
-from pytorch_lightning import Callback, Trainer
-from pytorch_lightning.callbacks import EarlyStopping, StochasticWeightAveraging
-from pytorch_lightning.loggers.base import LoggerCollection
-from pytorch_lightning.loggers.tensorboard import TensorBoardLogger
-from pytorch_lightning.profiler import AdvancedProfiler, PassThroughProfiler, PyTorchProfiler, SimpleProfiler
-from pytorch_lightning.profiler.pytorch import RegisterRecordFunction, warning_cache
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.imports import _KINETO_AVAILABLE
+from pi_ml import Callback, Trainer
+from pi_ml.callbacks import EarlyStopping, StochasticWeightAveraging
+from pi_ml.loggers.base import LoggerCollection
+from pi_ml.loggers.tensorboard import TensorBoardLogger
+from pi_ml.profiler import AdvancedProfiler, PassThroughProfiler, PyTorchProfiler, SimpleProfiler
+from pi_ml.profiler.pytorch import RegisterRecordFunction, warning_cache
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.imports import _KINETO_AVAILABLE
 from tests.helpers import BoringModel, ManualOptimBoringModel
 from tests.helpers.runif import RunIf
 
@@ -192,7 +192,7 @@ def test_simple_profiler_logs(tmpdir, caplog, simple_profiler):
     """Ensure that the number of printed logs is correct."""
     model = BoringModel()
     trainer = Trainer(default_root_dir=tmpdir, fast_dev_run=2, profiler=simple_profiler, logger=False)
-    with caplog.at_level(logging.INFO, logger="pytorch_lightning.profiler"):
+    with caplog.at_level(logging.INFO, logger="pi_ml.profiler"):
         trainer.fit(model)
         trainer.test(model)
 

@@ -17,7 +17,7 @@ from unittest import mock
 import pytest
 import torch
 
-from pytorch_lightning import callbacks, Trainer
+from pi_ml import callbacks, Trainer
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

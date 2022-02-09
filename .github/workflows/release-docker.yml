@@ -28,7 +28,7 @@ jobs:
       - name: Publish Releases to Docker
         uses: docker/build-push-action@v1.1.0
         with:
-          repository: pytorchlightning/pytorch_lightning
+          repository: pytorchlightning/pi_ml
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           dockerfile: dockers/release/Dockerfile
@@ -41,7 +41,7 @@ jobs:
         # only on releases and latest Python and PyTorch
         if: matrix.python_version == "3.9" && matrix.pytorch_version == "1.10"
         with:
-          repository: pytorchlightning/pytorch_lightning
+          repository: pytorchlightning/pi_ml
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           dockerfile: dockers/release/Dockerfile

@@ -18,13 +18,13 @@ from re import escape
 import pytest
 from torch.utils.data import BatchSampler, DataLoader, DistributedSampler, Sampler, SequentialSampler
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.trainer.states import RunningStage
-from pytorch_lightning.trainer.supporters import CombinedLoader
-from pytorch_lightning.utilities.data import _update_dataloader
-from pytorch_lightning.utilities.enums import _StrategyType
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.warnings import PossibleUserWarning
+from pi_ml import Trainer
+from pi_ml.trainer.states import RunningStage
+from pi_ml.trainer.supporters import CombinedLoader
+from pi_ml.utilities.data import _update_dataloader
+from pi_ml.utilities.enums import _StrategyType
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.warnings import PossibleUserWarning
 from tests.helpers import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 

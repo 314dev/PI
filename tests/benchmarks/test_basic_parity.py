@@ -20,7 +20,7 @@ import pytest
 import torch
 from tqdm import tqdm
 
-from pytorch_lightning import LightningModule, seed_everything, Trainer
+from pi_ml import LightningModule, seed_everything, Trainer
 from tests.helpers.advanced_models import ParityModuleCIFAR, ParityModuleMNIST, ParityModuleRNN
 
 _EXTEND_BENCHMARKS = os.getenv("PL_RUNNING_BENCHMARKS", "0") == "1"

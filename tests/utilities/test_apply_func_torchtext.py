@@ -14,8 +14,8 @@
 import pytest
 import torch
 
-from pytorch_lightning.utilities.apply_func import move_data_to_device
-from pytorch_lightning.utilities.imports import _TORCHTEXT_LEGACY
+from pi_ml.utilities.apply_func import move_data_to_device
+from pi_ml.utilities.imports import _TORCHTEXT_LEGACY
 from tests.helpers.runif import RunIf
 from tests.helpers.torchtext_utils import get_dummy_torchtext_data_iterator
 

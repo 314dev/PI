@@ -50,7 +50,7 @@ set the precision flag.
 
 .. code-block:: python
 
-    import pytorch_lightning as pl
+    import pi_ml as pl
 
     model = MyLightningModule()
     trainer = pl.Trainer(ipus=8, precision=16)
@@ -60,8 +60,8 @@ You can also use pure 16-bit training, where the weights are also in 16-bit prec
 
 .. code-block:: python
 
-    import pytorch_lightning as pl
-    from pytorch_lightning.strategies import IPUStrategy
+    import pi_ml as pl
+    from pi_ml.strategies import IPUStrategy
 
     model = MyLightningModule()
     model = model.half()
@@ -79,8 +79,8 @@ IPUs provide further optimizations to speed up training. By using the ``IPUStrat
 
 .. code-block:: python
 
-    import pytorch_lightning as pl
-    from pytorch_lightning.strategies import IPUStrategy
+    import pi_ml as pl
+    from pi_ml.strategies import IPUStrategy
 
     model = MyLightningModule()
     trainer = pl.Trainer(ipus=8, strategy=IPUStrategy(device_iterations=32))
@@ -91,8 +91,8 @@ Note that by default we return the last device iteration loss. You can override 
 .. code-block:: python
 
     import poptorch
-    import pytorch_lightning as pl
-    from pytorch_lightning.strategies import IPUStrategy
+    import pi_ml as pl
+    from pi_ml.strategies import IPUStrategy
 
     model = MyLightningModule()
     inference_opts = poptorch.Options()
@@ -120,8 +120,8 @@ Lightning supports dumping all reports to a directory to open using the tool.
 
 .. code-block:: python
 
-    import pytorch_lightning as pl
-    from pytorch_lightning.strategies import IPUStrategy
+    import pi_ml as pl
+    from pi_ml.strategies import IPUStrategy
 
     model = MyLightningModule()
     trainer = pl.Trainer(ipus=8, strategy=IPUStrategy(autoreport_dir="report_dir/"))
@@ -149,7 +149,7 @@ Below is an example using the block annotation in a LightningModule.
 
 .. code-block:: python
 
-    import pytorch_lightning as pl
+    import pi_ml as pl
     import poptorch
 
 
@@ -182,7 +182,7 @@ You can also use the block context manager within the forward function, or any o
 
 .. code-block:: python
 
-    import pytorch_lightning as pl
+    import pi_ml as pl
     import poptorch
 
 

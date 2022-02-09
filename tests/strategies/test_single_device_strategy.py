@@ -15,9 +15,9 @@ import pickle
 
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.core.optimizer import LightningOptimizer
-from pytorch_lightning.strategies import SingleDeviceStrategy
+from pi_ml import Trainer
+from pi_ml.core.optimizer import LightningOptimizer
+from pi_ml.strategies import SingleDeviceStrategy
 from tests.helpers.boring_model import BoringModel
 from tests.helpers.runif import RunIf
 

@@ -1,7 +1,7 @@
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.utilities.warnings import PossibleUserWarning
+from pi_ml import Trainer
+from pi_ml.utilities.warnings import PossibleUserWarning
 from tests.helpers import BoringModel
 
 

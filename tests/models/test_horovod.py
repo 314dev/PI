@@ -27,9 +27,9 @@ from torchmetrics.classification.accuracy import Accuracy
 
 import tests.helpers.pipelines as tpipes
 import tests.helpers.utils as tutils
-from pytorch_lightning import Trainer
-from pytorch_lightning.accelerators import CPUAccelerator
-from pytorch_lightning.utilities import _HOROVOD_AVAILABLE
+from pi_ml import Trainer
+from pi_ml.accelerators import CPUAccelerator
+from pi_ml.utilities import _HOROVOD_AVAILABLE
 from tests.helpers import BoringModel
 from tests.helpers.advanced_models import BasicGAN
 from tests.helpers.runif import RunIf
@@ -50,7 +50,7 @@ def _run_horovod(trainer_options, on_gpu=False):
     tutils.reset_seed()
     # TODO: Find out why coverage breaks CI.
     # append = '-a' if '.coverage' in os.listdir(_PROJECT_ROOT) else ''
-    # str(num_processes), sys.executable, '-m', 'coverage', 'run', '--source', 'pytorch_lightning', append,
+    # str(num_processes), sys.executable, '-m', 'coverage', 'run', '--source', 'pi_ml', append,
     cmdline = [
         "horovodrun",
         "-np",

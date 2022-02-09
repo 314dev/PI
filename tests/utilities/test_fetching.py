@@ -21,11 +21,11 @@ import torch
 from torch import tensor
 from torch.utils.data import DataLoader, Dataset, IterableDataset
 
-from pytorch_lightning import Callback, LightningDataModule, Trainer
-from pytorch_lightning.trainer.supporters import CombinedLoader
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.fetching import DataFetcher, DataLoaderIterDataFetcher, InterBatchParallelDataFetcher
-from pytorch_lightning.utilities.types import STEP_OUTPUT
+from pi_ml import Callback, LightningDataModule, Trainer
+from pi_ml.trainer.supporters import CombinedLoader
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.fetching import DataFetcher, DataLoaderIterDataFetcher, InterBatchParallelDataFetcher
+from pi_ml.utilities.types import STEP_OUTPUT
 from tests.helpers import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 

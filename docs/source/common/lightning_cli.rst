@@ -4,8 +4,8 @@
     import torch
     from unittest import mock
     from typing import List
-    import pytorch_lightning as pl
-    from pytorch_lightning import LightningModule, LightningDataModule, Trainer, Callback
+    import pi_ml as pl
+    from pi_ml import LightningModule, LightningDataModule, Trainer, Callback
 
 
     class NoFitTrainer(Trainer):
@@ -61,9 +61,9 @@ Lightning CLI and config files
 
 Another source of boilerplate code that Lightning can help to reduce is in the implementation of command line tools.
 Furthermore, it provides a standardized way to configure experiments using a single file that includes settings for
-:class:`~pytorch_lightning.trainer.trainer.Trainer` as well as the user extended
-:class:`~pytorch_lightning.core.lightning.LightningModule` and
-:class:`~pytorch_lightning.core.datamodule.LightningDataModule` classes. The full configuration is automatically saved
+:class:`~pi_ml.trainer.trainer.Trainer` as well as the user extended
+:class:`~pi_ml.core.lightning.LightningModule` and
+:class:`~pi_ml.core.datamodule.LightningDataModule` classes. The full configuration is automatically saved
 in the log directory. This has the benefit of greatly simplifying the reproducibility of experiments.
 
 The main requirement for user extended classes to be made configurable is that all relevant init arguments must have
@@ -78,11 +78,11 @@ are described in the docstrings, then the help of the command line tool will dis
 LightningCLI
 ^^^^^^^^^^^^
 
-The implementation of training command line tools is done via the :class:`~pytorch_lightning.utilities.cli.LightningCLI`
+The implementation of training command line tools is done via the :class:`~pi_ml.utilities.cli.LightningCLI`
 class. The minimal installation of pytorch-lightning does not include this support. To enable it, either install
 Lightning as :code:`pytorch-lightning[extra]` or install the package :code:`pip install -U jsonargparse[signatures]`.
 
-The case in which the user's :class:`~pytorch_lightning.core.lightning.LightningModule` class implements all required
+The case in which the user's :class:`~pi_ml.core.lightning.LightningModule` class implements all required
 :code:`*_dataloader` methods, a :code:`trainer.py` tool can be as simple as:
 
 .. testcode::
@@ -102,7 +102,7 @@ practice to create a configuration file and provide this to the tool. A way to d
     # Fit your model using the configuration
     python trainer.py fit --config config.yaml
 
-The instantiation of the :class:`~pytorch_lightning.utilities.cli.LightningCLI` class takes care of parsing command line
+The instantiation of the :class:`~pi_ml.utilities.cli.LightningCLI` class takes care of parsing command line
 and config file options, instantiating the classes, setting up a callback to save the config in the log directory and
 finally running the trainer. The resulting object :code:`cli` can be used for example to get the instance of the model,
 (:code:`cli.model`).
@@ -115,7 +115,7 @@ particular experiment, and also could be used to trivially reproduce a training,
 
     python trainer.py fit --config lightning_logs/version_7/config.yaml
 
-If a separate :class:`~pytorch_lightning.core.datamodule.LightningDataModule` class is required, the trainer tool just
+If a separate :class:`~pi_ml.core.datamodule.LightningDataModule` class is required, the trainer tool just
 needs a small modification as follows:
 
 .. testcode::
@@ -228,7 +228,7 @@ For every CLI implemented, users are encouraged to learn how to run it by readin
 :code:`--help` option and use the :code:`--print_config` option to guide the writing of config files. A few more details
 that might not be clear by only reading the help are the following.
 
-:class:`~pytorch_lightning.utilities.cli.LightningCLI` is based on argparse and as such follows the same arguments style
+:class:`~pi_ml.utilities.cli.LightningCLI` is based on argparse and as such follows the same arguments style
 as many POSIX command line tools. Long options are prefixed with two dashes and its corresponding values should be
 provided with an empty space or an equal sign, as :code:`--option value` or :code:`--option=value`. Command line options
 are parsed from left to right, therefore if a setting appears multiple times the value most to the right will override
@@ -288,7 +288,7 @@ Groups of options can also be given as independent config files:
     $ python trainer.py fit --trainer trainer.yaml --model model.yaml --data data.yaml [...]
 
 When running experiments in clusters it could be desired to use a config which needs to be accessed from a remote
-location. :class:`~pytorch_lightning.utilities.cli.LightningCLI` comes with `fsspec
+location. :class:`~pi_ml.utilities.cli.LightningCLI` comes with `fsspec
 <https://filesystem-spec.readthedocs.io/en/stable/>`_ support which allows reading and writing from many types of remote
 file systems. One example is if you have installed `s3fs <https://s3fs.readthedocs.io/en/latest/>`_ then a config
 could be stored in an S3 bucket and accessed as:
@@ -348,9 +348,9 @@ and argument parsing capabilities.
 Trainer Callbacks and arguments with class type
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A very important argument of the :class:`~pytorch_lightning.trainer.trainer.Trainer` class is the :code:`callbacks`. In
+A very important argument of the :class:`~pi_ml.trainer.trainer.Trainer` class is the :code:`callbacks`. In
 contrast to other more simple arguments which just require numbers or strings, :code:`callbacks` expects a list of
-instances of subclasses of :class:`~pytorch_lightning.callbacks.Callback`. To specify this kind of argument in a config
+instances of subclasses of :class:`~pi_ml.callbacks.Callback`. To specify this kind of argument in a config
 file, each callback must be given as a dictionary including a :code:`class_path` entry with an import path of the class,
 and optionally an :code:`init_args` entry with arguments required to instantiate it. Therefore, a simple configuration
 file example that defines a couple of callbacks is the following:
@@ -359,20 +359,20 @@ file example that defines a couple of callbacks is the following:
 
     trainer:
       callbacks:
-        - class_path: pytorch_lightning.callbacks.EarlyStopping
+        - class_path: pi_ml.callbacks.EarlyStopping
           init_args:
             patience: 5
-        - class_path: pytorch_lightning.callbacks.LearningRateMonitor
+        - class_path: pi_ml.callbacks.LearningRateMonitor
           init_args:
             ...
 
-Similar to the callbacks, any arguments in :class:`~pytorch_lightning.trainer.trainer.Trainer` and user extended
-:class:`~pytorch_lightning.core.lightning.LightningModule` and
-:class:`~pytorch_lightning.core.datamodule.LightningDataModule` classes that have as type hint a class can be configured
+Similar to the callbacks, any arguments in :class:`~pi_ml.trainer.trainer.Trainer` and user extended
+:class:`~pi_ml.core.lightning.LightningModule` and
+:class:`~pi_ml.core.datamodule.LightningDataModule` classes that have as type hint a class can be configured
 the same way using :code:`class_path` and :code:`init_args`.
 
 For callbacks in particular, Lightning simplifies the command line so that only
-the :class:`~pytorch_lightning.callbacks.Callback` name is required.
+the :class:`~pi_ml.callbacks.Callback` name is required.
 The argument's order matters and the user needs to pass the arguments in the following way.
 
 .. code-block:: bash
@@ -401,7 +401,7 @@ as described above:
 
 .. code-block:: python
 
-    from pytorch_lightning.utilities.cli import CALLBACK_REGISTRY
+    from pi_ml.utilities.cli import CALLBACK_REGISTRY
 
 
     @CALLBACK_REGISTRY
@@ -438,7 +438,7 @@ as described above:
 Multiple models and/or datasets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the previous examples :class:`~pytorch_lightning.utilities.cli.LightningCLI` works only for a single model and
+In the previous examples :class:`~pi_ml.utilities.cli.LightningCLI` works only for a single model and
 datamodule class. However, there are many cases in which the objective is to easily be able to run many experiments for
 multiple models and datasets.
 
@@ -448,7 +448,7 @@ This is particularly interesting for library authors who want to provide their u
 .. code-block:: python
 
     import flash.image
-    from pytorch_lightning.utilities.cli import MODEL_REGISTRY, DATAMODULE_REGISTRY
+    from pi_ml.utilities.cli import MODEL_REGISTRY, DATAMODULE_REGISTRY
 
 
     @MODEL_REGISTRY
@@ -502,14 +502,14 @@ A possible config file could be as follows:
         ...
     trainer:
       callbacks:
-        - class_path: pytorch_lightning.callbacks.EarlyStopping
+        - class_path: pi_ml.callbacks.EarlyStopping
           init_args:
             patience: 5
         ...
 
 Only model classes that are a subclass of :code:`MyModelBaseClass` would be allowed, and similarly only subclasses of
-:code:`MyDataModuleBaseClass`. If as base classes :class:`~pytorch_lightning.core.lightning.LightningModule` and
-:class:`~pytorch_lightning.core.datamodule.LightningDataModule` are given, then the tool would allow any lightning
+:code:`MyDataModuleBaseClass`. If as base classes :class:`~pi_ml.core.lightning.LightningModule` and
+:class:`~pi_ml.core.datamodule.LightningDataModule` are given, then the tool would allow any lightning
 module and data module.
 
 .. tip::
@@ -569,23 +569,23 @@ It is also possible to combine :code:`subclass_mode_model=True` and submodules, 
 Customizing LightningCLI
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The init parameters of the :class:`~pytorch_lightning.utilities.cli.LightningCLI` class can be used to customize some
+The init parameters of the :class:`~pi_ml.utilities.cli.LightningCLI` class can be used to customize some
 things, namely: the description of the tool, enabling parsing of environment variables and additional arguments to
 instantiate the trainer and configuration parser.
 
 Nevertheless the init arguments are not enough for many use cases. For this reason the class is designed so that can be
 extended to customize different parts of the command line tool. The argument parser class used by
-:class:`~pytorch_lightning.utilities.cli.LightningCLI` is
-:class:`~pytorch_lightning.utilities.cli.LightningArgumentParser` which is an extension of python's argparse, thus
+:class:`~pi_ml.utilities.cli.LightningCLI` is
+:class:`~pi_ml.utilities.cli.LightningArgumentParser` which is an extension of python's argparse, thus
 adding arguments can be done using the :func:`add_argument` method. In contrast to argparse it has additional methods to
 add arguments, for example :func:`add_class_arguments` adds all arguments from the init of a class, though requiring
 parameters to have type hints. For more details about this please refer to the `respective documentation
 <https://jsonargparse.readthedocs.io/en/stable/#classes-methods-and-functions>`_.
 
-The :class:`~pytorch_lightning.utilities.cli.LightningCLI` class has the
-:meth:`~pytorch_lightning.utilities.cli.LightningCLI.add_arguments_to_parser` method which can be implemented to include
+The :class:`~pi_ml.utilities.cli.LightningCLI` class has the
+:meth:`~pi_ml.utilities.cli.LightningCLI.add_arguments_to_parser` method which can be implemented to include
 more arguments. After parsing, the configuration is stored in the :code:`config` attribute of the class instance. The
-:class:`~pytorch_lightning.utilities.cli.LightningCLI` class also has two methods that can be used to run code before
+:class:`~pi_ml.utilities.cli.LightningCLI` class also has two methods that can be used to run code before
 and after the trainer runs: :code:`before_<subcommand>` and :code:`after_<subcommand>`.
 A realistic example for these would be to send an email before and after the execution.
 The code for the :code:`fit` subcommand would be something like:
@@ -611,7 +611,7 @@ instantiating the trainer class can be found in :code:`self.config['fit']['train
 
 .. tip::
 
-    Have a look at the :class:`~pytorch_lightning.utilities.cli.LightningCLI` class API reference to learn about other
+    Have a look at the :class:`~pi_ml.utilities.cli.LightningCLI` class API reference to learn about other
     methods that can be extended to customize a CLI.
 
 
@@ -625,7 +625,7 @@ This can be implemented as follows:
 
 .. testcode::
 
-    from pytorch_lightning.callbacks import EarlyStopping
+    from pi_ml.callbacks import EarlyStopping
 
 
     class MyLightningCLI(LightningCLI):
@@ -713,7 +713,7 @@ A more compact version that avoids writing a dictionary would be:
 Argument linking
 ^^^^^^^^^^^^^^^^
 
-Another case in which it might be desired to extend :class:`~pytorch_lightning.utilities.cli.LightningCLI` is that the
+Another case in which it might be desired to extend :class:`~pi_ml.utilities.cli.LightningCLI` is that the
 model and data module depend on a common parameter. For example in some cases both classes require to know the
 :code:`batch_size`. It is a burden and error prone giving the same value twice in a config file. To avoid this the
 parser can be configured so that a value is only given once and then propagated accordingly. With a tool implemented
@@ -796,7 +796,7 @@ Optimizers and learning rate schedulers
 
 Optimizers and learning rate schedulers can also be made configurable. The most common case is when a model only has a
 single optimizer and optionally a single learning rate scheduler. In this case, the model's
-:meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers` could be left unimplemented since it is
+:meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers` could be left unimplemented since it is
 normally always the same and just adds boilerplate.
 
 The CLI works out-of-the-box with PyTorch's built-in optimizers and learning rate schedulers when
@@ -833,7 +833,7 @@ Furthermore, you can register your own optimizers and/or learning rate scheduler
 
 .. code-block:: python
 
-    from pytorch_lightning.utilities.cli import OPTIMIZER_REGISTRY, LR_SCHEDULER_REGISTRY
+    from pi_ml.utilities.cli import OPTIMIZER_REGISTRY, LR_SCHEDULER_REGISTRY
 
 
     @OPTIMIZER_REGISTRY
@@ -863,7 +863,7 @@ The :class:`torch.optim.lr_scheduler.ReduceLROnPlateau` scheduler requires an ad
     $ python trainer.py fit --optimizer=Adam --lr_scheduler=ReduceLROnPlateau --lr_scheduler.monitor=metric_to_track
 
 If you need to customize the learning rate scheduler configuration, you can do so by overriding
-:meth:`~pytorch_lightning.utilities.cli.LightningCLI.configure_optimizers`:
+:meth:`~pi_ml.utilities.cli.LightningCLI.configure_optimizers`:
 
 .. testcode::
 
@@ -908,7 +908,7 @@ example can be when one wants to add support for multiple optimizers:
 
 .. code-block:: python
 
-    from pytorch_lightning.utilities.cli import instantiate_class
+    from pi_ml.utilities.cli import instantiate_class
 
 
     class MyModel(LightningModule):
@@ -936,7 +936,7 @@ example can be when one wants to add support for multiple optimizers:
     cli = MyLightningCLI(MyModel)
 
 The value given to :code:`optimizer*_init` will always be a dictionary including :code:`class_path` and
-:code:`init_args` entries. The function :func:`~pytorch_lightning.utilities.cli.instantiate_class`
+:code:`init_args` entries. The function :func:`~pi_ml.utilities.cli.instantiate_class`
 takes care of importing the class defined in :code:`class_path` and instantiating it using some positional arguments,
 in this case :code:`self.parameters()`, and the :code:`init_args`.
 Any number of optimizers and learning rate schedulers can be added when using :code:`link_to`.
@@ -986,7 +986,7 @@ Notes related to reproducibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The topic of reproducibility is complex and it is impossible to guarantee reproducibility by just providing a class that
-people can use in unexpected ways. Nevertheless, the :class:`~pytorch_lightning.utilities.cli.LightningCLI` tries to
+people can use in unexpected ways. Nevertheless, the :class:`~pi_ml.utilities.cli.LightningCLI` tries to
 give a framework and recommendations to make reproducibility simpler.
 
 When an experiment is run, it is good practice to use a stable version of the source code, either being a released

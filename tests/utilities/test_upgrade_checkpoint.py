@@ -16,8 +16,8 @@ import os
 import pytest
 import torch
 
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
-from pytorch_lightning.utilities.upgrade_checkpoint import upgrade_checkpoint
+from pi_ml.callbacks import EarlyStopping, ModelCheckpoint
+from pi_ml.utilities.upgrade_checkpoint import upgrade_checkpoint
 
 
 @pytest.mark.parametrize(

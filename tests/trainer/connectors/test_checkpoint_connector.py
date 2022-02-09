@@ -18,10 +18,10 @@ from unittest.mock import Mock
 import pytest
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.plugins.environments import SLURMEnvironment
-from pytorch_lightning.trainer.states import TrainerFn
+from pi_ml import Trainer
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.plugins.environments import SLURMEnvironment
+from pi_ml.trainer.states import TrainerFn
 from tests.helpers import BoringModel
 
 
@@ -43,7 +43,7 @@ class HPCHookedModel(BoringModel):
 
 # TODO: remove test_hpc_hook_calls in v1.8
 @mock.patch(
-    "pytorch_lightning.trainer.connectors.accelerator_connector.AcceleratorConnector._is_slurm_managing_tasks",
+    "pi_ml.trainer.connectors.accelerator_connector.AcceleratorConnector._is_slurm_managing_tasks",
     return_value=True,
 )
 def test_hpc_hook_calls(mock_slurm_env, tmpdir):

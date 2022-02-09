@@ -15,7 +15,7 @@
 ARG PYTHON_VERSION=3.9
 ARG PYTORCH_VERSION=1.8
 
-FROM pytorchlightning/pytorch_lightning:base-cuda-py${PYTHON_VERSION}-torch${PYTORCH_VERSION}
+FROM pytorchlightning/pi_ml:base-cuda-py${PYTHON_VERSION}-torch${PYTORCH_VERSION}
 
 LABEL maintainer="PyTorchLightning <https://github.com/PyTorchLightning>"
 
@@ -42,6 +42,6 @@ RUN \
 RUN python --version && \
     pip --version && \
     pip list && \
-    python -c "import pytorch_lightning as pl; print(pl.__version__)"
+    python -c "import pi_ml as pl; print(pl.__version__)"
 
 # CMD ["/bin/bash"]

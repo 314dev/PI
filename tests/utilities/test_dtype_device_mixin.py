@@ -15,8 +15,8 @@ import pytest
 import torch
 import torch.nn as nn
 
-from pytorch_lightning import Callback, Trainer
-from pytorch_lightning.core.mixins import DeviceDtypeModuleMixin
+from pi_ml import Callback, Trainer
+from pi_ml.core.mixins import DeviceDtypeModuleMixin
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

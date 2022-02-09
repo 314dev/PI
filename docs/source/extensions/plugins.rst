@@ -53,7 +53,7 @@ Expert users may choose to extend an existing plugin by overriding its methods .
 
 .. code-block:: python
 
-    from pytorch_lightning.strategies import DDPStrategy
+    from pi_ml.strategies import DDPStrategy
 
 
     class CustomDDPStrategy(DDPStrategy):
@@ -63,8 +63,8 @@ Expert users may choose to extend an existing plugin by overriding its methods .
                 device_ids=...,
             )
 
-or by subclassing the base classes :class:`~pytorch_lightning.strategies.Strategy` or
-:class:`~pytorch_lightning.plugins.precision.PrecisionPlugin` to create new ones. These custom plugins
+or by subclassing the base classes :class:`~pi_ml.strategies.Strategy` or
+:class:`~pi_ml.plugins.precision.PrecisionPlugin` to create new ones. These custom plugins
 can then be passed into the Trainer directly or via a (custom) accelerator:
 
 .. code-block:: python
@@ -92,7 +92,7 @@ The full list of built-in plugins is listed below.
 Training Strategies
 -------------------
 
-.. currentmodule:: pytorch_lightning.strategies
+.. currentmodule:: pi_ml.strategies
 
 .. autosummary::
     :nosignatures:
@@ -118,7 +118,7 @@ Training Strategies
 Precision Plugins
 -----------------
 
-.. currentmodule:: pytorch_lightning.plugins.precision
+.. currentmodule:: pi_ml.plugins.precision
 
 .. autosummary::
     :nosignatures:
@@ -140,7 +140,7 @@ Precision Plugins
 Cluster Environments
 --------------------
 
-.. currentmodule:: pytorch_lightning.plugins.environments
+.. currentmodule:: pi_ml.plugins.environments
 
 .. autosummary::
     :nosignatures:

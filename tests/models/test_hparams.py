@@ -26,12 +26,12 @@ import torch
 from fsspec.implementations.local import LocalFileSystem
 from torch.utils.data import DataLoader
 
-from pytorch_lightning import LightningModule, Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.core.datamodule import LightningDataModule
-from pytorch_lightning.core.saving import load_hparams_from_yaml, save_hparams_to_yaml
-from pytorch_lightning.utilities import _HYDRA_EXPERIMENTAL_AVAILABLE, _OMEGACONF_AVAILABLE, AttributeDict, is_picklable
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import LightningModule, Trainer
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.core.datamodule import LightningDataModule
+from pi_ml.core.saving import load_hparams_from_yaml, save_hparams_to_yaml
+from pi_ml.utilities import _HYDRA_EXPERIMENTAL_AVAILABLE, _OMEGACONF_AVAILABLE, AttributeDict, is_picklable
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 

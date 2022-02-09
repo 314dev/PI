@@ -17,7 +17,7 @@ import pytest
 import torch
 
 from pl_examples import _DALI_AVAILABLE
-from pytorch_lightning.utilities.imports import _IS_WINDOWS
+from pi_ml.utilities.imports import _IS_WINDOWS
 
 ARGS_DEFAULT = (
     "--trainer.default_root_dir %(tmpdir)s "

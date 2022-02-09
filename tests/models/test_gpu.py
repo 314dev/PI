@@ -22,18 +22,18 @@ import torch
 
 import tests.helpers.pipelines as tpipes
 import tests.helpers.utils as tutils
-from pytorch_lightning import Trainer
-from pytorch_lightning.plugins.environments import TorchElasticEnvironment
-from pytorch_lightning.utilities import device_parser
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.imports import _compare_version, _TORCHTEXT_LEGACY
+from pi_ml import Trainer
+from pi_ml.plugins.environments import TorchElasticEnvironment
+from pi_ml.utilities import device_parser
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.imports import _compare_version, _TORCHTEXT_LEGACY
 from tests.helpers import BoringModel
 from tests.helpers.datamodules import ClassifDataModule
 from tests.helpers.imports import Batch, Dataset, Example, Field, LabelField
 from tests.helpers.runif import RunIf
 from tests.helpers.simple_models import ClassificationModel
 
-PL_VERSION_LT_1_5 = _compare_version("pytorch_lightning", operator.lt, "1.5")
+PL_VERSION_LT_1_5 = _compare_version("pi_ml", operator.lt, "1.5")
 PRETEND_N_OF_GPUS = 16
 
 

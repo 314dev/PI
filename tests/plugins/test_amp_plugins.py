@@ -18,9 +18,9 @@ from unittest import mock
 import pytest
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.plugins import ApexMixedPrecisionPlugin, NativeMixedPrecisionPlugin
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Trainer
+from pi_ml.plugins import ApexMixedPrecisionPlugin, NativeMixedPrecisionPlugin
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 
@@ -249,7 +249,7 @@ def test_precision_selection_raises(monkeypatch):
     ):
         Trainer(amp_backend="apex", precision=16)
 
-    import pytorch_lightning.plugins.precision.native_amp as amp
+    import pi_ml.plugins.precision.native_amp as amp
 
     monkeypatch.setattr(amp, "_TORCH_GREATER_EQUAL_1_10", False)
     with pytest.warns(
@@ -268,7 +268,7 @@ def test_precision_selection_raises(monkeypatch):
     ):
         Trainer(amp_backend="apex", precision=16, gpus=1, strategy="ddp_fully_sharded")
 
-    import pytorch_lightning.plugins.precision.apex_amp as apex
+    import pi_ml.plugins.precision.apex_amp as apex
 
     monkeypatch.setattr(apex, "_APEX_AVAILABLE", False)
     with mock.patch("torch.cuda.device_count", return_value=1), pytest.raises(

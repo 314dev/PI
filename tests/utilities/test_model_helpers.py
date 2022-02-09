@@ -16,8 +16,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from pytorch_lightning import LightningDataModule
-from pytorch_lightning.utilities.model_helpers import is_overridden
+from pi_ml import LightningDataModule
+from pi_ml.utilities.model_helpers import is_overridden
 from tests.helpers import BoringDataModule, BoringModel
 
 

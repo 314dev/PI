@@ -31,14 +31,14 @@ import torch
 import yaml
 from torch import optim
 
-import pytorch_lightning as pl
+import pi_ml as pl
 import tests.helpers.utils as tutils
-from pytorch_lightning import seed_everything, Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.utilities.cloud_io import load as pl_load
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.imports import _OMEGACONF_AVAILABLE
+from pi_ml import seed_everything, Trainer
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.loggers import TensorBoardLogger
+from pi_ml.utilities.cloud_io import load as pl_load
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.imports import _OMEGACONF_AVAILABLE
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 
@@ -647,7 +647,7 @@ def test_ckpt_every_n_train_steps(tmpdir):
     assert set(os.listdir(tmpdir)) == set(expected)
 
 
-@mock.patch("pytorch_lightning.callbacks.model_checkpoint.time")
+@mock.patch("pi_ml.callbacks.model_checkpoint.time")
 def test_model_checkpoint_train_time_interval(mock_datetime, tmpdir) -> None:
     """Tests that the checkpoints are saved at the specified time interval."""
     seconds_per_batch = 7

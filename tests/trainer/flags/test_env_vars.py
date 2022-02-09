@@ -14,7 +14,7 @@
 import os
 from unittest import mock
 
-from pytorch_lightning import Trainer
+from pi_ml import Trainer
 
 
 def test_passing_no_env_variables():

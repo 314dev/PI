@@ -34,7 +34,7 @@ Exporting to TorchScript
 ------------------------
 
 TorchScript allows you to serialize your models in a way that it can be loaded in non-Python environments.
-The LightningModule has a handy method :meth:`~pytorch_lightning.core.lightning.LightningModule.to_torchscript`
+The LightningModule has a handy method :meth:`~pi_ml.core.lightning.LightningModule.to_torchscript`
 that returns a scripted module which you can save or directly use.
 
 .. code-block:: python

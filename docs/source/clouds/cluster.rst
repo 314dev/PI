@@ -1,6 +1,6 @@
 .. testsetup:: *
 
-    from pytorch_lightning.trainer.trainer import Trainer
+    from pi_ml.trainer.trainer import Trainer
 
 *****************
 Computing cluster
@@ -210,11 +210,11 @@ To get this behavior make sure to add the correct signal to your SLURM script
     # 90 seconds before training ends
     SBATCH --signal=SIGUSR1@90
 
-If auto-resubmit is not desired, it can be turned off in the :class:`~pytorch_lightning.plugins.environments.slurm_environment.SLURMEnvironment` plugin:
+If auto-resubmit is not desired, it can be turned off in the :class:`~pi_ml.plugins.environments.slurm_environment.SLURMEnvironment` plugin:
 
 .. code-block:: python
 
-    from pytorch_lightning.plugins.environments import SLURMEnvironment
+    from pi_ml.plugins.environments import SLURMEnvironment
 
     trainer = Trainer(plugins=[SLURMEnvironment(auto_requeue=False)])
 
@@ -289,12 +289,12 @@ The other option is that you generate scripts on your own via a bash command or 
 Lightning provides an interface for providing your own definition of a cluster environment. It mainly consists of
 parsing the right environment variables to access information such as world size, global and local rank (process id),
 and node rank (node id). Here is an example of a custom
-:class:`~pytorch_lightning.plugins.environments.cluster_environment.ClusterEnvironment`:
+:class:`~pi_ml.plugins.environments.cluster_environment.ClusterEnvironment`:
 
 .. code-block:: python
 
     import os
-    from pytorch_lightning.plugins.environments import ClusterEnvironment
+    from pi_ml.plugins.environments import ClusterEnvironment
 
 
     class MyClusterEnvironment(ClusterEnvironment):

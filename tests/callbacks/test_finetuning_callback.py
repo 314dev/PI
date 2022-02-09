@@ -19,8 +19,8 @@ from torch import nn
 from torch.optim import Optimizer, SGD
 from torch.utils.data import DataLoader
 
-from pytorch_lightning import LightningModule, seed_everything, Trainer
-from pytorch_lightning.callbacks import BackboneFinetuning, BaseFinetuning, ModelCheckpoint
+from pi_ml import LightningModule, seed_everything, Trainer
+from pi_ml.callbacks import BackboneFinetuning, BaseFinetuning, ModelCheckpoint
 from tests.helpers import BoringModel, RandomDataset
 
 

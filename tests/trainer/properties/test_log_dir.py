@@ -13,9 +13,9 @@
 # limitations under the License.
 import os
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.loggers import LoggerCollection, TensorBoardLogger
+from pi_ml import Trainer
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.loggers import LoggerCollection, TensorBoardLogger
 from tests.helpers.boring_model import BoringModel
 
 

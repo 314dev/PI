@@ -45,10 +45,10 @@ import torchvision.transforms as transforms
 from torch.utils.data import Dataset
 from torchmetrics import Accuracy
 
-from pytorch_lightning import LightningModule
-from pytorch_lightning.callbacks import ModelCheckpoint, TQDMProgressBar
-from pytorch_lightning.strategies import ParallelStrategy
-from pytorch_lightning.utilities.cli import LightningCLI
+from pi_ml import LightningModule
+from pi_ml.callbacks import ModelCheckpoint, TQDMProgressBar
+from pi_ml.strategies import ParallelStrategy
+from pi_ml.utilities.cli import LightningCLI
 
 
 class ImageNetLightningModel(LightningModule):

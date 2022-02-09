@@ -23,10 +23,10 @@ import torch
 from torch.utils.data import DataLoader
 from torchmetrics import Accuracy
 
-from pytorch_lightning import callbacks, Trainer
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint, TQDMProgressBar
-from pytorch_lightning.core.lightning import LightningModule
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import callbacks, Trainer
+from pi_ml.callbacks import EarlyStopping, ModelCheckpoint, TQDMProgressBar
+from pi_ml.core.lightning import LightningModule
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers.boring_model import BoringModel, RandomDataset, RandomDictDataset
 from tests.helpers.runif import RunIf
 

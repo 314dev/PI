@@ -21,12 +21,12 @@ import numpy as np
 import pytest
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.loggers import LightningLoggerBase, LoggerCollection, TensorBoardLogger
-from pytorch_lightning.loggers.base import DummyExperiment, DummyLogger
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.logger import _convert_params, _sanitize_params
-from pytorch_lightning.utilities.rank_zero import rank_zero_only
+from pi_ml import Trainer
+from pi_ml.loggers import LightningLoggerBase, LoggerCollection, TensorBoardLogger
+from pi_ml.loggers.base import DummyExperiment, DummyLogger
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.logger import _convert_params, _sanitize_params
+from pi_ml.utilities.rank_zero import rank_zero_only
 from tests.helpers.boring_model import BoringDataModule, BoringModel
 
 
@@ -323,7 +323,7 @@ def test_np_sanitization():
 
 
 @pytest.mark.parametrize("logger", [True, False])
-@patch("pytorch_lightning.loggers.tensorboard.TensorBoardLogger.log_hyperparams")
+@patch("pi_ml.loggers.tensorboard.TensorBoardLogger.log_hyperparams")
 def test_log_hyperparams_being_called(log_hyperparams_mock, tmpdir, logger):
     class TestModel(BoringModel):
         def __init__(self, param_one, param_two):
@@ -342,7 +342,7 @@ def test_log_hyperparams_being_called(log_hyperparams_mock, tmpdir, logger):
         log_hyperparams_mock.assert_not_called()
 
 
-@patch("pytorch_lightning.loggers.tensorboard.TensorBoardLogger.log_hyperparams")
+@patch("pi_ml.loggers.tensorboard.TensorBoardLogger.log_hyperparams")
 def test_log_hyperparams_key_collision(log_hyperparams_mock, tmpdir):
     class TestModel(BoringModel):
         def __init__(self, hparams: Dict[str, Any]) -> None:

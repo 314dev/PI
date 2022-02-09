@@ -20,8 +20,8 @@ from torch import optim
 from torch.utils.data import DataLoader
 
 import tests.helpers.utils as tutils
-from pytorch_lightning import Trainer
-from pytorch_lightning.plugins.environments import SLURMEnvironment
+from pi_ml import Trainer
+from pi_ml.plugins.environments import SLURMEnvironment
 from tests.helpers import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
 
@@ -161,7 +161,7 @@ def test_amp_gpu_ddp_slurm_managed(tmpdir):
     assert generated == "abc23"
 
 
-@mock.patch("pytorch_lightning.plugins.precision.apex_amp.ApexMixedPrecisionPlugin.backward")
+@mock.patch("pi_ml.plugins.precision.apex_amp.ApexMixedPrecisionPlugin.backward")
 def test_amp_without_apex(bwd_mock, tmpdir):
     """Check that even with apex amp type without requesting precision=16 the amp backend is void."""
     model = BoringModel()
@@ -177,7 +177,7 @@ def test_amp_without_apex(bwd_mock, tmpdir):
 
 
 @RunIf(min_gpus=1, amp_apex=True)
-@mock.patch("pytorch_lightning.plugins.precision.apex_amp.ApexMixedPrecisionPlugin.backward")
+@mock.patch("pi_ml.plugins.precision.apex_amp.ApexMixedPrecisionPlugin.backward")
 def test_amp_with_apex(bwd_mock, tmpdir):
     """Check calling apex scaling in training."""
 

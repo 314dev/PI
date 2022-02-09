@@ -20,12 +20,12 @@ Testing
 *******
 
 Lightning allows the user to test their models with any compatible test dataloaders. This can be done before/after training
-and is completely agnostic to :meth:`~pytorch_lightning.trainer.trainer.Trainer.fit` call. The logic used here is defined under
-:meth:`~pytorch_lightning.core.lightning.LightningModule.test_step`.
+and is completely agnostic to :meth:`~pi_ml.trainer.trainer.Trainer.fit` call. The logic used here is defined under
+:meth:`~pi_ml.core.lightning.LightningModule.test_step`.
 
 Testing is performed using the ``Trainer`` object's ``.test()`` method.
 
-.. automethod:: pytorch_lightning.trainer.Trainer.test
+.. automethod:: pi_ml.trainer.Trainer.test
     :noindex:
 
 
@@ -97,7 +97,7 @@ running the test set (ie: 16-bit, dp, ddp, etc...)
 Test with Additional DataLoaders
 ================================
 
-You can still run inference on a test dataset even if the :meth:`~pytorch_lightning.core.hooks.DataHooks.test_dataloader` method hasn't been
+You can still run inference on a test dataset even if the :meth:`~pi_ml.core.hooks.DataHooks.test_dataloader` method hasn't been
 defined within your :doc:`lightning module <../common/lightning_module>` instance. This would be the case when your test data
 is not available at the time your model was declared.
 
@@ -136,13 +136,13 @@ Validation
 **********
 
 Lightning allows the user to validate their models with any compatible ``val dataloaders``. This can be done before/after training.
-The logic associated to the validation is defined within the :meth:`~pytorch_lightning.core.lightning.LightningModule.validation_step`.
+The logic associated to the validation is defined within the :meth:`~pi_ml.core.lightning.LightningModule.validation_step`.
 
-Apart from this ``.validate`` has same API as ``.test``, but would rely respectively on :meth:`~pytorch_lightning.core.lightning.LightningModule.validation_step` and :meth:`~pytorch_lightning.core.lightning.LightningModule.test_step`.
+Apart from this ``.validate`` has same API as ``.test``, but would rely respectively on :meth:`~pi_ml.core.lightning.LightningModule.validation_step` and :meth:`~pi_ml.core.lightning.LightningModule.test_step`.
 
 .. note::
     ``.validate`` method uses the same validation logic being used under validation happening within
-    :meth:`~pytorch_lightning.trainer.trainer.Trainer.fit` call.
+    :meth:`~pi_ml.trainer.trainer.Trainer.fit` call.
 
 .. warning::
 
@@ -151,5 +151,5 @@ Apart from this ``.validate`` has same API as ``.test``, but would rely respecti
     make sure all devices have same batch size in case of uneven inputs. This is helpful to make sure
     benchmarking for research papers is done the right way.
 
-.. automethod:: pytorch_lightning.trainer.Trainer.validate
+.. automethod:: pi_ml.trainer.Trainer.validate
     :noindex:

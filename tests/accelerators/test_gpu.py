@@ -15,8 +15,8 @@ from unittest import mock
 
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.accelerators import GPUAccelerator
+from pi_ml import Trainer
+from pi_ml.accelerators import GPUAccelerator
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

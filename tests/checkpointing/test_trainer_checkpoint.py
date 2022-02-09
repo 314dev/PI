@@ -15,9 +15,9 @@ import os
 
 import torch
 
-import pytorch_lightning as pl
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
+import pi_ml as pl
+from pi_ml import Trainer
+from pi_ml.callbacks import ModelCheckpoint
 from tests.helpers import BoringModel
 
 

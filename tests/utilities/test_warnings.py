@@ -19,8 +19,8 @@ import os
 from contextlib import redirect_stderr
 from io import StringIO
 
-from pytorch_lightning.utilities.rank_zero import _warn, rank_zero_deprecation, rank_zero_warn
-from pytorch_lightning.utilities.warnings import WarningCache
+from pi_ml.utilities.rank_zero import _warn, rank_zero_deprecation, rank_zero_warn
+from pi_ml.utilities.warnings import WarningCache
 
 standalone = os.getenv("PL_RUN_STANDALONE_TESTS", "0") == "1"
 if standalone:
@@ -55,10 +55,10 @@ if standalone:
     # check that logging is properly configured
     import logging
 
-    from pytorch_lightning import _DETAIL
+    from pi_ml import _DETAIL
 
     root_logger = logging.getLogger()
-    lightning_logger = logging.getLogger("pytorch_lightning")
+    lightning_logger = logging.getLogger("pi_ml")
     # should have a `StreamHandler`
     assert lightning_logger.hasHandlers() and len(lightning_logger.handlers) == 1
     # set our own stream for testing

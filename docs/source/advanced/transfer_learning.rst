@@ -1,6 +1,6 @@
 .. testsetup:: *
 
-    from pytorch_lightning.core.lightning import LightningModule
+    from pi_ml.core.lightning import LightningModule
 
 #################
 Transfer Learning

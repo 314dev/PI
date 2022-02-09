@@ -16,9 +16,9 @@ from multiprocessing import Event, Process
 
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.profiler import XLAProfiler
-from pytorch_lightning.utilities import _TORCH_GREATER_EQUAL_1_8, _TPU_AVAILABLE
+from pi_ml import Trainer
+from pi_ml.profiler import XLAProfiler
+from pi_ml.utilities import _TORCH_GREATER_EQUAL_1_8, _TPU_AVAILABLE
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

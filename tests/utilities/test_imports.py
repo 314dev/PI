@@ -13,8 +13,8 @@
 # limitations under the License.
 import operator
 
-from pytorch_lightning.utilities import _module_available
-from pytorch_lightning.utilities.imports import _compare_version
+from pi_ml.utilities import _module_available
+from pi_ml.utilities.imports import _compare_version
 
 
 def test_module_exists():
@@ -27,7 +27,7 @@ def test_module_exists():
 
 
 def test_compare_version(monkeypatch):
-    from pytorch_lightning.utilities.imports import torch
+    from pi_ml.utilities.imports import torch
 
     monkeypatch.setattr(torch, "__version__", "1.8.9")
     assert not _compare_version("torch", operator.ge, "1.10.0")

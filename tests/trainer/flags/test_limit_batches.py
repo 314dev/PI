@@ -14,8 +14,8 @@
 
 import pytest
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.trainer.states import RunningStage
+from pi_ml import Trainer
+from pi_ml.trainer.states import RunningStage
 from tests.helpers.boring_model import BoringModel
 
 

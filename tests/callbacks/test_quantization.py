@@ -18,11 +18,11 @@ import pytest
 import torch
 from torchmetrics.functional import mean_absolute_percentage_error as mape
 
-from pytorch_lightning import seed_everything, Trainer
-from pytorch_lightning.callbacks import QuantizationAwareTraining
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.imports import _TORCH_GREATER_EQUAL_1_8
-from pytorch_lightning.utilities.memory import get_model_size_mb
+from pi_ml import seed_everything, Trainer
+from pi_ml.callbacks import QuantizationAwareTraining
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.imports import _TORCH_GREATER_EQUAL_1_8
+from pi_ml.utilities.memory import get_model_size_mb
 from tests.helpers.boring_model import RandomDataset
 from tests.helpers.datamodules import RegressDataModule
 from tests.helpers.runif import RunIf

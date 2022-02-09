@@ -3,7 +3,7 @@ LightningLite - Stepping Stone to Lightning
 ###########################################
 
 
-:class:`~pytorch_lightning.lite.LightningLite` enables pure PyTorch users to scale their existing code
+:class:`~pi_ml.lite.LightningLite` enables pure PyTorch users to scale their existing code
 on any kind of device while retaining full control over their own loops and optimization logic.
 
 .. image:: https://pl-public-data.s3.amazonaws.com/docs/static/images/lite/lightning_lite.gif
@@ -13,13 +13,13 @@ on any kind of device while retaining full control over their own loops and opti
 
 |
 
-:class:`~pytorch_lightning.lite.LightningLite` is the right tool for you if you match one of the two following descriptions:
+:class:`~pi_ml.lite.LightningLite` is the right tool for you if you match one of the two following descriptions:
 
 - I want to quickly scale my existing code to multiple devices with minimal code changes.
 - I would like to convert my existing code to the Lightning API, but a full path to Lightning transition might be too complex. I am looking for a stepping stone to ensure reproducibility during the transition.
 
 
-.. warning:: :class:`~pytorch_lightning.lite.LightningLite` is currently a beta feature. Its API is subject to change based on your feedback.
+.. warning:: :class:`~pi_ml.lite.LightningLite` is currently a beta feature. Its API is subject to change based on your feedback.
 
 
 ----------
@@ -76,13 +76,13 @@ The ``run`` function contains custom training loop used to train ``MyModel`` on 
 Convert to LightningLite
 ========================
 
-Here are 5 required steps to convert to :class:`~pytorch_lightning.lite.LightningLite`.
+Here are 5 required steps to convert to :class:`~pi_ml.lite.LightningLite`.
 
-1. Subclass :class:`~pytorch_lightning.lite.LightningLite` and override its :meth:`~pytorch_lightning.lite.LightningLite.run` method.
-2. Move the body of your existing ``run`` function into :class:`~pytorch_lightning.lite.LightningLite` ``run`` method.
-3. Remove all ``.to(...)``, ``.cuda()`` etc calls since :class:`~pytorch_lightning.lite.LightningLite` will take care of it.
-4. Apply :meth:`~pytorch_lightning.lite.LightningLite.setup` over each model and optimizers pair and :meth:`~pytorch_lightning.lite.LightningLite.setup_dataloaders` on all your dataloaders and replace ``loss.backward()`` by ``self.backward(loss)``.
-5. Instantiate your :class:`~pytorch_lightning.lite.LightningLite` subclass and call its :meth:`~pytorch_lightning.lite.LightningLite.run` method.
+1. Subclass :class:`~pi_ml.lite.LightningLite` and override its :meth:`~pi_ml.lite.LightningLite.run` method.
+2. Move the body of your existing ``run`` function into :class:`~pi_ml.lite.LightningLite` ``run`` method.
+3. Remove all ``.to(...)``, ``.cuda()`` etc calls since :class:`~pi_ml.lite.LightningLite` will take care of it.
+4. Apply :meth:`~pi_ml.lite.LightningLite.setup` over each model and optimizers pair and :meth:`~pi_ml.lite.LightningLite.setup_dataloaders` on all your dataloaders and replace ``loss.backward()`` by ``self.backward(loss)``.
+5. Instantiate your :class:`~pi_ml.lite.LightningLite` subclass and call its :meth:`~pi_ml.lite.LightningLite.run` method.
 
 |
 
@@ -91,7 +91,7 @@ Here are 5 required steps to convert to :class:`~pytorch_lightning.lite.Lightnin
     import torch
     from torch import nn
     from torch.utils.data import DataLoader, Dataset
-    from pytorch_lightning.lite import LightningLite
+    from pi_ml.lite import LightningLite
 
 
     class MyModel(nn.Module):
@@ -126,7 +126,7 @@ Here are 5 required steps to convert to :class:`~pytorch_lightning.lite.Lightnin
 
 That's all. You can now train on any kind of device and scale your training.
 
-:class:`~pytorch_lightning.lite.LightningLite` takes care of device management, so you don't have to.
+:class:`~pi_ml.lite.LightningLite` takes care of device management, so you don't have to.
 You should remove any device specific logic within your code.
 
 Here is how to train on 8 GPUs with `torch.bfloat16 <https://pytorch.org/docs/1.10.0/generated/torch.Tensor.bfloat16.html>`_ precision:
@@ -141,7 +141,7 @@ Here is how to use `DeepSpeed Zero3 <https://www.deepspeed.ai/news/2021/03/07/ze
 
     Lite(strategy="deepspeed", devices=8, accelerator="gpu", precision=16).run(10)
 
-:class:`~pytorch_lightning.lite.LightningLite` can also figure it out automatically for you!
+:class:`~pi_ml.lite.LightningLite` can also figure it out automatically for you!
 
 .. code-block:: python
 
@@ -186,24 +186,24 @@ Here is an example while running on 256 GPUs (8 GPUs times 32 nodes).
 
 
 If you require custom data or model device placement, you can deactivate
-:class:`~pytorch_lightning.lite.LightningLite` automatic placement by doing
+:class:`~pi_ml.lite.LightningLite` automatic placement by doing
 ``self.setup_dataloaders(..., move_to_device=False)`` for the data and
 ``self.setup(..., move_to_device=False)`` for the model.
 Futhermore, you can access the current device from ``self.device`` or
-rely on :meth:`~pytorch_lightning.lite.LightningLite.to_device`
+rely on :meth:`~pi_ml.lite.LightningLite.to_device`
 utility to move an object to the current device.
 
 
-.. note:: We recommend instantiating the models within the :meth:`~pytorch_lightning.lite.LightningLite.run` method as large models would cause an out-of-memory error otherwise.
+.. note:: We recommend instantiating the models within the :meth:`~pi_ml.lite.LightningLite.run` method as large models would cause an out-of-memory error otherwise.
 
 .. tip::
 
-    If you have hundreds or thousands of line within your :meth:`~pytorch_lightning.lite.LightningLite.run` function
+    If you have hundreds or thousands of line within your :meth:`~pi_ml.lite.LightningLite.run` function
     and you are feeling weird about it then this is right feeling.
-    Back in 2019, our :class:`~pytorch_lightning.core.lightning.LightningModule` was getting larger
+    Back in 2019, our :class:`~pi_ml.core.lightning.LightningModule` was getting larger
     and we got the same feeling. So we started to organize our code for simplicity, interoperability and standardization.
     This is definitely a good sign that you should consider refactoring your code and / or switch to
-    :class:`~pytorch_lightning.core.lightning.LightningModule` ultimately.
+    :class:`~pi_ml.core.lightning.LightningModule` ultimately.
 
 
 ----------
@@ -212,7 +212,7 @@ utility to move an object to the current device.
 Distributed Training Pitfalls
 =============================
 
-The :class:`~pytorch_lightning.lite.LightningLite` provides you with the tools to scale your training,
+The :class:`~pi_ml.lite.LightningLite` provides you with the tools to scale your training,
 but there are several major challenges ahead of you now:
 
 
@@ -234,7 +234,7 @@ but there are several major challenges ahead of you now:
      - Ability to resume from a failure as if it never happened.
 
 
-If you are facing one of those challenges then you are already meeting the limit of :class:`~pytorch_lightning.lite.LightningLite`.
+If you are facing one of those challenges then you are already meeting the limit of :class:`~pi_ml.lite.LightningLite`.
 We recommend you to convert to :doc:`Lightning <../starter/new-project>`, so you never have to worry about those.
 
 ----------
@@ -242,13 +242,13 @@ We recommend you to convert to :doc:`Lightning <../starter/new-project>`, so you
 Convert to Lightning
 ====================
 
-:class:`~pytorch_lightning.lite.LightningLite` is a stepping stone to fully transition to the Lightning API and benefit
+:class:`~pi_ml.lite.LightningLite` is a stepping stone to fully transition to the Lightning API and benefit
 from its hundreds of features.
 
-You can see our :class:`~pytorch_lightning.lite.LightningLite` class as a
-future :class:`~pytorch_lightning.core.lightning.LightningModule`, and slowly refactor your code into its API.
-Below, the :meth:`~pytorch_lightning.core.lightning.LightningModule.training_step`, :meth:`~pytorch_lightning.core.lightning.LightningModule.forward`,
-:meth:`~pytorch_lightning.core.lightning.LightningModule.configure_optimizers`, :meth:`~pytorch_lightning.core.lightning.LightningModule.train_dataloader` methods
+You can see our :class:`~pi_ml.lite.LightningLite` class as a
+future :class:`~pi_ml.core.lightning.LightningModule`, and slowly refactor your code into its API.
+Below, the :meth:`~pi_ml.core.lightning.LightningModule.training_step`, :meth:`~pi_ml.core.lightning.LightningModule.forward`,
+:meth:`~pi_ml.core.lightning.LightningModule.configure_optimizers`, :meth:`~pi_ml.core.lightning.LightningModule.train_dataloader` methods
 are implemented.
 
 
@@ -299,12 +299,12 @@ are implemented.
     Lite(...).run(args)
 
 
-Finally, change the :meth:`~pytorch_lightning.lite.LightningLite.run` into a
-:meth:`~pytorch_lightning.core.lightning.LightningModule.__init__` and drop the ``fit`` call from inside.
+Finally, change the :meth:`~pi_ml.lite.LightningLite.run` into a
+:meth:`~pi_ml.core.lightning.LightningModule.__init__` and drop the ``fit`` call from inside.
 
 .. code-block:: python
 
-    from pytorch_lightning import LightningDataModule, LightningModule, Trainer
+    from pi_ml import LightningDataModule, LightningModule, Trainer
 
 
     class LightningModel(LightningModule):
@@ -391,7 +391,7 @@ Additionally, you can pass in your custom training type strategy by configuring 
 
 .. code-block:: python
 
-    from pytorch_lightning.strategies import DeepSpeedStrategy
+    from pi_ml.strategies import DeepSpeedStrategy
 
     lite = Lite(strategy=DeepSpeedStrategy(stage=2), accelerator="gpu", devices=2)
 
@@ -502,11 +502,11 @@ plugins
 
 :ref:`Plugins` allow you to connect arbitrary backends, precision libraries, clusters etc. For example:
 To define your own behavior, subclass the relevant class and pass it in. Here's an example linking up your own
-:class:`~pytorch_lightning.plugins.environments.ClusterEnvironment`.
+:class:`~pi_ml.plugins.environments.ClusterEnvironment`.
 
 .. code-block:: python
 
-    from pytorch_lightning.plugins.environments import ClusterEnvironment
+    from pi_ml.plugins.environments import ClusterEnvironment
 
 
     class MyCluster(ClusterEnvironment):
@@ -538,7 +538,7 @@ run
 
 The run method servers two purposes:
 
-1.  Override this method from the :class:`~pytorch_lightning.lite.lite.LightningLite` class and put your
+1.  Override this method from the :class:`~pi_ml.lite.lite.LightningLite` class and put your
     training (or inference) code inside.
 2.  Launch the training procedure by calling the run method. Lite will take care of setting up the distributed backend.
 
@@ -546,7 +546,7 @@ You can optionally pass arguments to the run method. For example, the hyperparam
 
 .. code-block:: python
 
-    from pytorch_lightning.lite import LightningLite
+    from pi_ml.lite import LightningLite
 
 
     class Lite(LightningLite):
@@ -619,9 +619,9 @@ This replaces any occurences of ``loss.backward()`` and will make your code acce
 to_device
 =========
 
-Use :meth:`~pytorch_lightning.lite.lite.LightningLite.to_device` to move models, tensors or collections of tensors to
-the current device. By default :meth:`~pytorch_lightning.lite.lite.LightningLite.setup` and
-:meth:`~pytorch_lightning.lite.lite.LightningLite.setup_dataloaders` already move the model and data to the correct
+Use :meth:`~pi_ml.lite.lite.LightningLite.to_device` to move models, tensors or collections of tensors to
+the current device. By default :meth:`~pi_ml.lite.lite.LightningLite.setup` and
+:meth:`~pi_ml.lite.lite.LightningLite.setup_dataloaders` already move the model and data to the correct
 device, so calling this method is only necessary for manual operation when needed.
 
 .. code-block:: python
@@ -649,7 +649,7 @@ autocast
 ========
 
 Let the precision backend autocast the block of code under this context manager. This is optional and already done by
-Lite for the model's forward method (once the model was :meth:`~pytorch_lightning.lite.lite.LightningLite.setup`).
+Lite for the model's forward method (once the model was :meth:`~pi_ml.lite.lite.LightningLite.setup`).
 You need this only if you wish to autocast more operations outside the ones in model forward:
 
 .. code-block:: python

@@ -22,8 +22,8 @@ from torch.utils.data.dataset import Dataset, IterableDataset
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data.sampler import RandomSampler, Sampler, SequentialSampler
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.trainer.supporters import (
+from pi_ml import Trainer
+from pi_ml.trainer.supporters import (
     _nested_calc_num_data,
     CombinedDataset,
     CombinedLoader,
@@ -31,10 +31,10 @@ from pytorch_lightning.trainer.supporters import (
     CycleIterator,
     TensorRunningAccum,
 )
-from pytorch_lightning.utilities.apply_func import apply_to_collection
-from pytorch_lightning.utilities.auto_restart import CaptureMapDataset, FastForwardSampler
-from pytorch_lightning.utilities.data import get_len
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.apply_func import apply_to_collection
+from pi_ml.utilities.auto_restart import CaptureMapDataset, FastForwardSampler
+from pi_ml.utilities.data import get_len
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers.boring_model import BoringModel, RandomDataset
 
 

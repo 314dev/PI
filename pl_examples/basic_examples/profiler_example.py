@@ -30,9 +30,9 @@ import torchvision.models as models
 import torchvision.transforms as T
 
 from pl_examples import _DATASETS_PATH, cli_lightning_logo
-from pytorch_lightning import LightningDataModule, LightningModule
-from pytorch_lightning.profiler.pytorch import PyTorchProfiler
-from pytorch_lightning.utilities.cli import LightningCLI
+from pi_ml import LightningDataModule, LightningModule
+from pi_ml.profiler.pytorch import PyTorchProfiler
+from pi_ml.utilities.cli import LightningCLI
 
 DEFAULT_CMD_LINE = (
     "fit",

@@ -35,8 +35,8 @@ from torchmetrics import Accuracy
 
 from pl_examples.basic_examples.mnist_datamodule import MNIST
 from pl_examples.basic_examples.mnist_examples.image_classifier_1_pytorch import Net
-from pytorch_lightning import seed_everything
-from pytorch_lightning.lite import LightningLite
+from pi_ml import seed_everything
+from pi_ml.lite import LightningLite
 
 
 class Lite(LightningLite):

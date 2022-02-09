@@ -17,9 +17,9 @@ from unittest.mock import MagicMock
 import pytest
 import torch
 
-from pytorch_lightning.core.saving import load_hparams_from_yaml
-from pytorch_lightning.loggers import CSVLogger
-from pytorch_lightning.loggers.csv_logs import ExperimentWriter
+from pi_ml.core.saving import load_hparams_from_yaml
+from pi_ml.loggers import CSVLogger
+from pi_ml.loggers.csv_logs import ExperimentWriter
 
 
 def test_file_logger_automatic_versioning(tmpdir):

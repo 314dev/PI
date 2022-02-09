@@ -17,7 +17,7 @@ import torch
 import torch.multiprocessing as mp
 
 import tests.helpers.utils as tutils
-from pytorch_lightning.utilities.distributed import _collect_states_on_rank_zero
+from pi_ml.utilities.distributed import _collect_states_on_rank_zero
 from tests.helpers.runif import RunIf
 
 

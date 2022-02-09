@@ -13,9 +13,9 @@
 # limitations under the License.
 import torch
 
-from pytorch_lightning import Trainer
-from pytorch_lightning.strategies import DDPSpawnStrategy, DDPStrategy
-from pytorch_lightning.utilities import _TORCH_GREATER_EQUAL_1_8, _TORCH_GREATER_EQUAL_1_10
+from pi_ml import Trainer
+from pi_ml.strategies import DDPSpawnStrategy, DDPStrategy
+from pi_ml.utilities import _TORCH_GREATER_EQUAL_1_8, _TORCH_GREATER_EQUAL_1_10
 from tests.helpers import BoringModel
 from tests.helpers.runif import RunIf
 

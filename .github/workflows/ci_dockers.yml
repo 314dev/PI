@@ -139,7 +139,7 @@ jobs:
             PYTORCH_VERSION=${{ matrix.pytorch_version }}
           file: dockers/base-ipu/Dockerfile
           push: false
-          tags: pytorchlightning/pytorch_lightning:base-ipu-py${{ matrix.python_version }}-torch${{ matrix.pytorch_version }}
+          tags: pytorchlightning/pi_ml:base-ipu-py${{ matrix.python_version }}-torch${{ matrix.pytorch_version }}
         timeout-minutes: 50
 
       - name: Build IPU CI runner Docker

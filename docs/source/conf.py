@@ -39,7 +39,7 @@ FOLDER_GENERATED = "generated"
 SPHINX_MOCK_REQUIREMENTS = int(os.environ.get("SPHINX_MOCK_REQUIREMENTS", True))
 
 spec = spec_from_file_location(
-    "pytorch_lightning/__about__.py", os.path.join(PATH_ROOT, "pytorch_lightning", "__about__.py")
+    "pi_ml/__about__.py", os.path.join(PATH_ROOT, "pi_ml", "__about__.py")
 )
 about = module_from_spec(spec)
 spec.loader.exec_module(about)
@@ -374,9 +374,9 @@ import os
 from typing import Optional
 import torch
 from torch import nn
-import pytorch_lightning as pl
-from pytorch_lightning import LightningDataModule, LightningModule, Trainer
-from pytorch_lightning.utilities import (
+import pi_ml as pl
+from pi_ml import LightningDataModule, LightningModule, Trainer
+from pi_ml.utilities import (
     _APEX_AVAILABLE,
     _XLA_AVAILABLE,
     _TPU_AVAILABLE,

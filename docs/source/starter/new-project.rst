@@ -5,10 +5,10 @@
     from torch.nn import functional as F
     from torch.utils.data import DataLoader
     from torch.utils.data import random_split
-    import pytorch_lightning as pl
-    from pytorch_lightning.core.datamodule import LightningDataModule
-    from pytorch_lightning.core.lightning import LightningModule
-    from pytorch_lightning.trainer.trainer import Trainer
+    import pi_ml as pl
+    from pi_ml.core.datamodule import LightningDataModule
+    from pi_ml.core.lightning import LightningModule
+    from pi_ml.trainer.trainer import Trainer
 
 .. _new_project:
 
@@ -125,7 +125,7 @@ Import the following:
     from torchvision import transforms
     from torchvision.datasets import MNIST
     from torch.utils.data import DataLoader, random_split
-    import pytorch_lightning as pl
+    import pi_ml as pl
 
 
 Step 1: Define LightningModule
@@ -250,7 +250,7 @@ then call fit with both the data and model.
     trainer = pl.Trainer()
     trainer.fit(model=autoencoder, train_dataloaders=train_loader)
 
-The :class:`~pytorch_lightning.trainer.Trainer` automates:
+The :class:`~pi_ml.trainer.Trainer` automates:
 
 * Epoch and batch iteration
 * ``optimizer.step()``, ``loss.backward()``, ``optimizer.zero_grad()`` calls
@@ -282,7 +282,7 @@ Automatic Optimization
 ----------------------
 
 With Lightning, you don't need to worry about when to enable/disable grads, do a backward pass, or update optimizers
-as long as you return a loss with an attached graph from the :meth:`~pytorch_lightning.core.lightning.LightningModule.training_step` method,
+as long as you return a loss with an attached graph from the :meth:`~pi_ml.core.lightning.LightningModule.training_step` method,
 Lightning will automate the optimization.
 
 .. code-block:: python
@@ -408,14 +408,14 @@ Option 3: Production
 For production systems, `ONNX <https://pytorch.org/docs/stable/onnx.html>`_ or `TorchScript <https://pytorch.org/docs/stable/jit.html>`_ are much faster.
 Make sure you have added a ``forward`` method or trace only the sub-models you need.
 
-* TorchScript using :meth:`~pytorch_lightning.core.lightning.LightningModule.to_torchscript` method.
+* TorchScript using :meth:`~pi_ml.core.lightning.LightningModule.to_torchscript` method.
 
 .. code-block:: python
 
     autoencoder = LitAutoEncoder()
     autoencoder.to_torchscript(file_path="model.pt")
 
-* Onnx using :meth:`~pytorch_lightning.core.lightning.LightningModule.to_onnx` method.
+* Onnx using :meth:`~pi_ml.core.lightning.LightningModule.to_onnx` method.
 
 .. code-block:: python
 
@@ -427,7 +427,7 @@ Make sure you have added a ``forward`` method or trace only the sub-models you n
 Using Accelerators
 ==================
 
-It's trivial to use CPUs, GPUs, TPUs or IPUs in Lightning. There's **NO NEED** to change your code, simply change the :class:`~pytorch_lightning.trainer.trainer.Trainer` options.
+It's trivial to use CPUs, GPUs, TPUs or IPUs in Lightning. There's **NO NEED** to change your code, simply change the :class:`~pi_ml.trainer.trainer.Trainer` options.
 
 CPU
 ---

@@ -23,11 +23,11 @@ from torch.utils.data.dataset import Dataset, IterableDataset, Subset
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data.sampler import SequentialSampler
 
-from pytorch_lightning import Callback, seed_everything, Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.trainer.states import RunningStage
-from pytorch_lightning.utilities.data import _auto_add_worker_init_fn, has_iterable_dataset, has_len_all_ranks
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pi_ml import Callback, seed_everything, Trainer
+from pi_ml.callbacks import ModelCheckpoint
+from pi_ml.trainer.states import RunningStage
+from pi_ml.utilities.data import _auto_add_worker_init_fn, has_iterable_dataset, has_len_all_ranks
+from pi_ml.utilities.exceptions import MisconfigurationException
 from tests.helpers.boring_model import BoringModel, RandomDataset, RandomIterableDataset, RandomIterableDatasetWithLen
 from tests.helpers.dataloaders import CustomInfDataloader, CustomNotImplementedErrorDataloader
 from tests.helpers.runif import RunIf
@@ -563,7 +563,7 @@ def test_error_on_zero_len_dataloader(tmpdir):
 @RunIf(skip_windows=True)
 @pytest.mark.parametrize("ckpt_path", (None, "best", "specific"))
 @pytest.mark.parametrize("stage", ("train", "test", "val"))
-@patch("pytorch_lightning.trainer.connectors.data_connector.multiprocessing.cpu_count", return_value=4)
+@patch("pi_ml.trainer.connectors.data_connector.multiprocessing.cpu_count", return_value=4)
 def test_warning_with_few_workers(_, tmpdir, ckpt_path, stage):
     """Test that error is raised if dataloader with only a few workers is used."""
 
@@ -593,7 +593,7 @@ def test_warning_with_few_workers(_, tmpdir, ckpt_path, stage):
 @RunIf(skip_windows=True)
 @pytest.mark.parametrize("ckpt_path", (None, "best", "specific"))
 @pytest.mark.parametrize("stage", ("train", "test", "val"))
-@patch("pytorch_lightning.trainer.connectors.data_connector.multiprocessing.cpu_count", return_value=4)
+@patch("pi_ml.trainer.connectors.data_connector.multiprocessing.cpu_count", return_value=4)
 def test_warning_with_few_workers_multi_loader(_, tmpdir, ckpt_path, stage):
     """Test that error is raised if dataloader with only a few workers is used."""
 

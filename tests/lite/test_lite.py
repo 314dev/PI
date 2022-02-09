@@ -23,13 +23,13 @@ import torch.nn.functional
 from torch import nn
 from torch.utils.data import DataLoader, DistributedSampler, Sampler
 
-from pytorch_lightning.lite import LightningLite
-from pytorch_lightning.lite.wrappers import _LiteDataLoader, _LiteModule, _LiteOptimizer
-from pytorch_lightning.plugins import PrecisionPlugin
-from pytorch_lightning.strategies import DeepSpeedStrategy, Strategy
-from pytorch_lightning.utilities import _StrategyType
-from pytorch_lightning.utilities.exceptions import MisconfigurationException
-from pytorch_lightning.utilities.seed import pl_worker_init_function
+from pi_ml.lite import LightningLite
+from pi_ml.lite.wrappers import _LiteDataLoader, _LiteModule, _LiteOptimizer
+from pi_ml.plugins import PrecisionPlugin
+from pi_ml.strategies import DeepSpeedStrategy, Strategy
+from pi_ml.utilities import _StrategyType
+from pi_ml.utilities.exceptions import MisconfigurationException
+from pi_ml.utilities.seed import pl_worker_init_function
 from tests.helpers.runif import RunIf
 
 
@@ -165,7 +165,7 @@ def test_setup_dataloaders_return_type():
     assert lite_dataloader1.dataset is dataset1
 
 
-@mock.patch("pytorch_lightning.lite.lite._replace_dataloader_init_method")
+@mock.patch("pi_ml.lite.lite._replace_dataloader_init_method")
 def test_setup_dataloaders_captures_dataloader_arguments(ctx_manager):
     """Test that Lite intercepts the DataLoader constructor arguments with a context manager in its run method."""
 
@@ -209,7 +209,7 @@ def test_setup_dataloaders_twice_fails():
 
 
 @mock.patch(
-    "pytorch_lightning.lite.lite.LightningLite.device",
+    "pi_ml.lite.lite.LightningLite.device",
     new_callable=PropertyMock,
     return_value=torch.device("cuda", 1),
 )
